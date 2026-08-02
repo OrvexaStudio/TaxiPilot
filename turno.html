@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TaxiPilot - Turno</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<header class="topbar">
+
+<div class="brand">
+
+<div class="brand-name">
+TaxiPilot
+</div>
+
+<div class="brand-sub">
+Gestione turno
+</div>
+
+</div>
+
+</header>
+
+
+
+
+
+<main>
+
+
+
+<section class="page-header">
+
+<h1>
+Il mio turno
+</h1>
+
+<p>
+Monitora la tua giornata lavorativa.
+</p>
+
+</section>
+
+
+
+
+
+
+<section class="card">
+
+
+<h2>
+Stato turno
+</h2>
+
+
+<div id="statoTurno">
+
+
+<p class="empty">
+Nessun turno attivo
+</p>
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+<section class="card">
+
+
+<h2>
+Avvia nuovo turno
+</h2>
+
+
+
+<label>
+Chilometri iniziali
+</label>
+
+
+<input 
+id="kmInizio"
+type="number"
+placeholder="Inserisci km attuali">
+
+
+
+<button 
+class="main-button"
+onclick="iniziaTurno()">
+
+Inizia turno
+
+</button>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<section class="card">
+
+
+<h2>
+Statistiche turno
+</h2>
+
+
+
+<div class="stats">
+
+
+<div class="stat-card">
+
+<h3 id="oreTurno">
+0</h3>
+
+<p>
+Ore lavorate
+</p>
+
+</div>
+
+
+
+
+<div class="stat-card">
+
+<h3 id="corseTurno">
+0</h3>
+
+<p>
+Corse
+</p>
+
+</div>
+
+
+</div>
+
+
+
+<br>
+
+
+<button
+class="main-button"
+onclick="terminaTurno()">
+
+Termina turno
+
+</button>
+
+
+</section>
+
+
+
+
+
+
+</main>
+
+
+
+
+
+
+
+<nav class="bottom-nav">
+
+
+<a href="index.html">
+
+<span>
+Home
+</span>
+
+</a>
+
+
+
+<a href="corse.html">
+
+<span>
+Corse
+</span>
+
+</a>
+
+
+
+<a href="turno.html" class="active">
+
+<span>
+Turno
+</span>
+
+</a>
+
+
+
+
+<a href="sos.html">
+
+<span>
+SOS
+</span>
+
+</a>
+
+
+
+<a href="profilo.html">
+
+<span>
+Profilo
+</span>
+
+</a>
+
+
+
+</nav>
+
+
+
+
+
+<script src="script.js"></script>
+
+
+</body>
+
+</html>
