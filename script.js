@@ -445,6 +445,8 @@ mostraCorse();
 
 aggiornaStatistiche();
 
+mostraProssimaCorsa();
+
 cambiaStato();
 
 
