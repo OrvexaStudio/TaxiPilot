@@ -512,3 +512,78 @@ button:hover {
     font-weight:700;
 
 }
+
+
+/* ===============================
+   SOS
+================================ */
+
+
+.sos-card {
+
+text-align:center;
+
+}
+
+
+
+.security-status {
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+gap:10px;
+
+font-weight:600;
+
+}
+
+
+
+.emergency-panel {
+
+text-align:center;
+
+}
+
+
+
+.emergency-panel p {
+
+color:#666;
+
+line-height:1.5;
+
+}
+
+
+
+.sos-button {
+
+
+background:#b3261e;
+
+height:120px;
+
+width:120px;
+
+border-radius:50%;
+
+font-size:15px;
+
+font-weight:700;
+
+margin-top:20px;
+
+}
+
+
+
+.sos-button:hover {
+
+background:#8e1d17;
+
+}
