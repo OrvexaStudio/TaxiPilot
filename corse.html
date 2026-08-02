@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TaxiPilot - Corse</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<header class="topbar">
+
+<div class="brand">
+
+<div class="brand-name">
+TaxiPilot
+</div>
+
+<div class="brand-sub">
+Gestione corse
+</div>
+
+</div>
+
+
+</header>
+
+
+
+
+<main>
+
+
+<section class="page-header">
+
+<h1>
+Le mie corse
+</h1>
+
+<p>
+Gestisci tutte le prenotazioni del tuo turno.
+</p>
+
+</section>
+
+
+
+
+
+<section class="card">
+
+
+<button class="main-button" onclick="openForm()">
+
+Nuova corsa
+
+</button>
+
+
+</section>
+
+
+
+
+
+
+
+<section id="formCorsa" class="card hidden">
+
+
+<h2>
+Inserisci nuova corsa
+</h2>
+
+
+
+<label>
+Cliente
+</label>
+
+<input 
+id="nomeCliente"
+type="text"
+placeholder="Nome e cognome">
+
+
+
+
+
+<label>
+Telefono
+</label>
+
+<input 
+id="telefono"
+type="tel"
+placeholder="Numero telefono">
+
+
+
+
+
+<label>
+Partenza
+</label>
+
+<input 
+id="partenza"
+type="text"
+placeholder="Indirizzo partenza">
+
+
+
+
+
+<label>
+Destinazione
+</label>
+
+<input 
+id="destinazione"
+type="text"
+placeholder="Destinazione">
+
+
+
+
+
+<label>
+Orario
+</label>
+
+<input 
+id="orario"
+type="time">
+
+
+
+
+
+<label>
+Importo
+</label>
+
+<input 
+id="importo"
+type="number"
+placeholder="€">
+
+
+
+
+
+<button 
+class="main-button"
+onclick="salvaCorsa()">
+
+Salva corsa
+
+</button>
+
+
+</section>
+
+
+
+
+
+
+
+
+<section class="card">
+
+
+<h2>
+Programmate
+</h2>
+
+
+<div id="listaCorse">
+
+
+<p class="empty">
+Nessuna corsa inserita
+</p>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+</main>
+
+
+
+
+
+
+
+<nav class="bottom-nav">
+
+
+<a href="index.html">
+
+<span>
+Home
+</span>
+
+</a>
+
+
+
+
+<a href="corse.html" class="active">
+
+<span>
+Corse
+</span>
+
+</a>
+
+
+
+
+<a href="turno.html">
+
+<span>
+Turno
+</span>
+
+</a>
+
+
+
+
+<a href="sos.html">
+
+<span>
+SOS
+</span>
+
+</a>
+
+
+
+
+<a href="profilo.html">
+
+<span>
+Profilo
+</span>
+
+</a>
+
+
+
+</nav>
+
+
+
+
+
+<script src="script.js"></script>
+
+
+</body>
+
+</html>
