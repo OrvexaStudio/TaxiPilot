@@ -2076,25 +2076,29 @@ function mostraProssimaCorsa(){
 
 
 
-// ===============================
-// GESTIONE TURNO
-// ===============================
+// ======================================================
+// GESTIONE TURNO AVANZATA
+// ======================================================
 
 
+let storicoTurni = JSON.parse(
+    localStorage.getItem("taxipilot_turni")
+) || [];
+
+
+
+
+// AVVIO TURNO
 
 function iniziaTurno(){
 
 
     let km =
-    document.getElementById(
-        "kmInizio"
-    ).value;
+    document.getElementById("kmInizio").value;
 
 
 
-    if(
-        km === ""
-    ){
+    if(km === ""){
 
         alert(
             "Inserisci i chilometri iniziali"
@@ -2106,43 +2110,41 @@ function iniziaTurno(){
 
 
 
-
-
     let turno = {
 
-
         attivo:true,
-
 
         inizio:
         Date.now(),
 
+        oraInizio:
+        new Date().toLocaleTimeString(
+            "it-IT",
+            {
+                hour:"2-digit",
+                minute:"2-digit"
+            }
+        ),
+
 
         kmInizio:
-        km
-
-
+        Number(km)
 
     };
 
 
 
-
-
     localStorage.setItem(
 
-        "taxipilot_turno",
+        "taxipilot_turno_attivo",
 
-        JSON.stringify(
-            turno
-        )
+        JSON.stringify(turno)
 
     );
 
 
 
     mostraTurno();
-
 
 
 }
@@ -2152,11 +2154,10 @@ function iniziaTurno(){
 
 
 
-
+// VISUALIZZA TURNO
 
 
 function mostraTurno(){
-
 
 
     let box =
@@ -2166,9 +2167,7 @@ function mostraTurno(){
 
 
 
-    if(
-        !box
-    ){
+    if(!box){
 
         return;
 
@@ -2176,28 +2175,16 @@ function mostraTurno(){
 
 
 
-
-
-
     let turno =
-
     JSON.parse(
-
         localStorage.getItem(
-            "taxipilot_turno"
+            "taxipilot_turno_attivo"
         )
-
     );
 
 
 
-
-
-
-
-    if(
-        !turno
-    ){
+    if(!turno){
 
 
         box.innerHTML =
@@ -2211,37 +2198,7 @@ function mostraTurno(){
 
         return;
 
-
     }
-
-
-
-
-
-
-
-    let ora =
-
-    new Date(
-        turno.inizio
-    )
-
-    .toLocaleTimeString(
-
-        "it-IT",
-
-        {
-
-        hour:"2-digit",
-
-        minute:"2-digit"
-
-        }
-
-    );
-
-
-
 
 
 
@@ -2255,56 +2212,35 @@ function mostraTurno(){
 
 
     <h3>
-
     Turno attivo
-
     </h3>
 
 
-
     <p>
-
     Inizio:
-
-    ${ora}
-
+    ${turno.oraInizio}
     </p>
 
 
-
     <p>
-
     Km iniziali:
-
     ${turno.kmInizio}
-
     </p>
 
 
 
-    <p>
+    <button
+    class="main-button"
+    onclick="terminaTurno()">
 
-    Ore lavorate:
+    Termina turno
 
-    <span id="oreTurno">
-
-    0
-
-    </span>
-
-    </p>
-
+    </button>
 
 
     </div>
 
-
     `;
-
-
-
-    aggiornaOreTurno();
-
 
 
 }
@@ -2314,30 +2250,10 @@ function mostraTurno(){
 
 
 
+// CHIUSURA TURNO
 
 
-
-function aggiornaOreTurno(){
-
-
-
-    let box =
-
-    document.getElementById(
-        "oreTurno"
-    );
-
-
-
-    if(
-        !box
-    ){
-
-        return;
-
-    }
-
-
+function terminaTurno(){
 
 
 
@@ -2346,16 +2262,14 @@ function aggiornaOreTurno(){
     JSON.parse(
 
         localStorage.getItem(
-            "taxipilot_turno"
+            "taxipilot_turno_attivo"
         )
 
     );
 
 
 
-    if(
-        !turno
-    ){
+    if(!turno){
 
         return;
 
@@ -2364,12 +2278,43 @@ function aggiornaOreTurno(){
 
 
 
+    let kmFinali = prompt(
 
-    let tempo =
+        "Inserisci chilometri finali"
 
-    Date.now()
+    );
 
-    -
+
+
+    if(!kmFinali){
+
+        return;
+
+    }
+
+
+
+
+    kmFinali =
+    Number(kmFinali);
+
+
+
+
+
+    let kmPercorsi =
+
+    kmFinali -
+
+    turno.kmInizio;
+
+
+
+
+
+    let durata =
+
+    Date.now() -
 
     turno.inizio;
 
@@ -2379,47 +2324,117 @@ function aggiornaOreTurno(){
 
     let ore =
 
-    Math.floor(
+    durata / 3600000;
 
-        tempo /
 
-        3600000
+
+
+
+
+    let oggi =
+
+    new Date()
+
+    .toLocaleDateString(
+        "it-IT"
+    );
+
+
+
+
+
+    let corseTurno =
+
+    corse.filter(
+
+        corsa =>
+
+        corsa.data === oggi
 
     );
 
 
 
 
-    box.innerHTML =
-    ore;
+
+    let incasso =
+
+    corseTurno.reduce(
+
+        (totale,corsa)=>
+
+        totale +
+
+        Number(
+            corsa.importo
+        ),
+
+        0
+
+    );
 
 
 
-}
+
+
+
+    let turnoChiuso = {
+
+
+        data:oggi,
+
+
+        kmInizio:
+        turno.kmInizio,
+
+
+        kmFine:
+        kmFinali,
+
+
+        kmPercorsi:
+        kmPercorsi,
+
+
+        ore:
+        Number(
+            ore.toFixed(2)
+        ),
+
+
+        corse:
+        corseTurno.length,
+
+
+        incasso:
+        incasso
+
+
+
+    };
 
 
 
 
 
 
+    storicoTurni.push(
+        turnoChiuso
+    );
 
 
 
-function terminaTurno(){
 
 
+    localStorage.setItem(
 
-    if(
+        "taxipilot_turni",
 
-        !confirm(
-        "Terminare il turno?"
+        JSON.stringify(
+            storicoTurni
         )
 
-    ){
-
-        return;
-
-    }
+    );
 
 
 
@@ -2427,14 +2442,23 @@ function terminaTurno(){
 
     localStorage.removeItem(
 
-        "taxipilot_turno"
+        "taxipilot_turno_attivo"
 
     );
 
 
 
 
+
     mostraTurno();
+
+
+
+    alert(
+
+    "Turno terminato e salvato"
+
+    );
 
 
 
