@@ -12,7 +12,7 @@ const files = [
 
 "style.css",
 "script.js",
-"logo.png"
+"logo1.png"
 
 ];
 
