@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TaxiPilot - Accesso</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body class="login-page">
+
+
+<main class="login-container">
+
+
+<div class="login-logo">
+
+<h1>
+Taxi<span>Pilot</span>
+</h1>
+
+<p>
+Il copilota digitale del tassista
+</p>
+
+</div>
+
+
+
+
+
+<section class="login-card">
+
+
+<h2>
+Configura dispositivo
+</h2>
+
+
+<p>
+Inserisci i tuoi dati. Rimarranno salvati solo su questo dispositivo.
+</p>
+
+
+
+
+
+<label>
+Nome tassista
+</label>
+
+<input 
+id="loginNome"
+type="text"
+placeholder="Nome e cognome">
+
+
+
+
+
+
+<label>
+Numero taxi
+</label>
+
+<input 
+id="loginTaxi"
+type="text"
+placeholder="Taxi 12">
+
+
+
+
+
+
+<h3>
+Contatti emergenza
+</h3>
+
+
+
+<div id="loginContatti">
+
+
+</div>
+
+
+
+
+
+<button 
+class="secondary-button"
+onclick="aggiungiContattoLogin()">
+
+Aggiungi contatto
+
+</button>
+
+
+
+
+
+<button 
+class="main-button"
+onclick="salvaAccesso()">
+
+Entra in TaxiPilot
+
+</button>
+
+
+
+</section>
+
+
+
+</main>
+
+
+
+
+
+<script src="script.js"></script>
+
+
+</body>
+
+</html>
