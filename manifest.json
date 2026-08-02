@@ -1,0 +1,18 @@
+{
+  "name": "TaxiPilot",
+  "short_name": "TaxiPilot",
+  "description": "Gestione professionale per tassisti",
+  "start_url": "index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#080808",
+  "theme_color": "#e87517",
+
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
