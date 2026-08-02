@@ -2862,7 +2862,103 @@ function openForm(){
 
 
 
+function esportaPDF(){
 
+
+    const { jsPDF } = window.jspdf;
+
+
+    let pdf = new jsPDF();
+
+
+
+    pdf.setFontSize(18);
+
+    pdf.text(
+        "TaxiPilot - Report lavoro",
+        15,
+        20
+    );
+
+
+
+    let nome =
+    profiloTaxi?.nome || "Tassista";
+
+
+
+    pdf.setFontSize(12);
+
+
+    pdf.text(
+        "Autista: " + nome,
+        15,
+        35
+    );
+
+
+
+    let corse =
+    document.getElementById(
+        "statCorse"
+    ).innerText;
+
+
+    let incasso =
+    document.getElementById(
+        "statIncasso"
+    ).innerText;
+
+
+    let ore =
+    document.getElementById(
+        "statOre"
+    ).innerText;
+
+
+    let km =
+    document.getElementById(
+        "statKm"
+    ).innerText;
+
+
+
+
+    pdf.text(
+        "Corse: " + corse,
+        15,
+        55
+    );
+
+
+    pdf.text(
+        "Incasso: " + incasso,
+        15,
+        65
+    );
+
+
+    pdf.text(
+        "Ore: " + ore,
+        15,
+        75
+    );
+
+
+    pdf.text(
+        "Km: " + km,
+        15,
+        85
+    );
+
+
+
+    pdf.save(
+        "TaxiPilot_Report.pdf"
+    );
+
+
+}
 
 // ===============================
 // AVVIO APPLICAZIONE
