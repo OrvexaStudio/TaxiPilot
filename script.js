@@ -1,75 +1,163 @@
+// ======================================================
+// TaxiPilot
+// BLOCCO 1/5
+// ACCESSO DISPOSITIVO + PROFILO + LOGIN
+// ======================================================
+
+
+
 // ===============================
-// ACCESSO DISPOSITIVO
+// DATABASE LOCALE
 // ===============================
 
 
-let contattiLogin = JSON.parse(
-localStorage.getItem("taxipilot_contatti_sos")
+let profiloTaxi =
+JSON.parse(
+    localStorage.getItem("taxipilot_profilo")
+) || null;
+
+
+
+let contattiSOS =
+JSON.parse(
+    localStorage.getItem("taxipilot_contatti_sos")
 ) || [];
 
 
 
 
+// ===============================
+// CONTROLLO PRIMO ACCESSO
+// ===============================
+
+
 function controlloAccesso(){
 
 
-let configurato =
-localStorage.getItem(
-"taxipilot_configurato"
-);
+    let configurato =
+    localStorage.getItem(
+        "taxipilot_configurato"
+    );
 
 
 
-if(
-!configurato &&
-!window.location.pathname.includes("login.html")
-){
+    let pagina =
+    window.location.pathname;
 
-window.location.href="login.html";
+
+
+    let login =
+    pagina.includes("login.html");
+
+
+
+    if(
+        !configurato &&
+        !login
+    ){
+
+        window.location.replace(
+            "login.html"
+        );
+
+        return;
+
+    }
+
+
+
+    if(
+        configurato &&
+        login
+    ){
+
+        window.location.replace(
+            "index.html"
+        );
+
+        return;
+
+    }
+
 
 }
 
 
-}
 
 
+
+
+
+// ===============================
+// PRIMO ACCESSO LOGIN
+// ===============================
 
 
 
 function aggiungiContattoLogin(){
 
 
-let nome =
-prompt("Nome contatto");
+    let nome =
+    prompt(
+        "Nome contatto SOS"
+    );
 
 
 
-let numero =
-prompt("Numero telefono");
+    let numero =
+    prompt(
+        "Numero telefono"
+    );
 
 
 
-if(!nome || !numero){
+    if(
+        !nome ||
+        !numero
+    ){
 
-return;
+        return;
 
-}
-
-
-
-contattiLogin.push({
-
-id:Date.now(),
-
-nome:nome,
-
-telefono:numero
-
-});
+    }
 
 
 
-mostraContattiLogin();
+    let contatto = {
+
+
+        id:
+        Date.now(),
+
+
+        nome:
+        nome,
+
+
+        telefono:
+        numero
+
+
+    };
+
+
+
+    contattiSOS.push(
+        contatto
+    );
+
+
+
+    localStorage.setItem(
+
+        "taxipilot_contatti_sos",
+
+        JSON.stringify(contattiSOS)
+
+    );
+
+
+
+    mostraContattiLogin();
 
 
 }
@@ -83,51 +171,54 @@ mostraContattiLogin();
 function mostraContattiLogin(){
 
 
-let box =
-document.getElementById(
-"loginContatti"
-);
+    let box =
+    document.getElementById(
+        "loginContatti"
+    );
 
 
 
-if(!box){
+    if(!box){
 
-return;
+        return;
+
+    }
+
+
+
+    box.innerHTML = "";
+
+
+
+    contattiSOS.forEach(
+        contatto=>{
+
+
+        box.innerHTML += `
+
+        <div class="trip-card">
+
+
+        <h3>
+        ${contatto.nome}
+        </h3>
+
+
+        <p>
+        ${contatto.telefono}
+        </p>
+
+
+        </div>
+
+        `;
+
+
+    });
+
 
 }
 
-
-
-box.innerHTML="";
-
-
-
-contattiLogin.forEach(contatto=>{
-
-
-box.innerHTML +=
-`
-
-<div class="trip-card">
-
-<h3>
-${contatto.nome}
-</h3>
-
-<p>
-${contatto.telefono}
-</p>
-
-</div>
-
-`;
-
-
-
-});
-
-
-}
 
 
 
@@ -138,28 +229,99 @@ function salvaAccesso(){
 
 
 
-let nome =
-document.getElementById(
-"loginNome"
-).value;
+    let nome =
+    document.getElementById(
+        "loginNome"
+    ).value;
 
 
 
-let taxi =
-document.getElementById(
-"loginTaxi"
-).value;
+    let taxi =
+    document.getElementById(
+        "loginTaxi"
+    ).value;
+
+
+
+    if(
+        nome.trim()===""
+    ){
+
+        alert(
+            "Inserisci il nome del tassista"
+        );
+
+        return;
+
+    }
 
 
 
 
-if(!nome){
 
-alert(
-"Inserisci il nome tassista"
-);
+    profiloTaxi = {
 
-return;
+
+        nome:
+        nome,
+
+
+        taxi:
+        taxi,
+
+
+        creato:
+        new Date().toLocaleDateString(
+            "it-IT"
+        )
+
+
+    };
+
+
+
+
+
+    localStorage.setItem(
+
+        "taxipilot_profilo",
+
+        JSON.stringify(profiloTaxi)
+
+    );
+
+
+
+
+
+    localStorage.setItem(
+
+        "taxipilot_contatti_sos",
+
+        JSON.stringify(contattiSOS)
+
+    );
+
+
+
+
+
+    localStorage.setItem(
+
+        "taxipilot_configurato",
+
+        "true"
+
+    );
+
+
+
+
+
+    window.location.replace(
+        "index.html"
+    );
+
 
 }
 
@@ -167,319 +329,29 @@ return;
 
 
 
-let profilo={
-
-
-nome:nome,
-
-taxi:taxi
-
-
-};
 
 
 
 
-
-localStorage.setItem(
-"taxipilot_profilo",
-JSON.stringify(profilo)
-);
-
-
-
-
-localStorage.setItem(
-"taxipilot_contatti_sos",
-JSON.stringify(contattiLogin)
-);
-
-
-
-
-localStorage.setItem(
-"taxipilot_configurato",
-"true"
-);
-
-
-
-window.location.href="index.html";
-
-
-}
-
-
-
-
+// ===============================
+// CARICAMENTO PROFILO
+// ===============================
 
 
 
 function caricaNomeHome(){
 
 
-let nomeBox =
-document.getElementById(
-"nomeAutista"
-);
-
-
-
-if(!nomeBox){
-
-return;
-
-}
-
-
-
-let profilo =
-JSON.parse(
-localStorage.getItem("taxipilot_profilo")
-);
-
-
-
-if(profilo){
-
-nomeBox.innerHTML =
-profilo.nome;
-
-}
-
-
-}
-
-// ===============================
-// TaxiPilot - Script principale
-// ===============================
-
-
-// Recupero corse salvate
-let corse = JSON.parse(localStorage.getItem("taxipilot_corse")) || [];
-
-
-// ===============================
-// GESTIONE CORSE
-// ===============================
-
-
-function salvaCorsa() {
-
-
-    let cliente = document.getElementById("nomeCliente").value;
-    let telefono = document.getElementById("telefono").value;
-    let partenza = document.getElementById("partenza").value;
-    let destinazione = document.getElementById("destinazione").value;
-    let orario = document.getElementById("orario").value;
-    let importo = document.getElementById("importo").value;
-
-
-
-    if(
-        cliente === "" ||
-        partenza === "" ||
-        destinazione === "" ||
-        orario === ""
-    ){
-
-        alert("Compila tutti i campi obbligatori");
-
-        return;
-
-    }
-
-
-let nuovaCorsa = {
-
-    id: Date.now(),
-
-    cliente: cliente,
-
-    telefono: telefono,
-
-    partenza: partenza,
-
-    destinazione: destinazione,
-
-    orario: orario,
-
-    importo: Number(importo) || 0,
-
-    stato:"Programmata"
-
-    data:
-new Date().toLocaleDateString("it-IT"),
-
-};
-
-
-
-    corse.push(nuovaCorsa);
-
-
-
-    localStorage.setItem(
-        "taxipilot_corse",
-        JSON.stringify(corse)
+    let elemento =
+    document.getElementById(
+        "nomeAutista"
     );
 
 
 
-    svuotaForm();
-
-    mostraCorse();
-
-    aggiornaStatistiche();
-
-
-
-    alert("Corsa salvata correttamente");
-
-}
-
-
-
-
-
-function mostraCorse(){
-
-
-let contenitore =
-document.getElementById("listaCorse");
-
-
-
-if(!contenitore){
-
-return;
-
-}
-
-
-
-contenitore.innerHTML="";
-
-
-
-if(corse.length===0){
-
-contenitore.innerHTML =
-`
-<p class="empty">
-Nessuna corsa inserita
-</p>
-`;
-
-return;
-
-}
-
-
-
-
-corse.forEach(corsa=>{
-
-
-contenitore.innerHTML +=
-
-`
-
-<div class="trip-card">
-
-
-<h3>
-${corsa.orario} - ${corsa.cliente}
-</h3>
-
-
-
-<p>
-${corsa.partenza}
-→
-${corsa.destinazione}
-</p>
-
-
-
-<p>
-Importo:
-<strong>
-${corsa.importo.toFixed(2)} €
-</strong>
-</p>
-
-
-
-<p>
-Stato:
-<strong>
-${corsa.stato}
-</strong>
-</p>
-
-
-
-
-
-<button
-class="main-button"
-onclick="cambiaStatoCorsa(${corsa.id})">
-
-Cambia stato
-
-</button>
-
-
-
-
-
-<button
-class="main-button"
-onclick="navigaCorsa('${corsa.destinazione}')">
-
-Naviga
-
-</button>
-
-
-
-
-
-<button
-class="delete-btn"
-onclick="eliminaCorsa(${corsa.id})">
-
-Elimina
-
-</button>
-
-
-</div>
-
-`;
-
-
-
-});
-
-
-}
-
-
-
-    contenitore.innerHTML="";
-
-
-
-    if(corse.length === 0){
-
-        contenitore.innerHTML =
-        `
-        <p class="empty">
-        Nessuna corsa inserita
-        </p>
-        `;
+    if(
+        !elemento
+    ){
 
         return;
 
@@ -489,44 +361,434 @@ Elimina
 
 
 
-    corse.forEach(corsa => {
+    if(
+        profiloTaxi
+    ){
+
+        elemento.innerHTML =
+        profiloTaxi.nome;
+
+    }
+
+
+}
 
 
 
-        contenitore.innerHTML +=
+
+
+
+
+function caricaProfiloCompleto(){
+
+
+    if(
+        !profiloTaxi
+    ){
+
+        return;
+
+    }
+
+
+
+
+    let campi = {
+
+
+        nomeProfilo:
+        profiloTaxi.nome || "",
+
+
+        numeroTaxi:
+        profiloTaxi.taxi || "",
+
+
+        modelloVeicolo:
+        profiloTaxi.veicolo || "",
+
+
+        targaVeicolo:
+        profiloTaxi.targa || ""
+
+    };
+
+
+
+
+
+    for(
+        let id in campi
+    ){
+
+
+        let campo =
+        document.getElementById(
+            id
+        );
+
+
+
+        if(
+            campo
+        ){
+
+            campo.value =
+            campi[id];
+
+        }
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+function salvaProfiloCompleto(){
+
+
+
+    profiloTaxi = {
+
+
+        nome:
+        document.getElementById(
+            "nomeProfilo"
+        ).value,
+
+
+        taxi:
+        document.getElementById(
+            "numeroTaxi"
+        ).value,
+
+
+        veicolo:
+        document.getElementById(
+            "modelloVeicolo"
+        ).value,
+
+
+        targa:
+        document.getElementById(
+            "targaVeicolo"
+        ).value
+
+
+
+    };
+
+
+
+
+
+    localStorage.setItem(
+
+        "taxipilot_profilo",
+
+        JSON.stringify(profiloTaxi)
+
+    );
+
+
+
+    alert(
+        "Profilo salvato"
+    );
+
+
+
+}
+
+// ======================================================
+// TaxiPilot
+// BLOCCO 2/5
+// SISTEMA SOS
+// ======================================================
+
+
+
+// ===============================
+// AGGIUNTA CONTATTO SOS
+// ===============================
+
+
+function aggiungiContatto(){
+
+
+    let nome =
+    prompt(
+        "Nome contatto"
+    );
+
+
+    let telefono =
+    prompt(
+        "Numero telefono"
+    );
+
+
+
+    if(
+        !nome ||
+        !telefono
+    ){
+
+        return;
+
+    }
+
+
+
+
+
+    let nuovoContatto = {
+
+
+        id:
+        Date.now(),
+
+
+        nome:
+        nome,
+
+
+        telefono:
+        telefono
+
+
+
+    };
+
+
+
+
+
+    contattiSOS.push(
+        nuovoContatto
+    );
+
+
+
+
+
+    localStorage.setItem(
+
+        "taxipilot_contatti_sos",
+
+        JSON.stringify(contattiSOS)
+
+    );
+
+
+
+
+
+    mostraListaSOS();
+
+    mostraContattiProfilo();
+
+
+
+}
+
+
+
+
+
+
+
+// ===============================
+// VISUALIZZA CONTATTI SOS
+// ===============================
+
+
+
+function mostraListaSOS(){
+
+
+
+    let box =
+    document.getElementById(
+        "listaSOS"
+    );
+
+
+
+    if(
+        !box
+    ){
+
+        return;
+
+    }
+
+
+
+
+
+    box.innerHTML = "";
+
+
+
+
+
+    if(
+        contattiSOS.length===0
+    ){
+
+
+        box.innerHTML =
+
+        `
+
+        <p class="empty">
+
+        Nessun contatto salvato
+
+        </p>
+
+        `;
+
+
+        return;
+
+    }
+
+
+
+
+
+
+
+    contattiSOS.forEach(
+    contatto=>{
+
+
+
+        box.innerHTML +=
+
+
         `
 
         <div class="trip-card">
 
 
         <h3>
-        ${corsa.orario} - ${corsa.cliente}
+
+        ${contatto.nome}
+
         </h3>
 
 
         <p>
-        ${corsa.partenza}
-        →
-        ${corsa.destinazione}
-        </p>
 
+        ${contatto.telefono}
 
-        <p>
-        Importo:
-        <strong>
-        ${corsa.importo.toFixed(2)} €
-        </strong>
         </p>
 
 
 
-        <button 
+        <button
+
         class="delete-btn"
-        onclick="eliminaCorsa(${corsa.id})">
+
+        onclick="eliminaContattoSOS(${contatto.id})"
+
+        >
 
         Elimina
 
         </button>
+
+
+
+        </div>
+
+
+        `;
+
+
+
+    });
+
+
+
+}
+
+
+
+
+
+
+
+
+// ===============================
+// VISUALIZZA IN PROFILO
+// ===============================
+
+
+
+function mostraContattiProfilo(){
+
+
+
+    let box =
+    document.getElementById(
+        "listaContattiProfilo"
+    );
+
+
+
+    if(
+        !box
+    ){
+
+        return;
+
+    }
+
+
+
+
+
+    box.innerHTML="";
+
+
+
+
+
+    contattiSOS.forEach(
+    contatto=>{
+
+
+        box.innerHTML +=
+
+
+        `
+
+        <div class="trip-card">
+
+
+        <h3>
+
+        ${contatto.nome}
+
+        </h3>
+
+
+        <p>
+
+        ${contatto.telefono}
+
+        </p>
+
 
 
         </div>
@@ -546,167 +808,1071 @@ Elimina
 
 
 
-function eliminaCorsa(id){
 
 
-    corse = corse.filter(
-        corsa => corsa.id !== id
+
+// ===============================
+// ELIMINA CONTATTO
+// ===============================
+
+
+
+function eliminaContattoSOS(id){
+
+
+
+    let conferma =
+    confirm(
+        "Eliminare questo contatto?"
     );
+
+
+
+    if(
+        !conferma
+    ){
+
+        return;
+
+    }
+
+
+
+
+
+    contattiSOS =
+
+    contattiSOS.filter(
+
+        contatto =>
+
+        contatto.id !== id
+
+    );
+
+
+
 
 
     localStorage.setItem(
-        "taxipilot_corse",
-        JSON.stringify(corse)
+
+        "taxipilot_contatti_sos",
+
+        JSON.stringify(contattiSOS)
+
     );
+
+
+
+
+
+    mostraListaSOS();
+
+    mostraContattiProfilo();
+
+
+
+}
+
+
+
+
+
+
+
+
+// ===============================
+// ATTIVAZIONE SOS
+// ===============================
+
+
+
+function attivaSOS(){
+
+
+
+    if(
+        contattiSOS.length===0
+    ){
+
+
+        alert(
+            "Nessun contatto SOS configurato"
+        );
+
+
+        return;
+
+
+    }
+
+
+
+
+
+
+    let conferma =
+    confirm(
+
+        "Inviare richiesta di emergenza?"
+
+    );
+
+
+
+    if(
+        !conferma
+    ){
+
+        return;
+
+    }
+
+
+
+
+
+
+
+    if(
+        navigator.geolocation
+    ){
+
+
+
+        navigator.geolocation.getCurrentPosition(
+
+
+        posizione=>{
+
+
+
+            let lat =
+
+            posizione.coords.latitude;
+
+
+
+            let lng =
+
+            posizione.coords.longitude;
+
+
+
+
+
+            inviaMessaggioSOS(
+                lat,
+                lng
+            );
+
+
+
+        },
+
+
+
+        ()=>{
+
+
+            inviaMessaggioSOS(
+
+                "non disponibile",
+
+                "non disponibile"
+
+            );
+
+
+        }
+
+
+
+        );
+
+
+
+    }
+
+    else{
+
+
+        inviaMessaggioSOS(
+
+            "non disponibile",
+
+            "non disponibile"
+
+        );
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+// ===============================
+// WHATSAPP SOS
+// ===============================
+
+
+
+function inviaMessaggioSOS(
+lat,
+lng
+){
+
+
+
+    let nome =
+    profiloTaxi?.nome ||
+    "Tassista";
+
+
+
+
+
+    let messaggio =
+
+
+`ALLARME TAXIPILOT
+
+Richiesta assistenza.
+
+Autista:
+${nome}
+
+
+Posizione:
+
+https://maps.google.com/?q=${lat},${lng}
+
+
+Ora:
+
+${new Date().toLocaleString("it-IT")}
+
+`;
+
+
+
+
+
+
+
+    let testo =
+
+    encodeURIComponent(
+        messaggio
+    );
+
+
+
+
+
+
+
+    contattiSOS.forEach(
+
+    contatto=>{
+
+
+        let numero =
+
+        contatto.telefono
+        .replace(
+            /\s/g,
+            ""
+        );
+
+
+
+
+        let url =
+
+
+        `https://wa.me/${numero}?text=${testo}`;
+
+
+
+
+
+        window.open(
+
+            url,
+
+            "_blank"
+
+        );
+
+
+
+    }
+
+
+    );
+
+
+
+}
+
+// ======================================================
+// TaxiPilot
+// BLOCCO 3/5
+// GESTIONE CORSE
+// ======================================================
+
+
+
+// ===============================
+// SALVA CORSA
+// ===============================
+
+
+function salvaCorsa(){
+
+
+
+    let cliente =
+    document.getElementById(
+        "nomeCliente"
+    ).value;
+
+
+
+    let telefono =
+    document.getElementById(
+        "telefono"
+    ).value;
+
+
+
+    let partenza =
+    document.getElementById(
+        "partenza"
+    ).value;
+
+
+
+    let destinazione =
+    document.getElementById(
+        "destinazione"
+    ).value;
+
+
+
+    let orario =
+    document.getElementById(
+        "orario"
+    ).value;
+
+
+
+    let importo =
+    Number(
+        document.getElementById(
+            "importo"
+        ).value
+    ) || 0;
+
+
+
+
+
+
+    if(
+        !cliente ||
+        !partenza ||
+        !destinazione ||
+        !orario
+    ){
+
+
+        alert(
+            "Compila tutti i campi obbligatori"
+        );
+
+
+        return;
+
+
+    }
+
+
+
+
+
+
+
+    let nuovaCorsa = {
+
+
+        id:
+        Date.now(),
+
+
+        cliente:
+        cliente,
+
+
+        telefono:
+        telefono,
+
+
+        partenza:
+        partenza,
+
+
+        destinazione:
+        destinazione,
+
+
+        orario:
+        orario,
+
+
+        importo:
+        importo,
+
+
+        stato:
+        "Programmata",
+
+
+        data:
+        new Date().toLocaleDateString(
+            "it-IT"
+        )
+
+
+    };
+
+
+
+
+
+
+
+    corse.push(
+        nuovaCorsa
+    );
+
+
+
+
+
+    salvaCorse();
+
+
+
+    svuotaForm();
+
 
 
     mostraCorse();
 
+
+
+    mostraProssimaCorsa();
+
+
+
     aggiornaStatistiche();
 
 
+
 }
+
+
+
+
+
+
+
+function salvaCorse(){
+
+
+
+    localStorage.setItem(
+
+        "taxipilot_corse",
+
+        JSON.stringify(corse)
+
+    );
+
+
+}
+
+
+
+
+
+
+
+
+
+// ===============================
+// VISUALIZZA CORSE
+// ===============================
+
+
+function mostraCorse(){
+
+
+
+    let box =
+    document.getElementById(
+        "listaCorse"
+    );
+
+
+
+    if(
+        !box
+    ){
+
+        return;
+
+    }
+
+
+
+
+
+    box.innerHTML="";
+
+
+
+
+
+
+    if(
+        corse.length===0
+    ){
+
+
+        box.innerHTML=
+
+        `
+
+        <p class="empty">
+
+        Nessuna corsa inserita
+
+        </p>
+
+
+        `;
+
+
+        return;
+
+
+    }
+
+
+
+
+
+
+
+    let lista = [...corse];
+
+
+
+    lista.sort(
+
+        (a,b)=>
+
+        a.orario.localeCompare(
+            b.orario
+        )
+
+    );
+
+
+
+
+
+
+
+
+
+    lista.forEach(
+    corsa=>{
+
+
+
+        box.innerHTML +=
+
+
+        `
+
+<div class="trip-card">
+
+
+<h3>
+
+${corsa.orario}
+
+-
+
+${corsa.cliente}
+
+</h3>
+
+
+
+<p>
+
+${corsa.partenza}
+
+→
+
+${corsa.destinazione}
+
+</p>
+
+
+
+<p>
+
+Importo:
+
+<strong>
+
+${corsa.importo.toFixed(2)} €
+
+</strong>
+
+</p>
+
+
+
+<p>
+
+Stato:
+
+<strong>
+
+${corsa.stato}
+
+</strong>
+
+</p>
+
+
+
+
+
+<button
+
+class="main-button"
+
+onclick="cambiaStatoCorsa(${corsa.id})"
+
+>
+
+Cambia stato
+
+</button>
+
+
+
+
+
+
+
+<button
+
+class="main-button"
+
+onclick="chiamaCliente('${corsa.telefono}')"
+
+>
+
+Chiama cliente
+
+</button>
+
+
+
+
+
+
+
+<button
+
+class="main-button"
+
+onclick="navigaCorsa('${corsa.destinazione}')"
+
+>
+
+Naviga
+
+</button>
+
+
+
+
+
+
+
+<button
+
+class="delete-btn"
+
+onclick="eliminaCorsa(${corsa.id})"
+
+>
+
+Elimina
+
+</button>
+
+
+
+</div>
+
+
+`;
+
+
+
+    });
+
+
+}
+
+
+
+
+
+
+
+
+
+// ===============================
+// CAMBIO STATO CORSA
+// ===============================
+
+
 
 function cambiaStatoCorsa(id){
 
 
-let corsa =
-corse.find(
-c => c.id === id
-);
+
+    let corsa =
+
+    corse.find(
+
+        c =>
+
+        c.id===id
+
+    );
 
 
 
-if(!corsa){
+    if(
+        !corsa
+    ){
 
-return;
+        return;
+
+    }
+
+
+
+
+
+
+
+    let stati = [
+
+
+        "Programmata",
+
+
+        "In arrivo",
+
+
+        "Cliente a bordo",
+
+
+        "Completata"
+
+
+    ];
+
+
+
+
+
+
+
+    let posizione =
+
+    stati.indexOf(
+        corsa.stato
+    );
+
+
+
+
+
+    posizione++;
+
+
+
+
+
+    if(
+        posizione >= stati.length
+    ){
+
+        posizione=0;
+
+    }
+
+
+
+
+
+
+    corsa.stato =
+
+    stati[posizione];
+
+
+
+
+
+    salvaCorse();
+
+
+
+    mostraCorse();
+
+
+
+    mostraProssimaCorsa();
+
+
 
 }
+
+
+
+
+
+
+
+
+
+// ===============================
+// ELIMINA CORSA
+// ===============================
+
+
+
+function eliminaCorsa(id){
+
+
+
+    corse =
+
+    corse.filter(
+
+        c =>
+
+        c.id !== id
+
+    );
+
+
+
+
+
+    salvaCorse();
+
+
+
+    mostraCorse();
+
+
+
+    mostraProssimaCorsa();
+
+
+
+    aggiornaStatistiche();
+
+
+
+}
+
+
+
+
+
+
+
+
+
+// ===============================
+// CHIAMATA CLIENTE
+// ===============================
+
+
+
+function chiamaCliente(numero){
+
+
+
+    if(!numero){
+
+        alert(
+            "Numero non disponibile"
+        );
+
+        return;
+
+    }
+
+
+
+    window.location.href =
+
+    "tel:" + numero;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+// ===============================
+// NAVIGAZIONE
+// ===============================
+
+
 
 function navigaCorsa(destinazione){
 
 
-let url =
 
-"https://www.google.com/maps/search/?api=1&query="
-+
-encodeURIComponent(destinazione);
+    let url =
 
 
+    "https://www.google.com/maps/search/?api=1&query="
 
-window.open(
-url,
-"_blank"
-);
+    +
 
-
-}
-
-
-let stati = [
-
-"Programmata",
-
-"In arrivo",
-
-"Cliente a bordo",
-
-"Completata"
-
-];
+    encodeURIComponent(
+        destinazione
+    );
 
 
 
-let posizione =
-stati.indexOf(corsa.stato);
 
+    window.open(
 
+        url,
 
-posizione++;
+        "_blank"
 
-
-
-if(posizione >= stati.length){
-
-posizione=0;
+    );
 
 }
 
 
 
-corsa.stato =
-stati[posizione];
 
 
 
-localStorage.setItem(
-"taxipilot_corse",
-JSON.stringify(corse)
-);
 
 
 
-mostraCorse();
-
-mostraProssimaCorsa();
-
-
-}
-
-
+// ===============================
+// PULIZIA FORM
+// ===============================
 
 
 
 function svuotaForm(){
 
 
-let campi = [
 
-"nomeCliente",
-"telefono",
-"partenza",
-"destinazione",
-"orario",
-"importo"
-
-];
+    let campi = [
 
 
-campi.forEach(id=>{
-
-let elemento=document.getElementById(id);
+        "nomeCliente",
 
 
-if(elemento){
+        "telefono",
 
-elemento.value="";
+
+        "partenza",
+
+
+        "destinazione",
+
+
+        "orario",
+
+
+        "importo"
+
+
+    ];
+
+
+
+
+
+    campi.forEach(
+
+    id=>{
+
+
+        let campo =
+
+        document.getElementById(
+            id
+        );
+
+
+
+        if(campo){
+
+            campo.value="";
+
+        }
+
+
+    });
+
 
 }
 
-});
 
-
-}
-
-
-
-
-
-
-function openForm(){
-
-
-let form = document.getElementById("formCorsa");
-
-
-if(form){
-
-form.classList.toggle("hidden");
-
-}
-
-
-}
 
 
 
@@ -715,207 +1881,106 @@ form.classList.toggle("hidden");
 
 
 // ===============================
-// STATISTICHE HOME
+// PROSSIMA CORSA HOME
 // ===============================
 
-function aggiornaStatistiche(){
-
-
-let numero =
-document.getElementById("numeroCorse");
-
-
-let incasso =
-document.getElementById("incassoGiornaliero");
-
-
-
-if(!numero || !incasso){
-
-return;
-
-}
-
-
-
-
-
-let oggi =
-new Date()
-.toLocaleDateString("it-IT");
-
-
-
-
-
-let corseOggi = corse.filter(
-
-corsa =>
-
-corsa.data === oggi
-
-);
-
-
-
-
-
-let totale = corseOggi.reduce(
-
-(sum,corsa)=>
-
-sum + Number(corsa.importo),
-
-0
-
-);
-
-
-
-
-
-numero.innerHTML =
-corseOggi.length;
-
-
-
-incasso.innerHTML =
-totale.toFixed(0)+"€";
-
-
-
-}
-
-
-
-
-if(incasso){
-
-
-let totale = corse.reduce(
-(sum,corsa)=>sum+corsa.importo,
-0
-);
-
-
-
-incasso.innerHTML =
-totale.toFixed(2)+" €";
-
-
-}
-
-
-
-}
-
-
-
-
-
-
-
-// ===============================
-// STATO SERVIZIO
-// ===============================
-
-
-function cambiaStato(){
-
-
-let stato =
-localStorage.getItem("taxipilot_stato")
-||
-"Disponibile";
-
-
-
-let elemento =
-document.getElementById("statoServizio");
-
-
-
-if(elemento){
-
-elemento.innerHTML = stato;
-
-}
-
-
-
-}
 
 
 function mostraProssimaCorsa(){
 
 
-let box =
-document.getElementById("prossimaCorsa");
+
+    let box =
+
+    document.getElementById(
+        "prossimaCorsa"
+    );
 
 
 
-if(!box){
+    if(!box){
 
-return;
+        return;
 
-}
-
-
-
-
-let corseDisponibili = corse.filter(
-
-corsa => corsa.stato !== "Completata"
-
-);
-
-
-
-
-if(corseDisponibili.length === 0){
-
-
-box.innerHTML =
-
-`
-<p class="empty">
-Nessuna corsa programmata
-</p>
-`;
-
-return;
-
-
-}
+    }
 
 
 
 
 
-// ordina per orario
 
-corseDisponibili.sort(
-
-(a,b)=>
-
-a.orario.localeCompare(b.orario)
-
-);
+    let disponibili =
 
 
+    corse.filter(
 
+        c =>
 
+        c.stato !== "Completata"
 
-let corsa =
-corseDisponibili[0];
+    );
 
 
 
 
 
-box.innerHTML =
 
-`
+    if(
+        disponibili.length===0
+    ){
+
+
+        box.innerHTML=
+
+        `
+
+        <p>
+
+        Nessuna corsa programmata
+
+        </p>
+
+
+        `;
+
+
+        return;
+
+
+    }
+
+
+
+
+
+
+    disponibili.sort(
+
+        (a,b)=>
+
+        a.orario.localeCompare(
+            b.orario
+        )
+
+    );
+
+
+
+
+
+    let corsa =
+
+    disponibili[0];
+
+
+
+
+
+
+
+    box.innerHTML=
+
+    `
 
 <div class="trip-box">
 
@@ -943,19 +2008,7 @@ ${corsa.cliente}
 
 ${corsa.partenza}
 
-</p>
-
-
-
-<p>
-
 ↓
-
-</p>
-
-
-
-<p>
 
 ${corsa.destinazione}
 
@@ -970,6 +2023,7 @@ ${corsa.importo.toFixed(2)} €
 </strong>
 
 
+
 </div>
 
 
@@ -981,121 +2035,101 @@ ${corsa.importo.toFixed(2)} €
 
 }
 
+// ======================================================
+// TaxiPilot
+// BLOCCO 4/5
+// TURNO + STATISTICHE + STATO SERVIZIO
+// ======================================================
 
 
-if(corse.length === 0){
-
-box.innerHTML=
-`
-<p class="empty">
-Nessuna corsa programmata
-</p>
-`;
-
-return;
-
-}
-
-
-
-
-let prossima = corse[0];
-
-
-
-box.innerHTML =
-`
-
-<div class="trip-box">
-
-
-<div class="trip-time">
-
-${prossima.orario}
-
-</div>
-
-
-<div class="trip-info">
-
-
-<h3>
-${prossima.cliente}
-</h3>
-
-
-<p>
-${prossima.partenza}
-→
-${prossima.destinazione}
-</p>
-
-
-<p class="price">
-${prossima.importo.toFixed(2)} €
-</p>
-
-
-</div>
-
-
-</div>
-
-`;
-
-}
 
 // ===============================
 // GESTIONE TURNO
 // ===============================
 
 
+
 function iniziaTurno(){
 
 
-let km =
-document.getElementById("kmInizio").value;
+
+    let km =
+    document.getElementById(
+        "kmInizio"
+    ).value;
 
 
 
-if(km === ""){
 
-alert("Inserisci i chilometri iniziali");
 
-return;
+    if(
+        km === ""
+    ){
+
+
+        alert(
+            "Inserisci i chilometri iniziali"
+        );
+
+
+        return;
+
+
+    }
+
+
+
+
+
+
+    let turno = {
+
+
+
+        attivo:
+        true,
+
+
+
+        inizio:
+        Date.now(),
+
+
+
+        kmInizio:
+        km
+
+
+
+    };
+
+
+
+
+
+
+
+    localStorage.setItem(
+
+        "taxipilot_turno",
+
+        JSON.stringify(turno)
+
+    );
+
+
+
+
+
+    mostraTurno();
+
+
 
 }
 
 
 
-let turno = {
 
-
-attivo:true,
-
-inizio:
-new Date().getTime(),
-
-kmInizio:
-km
-
-
-};
-
-
-
-localStorage.setItem(
-"taxipilot_turno",
-JSON.stringify(turno)
-);
-
-
-
-mostraTurno();
-
-
-
-}
 
 
 
@@ -1105,83 +2139,249 @@ function mostraTurno(){
 
 
 
-let box =
-document.getElementById("statoTurno");
+    let box =
+
+    document.getElementById(
+        "statoTurno"
+    );
 
 
 
-if(!box){
+    if(!box){
 
-return;
+        return;
 
-}
-
-
-
-let turno =
-JSON.parse(
-localStorage.getItem("taxipilot_turno")
-);
+    }
 
 
 
-if(!turno || !turno.attivo){
-
-
-box.innerHTML =
-`
-<p class="empty">
-Nessun turno attivo
-</p>
-`;
-
-return;
-
-}
 
 
 
-let ora =
-new Date(turno.inizio)
-.toLocaleTimeString(
-"it-IT",
-{
-hour:"2-digit",
-minute:"2-digit"
-}
-);
+
+    let turno =
+
+    JSON.parse(
+
+        localStorage.getItem(
+            "taxipilot_turno"
+        )
+
+    );
 
 
 
-box.innerHTML =
-`
+
+
+
+
+    if(
+        !turno ||
+        !turno.attivo
+    ){
+
+
+
+        box.innerHTML=
+
+        `
+
+        <p class="empty">
+
+        Nessun turno attivo
+
+        </p>
+
+
+        `;
+
+
+        return;
+
+
+    }
+
+
+
+
+
+
+
+    let ora =
+
+    new Date(
+        turno.inizio
+    )
+
+    .toLocaleTimeString(
+        "it-IT",
+        {
+            hour:"2-digit",
+            minute:"2-digit"
+        }
+    );
+
+
+
+
+
+
+
+    box.innerHTML=
+
+    `
 
 <div class="trip-card">
 
+
 <h3>
+
 Turno attivo
+
 </h3>
 
 
+
 <p>
+
 Inizio:
+
 ${ora}
+
 </p>
+
 
 
 <p>
+
 Km iniziali:
+
 ${turno.kmInizio}
+
 </p>
+
+
+
+<p>
+
+Ore lavorate:
+
+<span id="oreTurno">
+
+0
+
+</span>
+
+</p>
+
 
 
 </div>
 
+
 `;
 
 
 
-calcolaOreTurno();
+
+    aggiornaOreTurno();
+
+
+
+}
+
+
+
+
+
+
+
+
+
+function aggiornaOreTurno(){
+
+
+
+    let box =
+
+    document.getElementById(
+        "oreTurno"
+    );
+
+
+
+    if(!box){
+
+        return;
+
+    }
+
+
+
+
+
+
+
+    let turno =
+
+    JSON.parse(
+
+        localStorage.getItem(
+            "taxipilot_turno"
+        )
+
+    );
+
+
+
+
+
+    if(
+        !turno
+    ){
+
+        return;
+
+    }
+
+
+
+
+
+
+    let differenza =
+
+    Date.now()
+
+    -
+
+    turno.inizio;
+
+
+
+
+
+
+
+    let ore =
+
+    Math.floor(
+
+        differenza /
+
+        3600000
+
+    );
+
+
+
+
+
+
+
+    box.innerHTML =
+    ore;
+
 
 
 }
@@ -1190,47 +2390,6 @@ calcolaOreTurno();
 
 
 
-function calcolaOreTurno(){
-
-
-let turno =
-JSON.parse(
-localStorage.getItem("taxipilot_turno")
-);
-
-
-
-let oreBox =
-document.getElementById("oreTurno");
-
-
-
-if(!turno || !oreBox){
-
-return;
-
-}
-
-
-
-let differenza =
-Date.now()-turno.inizio;
-
-
-
-let ore =
-Math.floor(
-differenza / 3600000
-);
-
-
-
-oreBox.innerHTML =
-ore;
-
-
-
-}
 
 
 
@@ -1238,318 +2397,21 @@ ore;
 function terminaTurno(){
 
 
-let conferma =
-confirm(
-"Terminare il turno?"
-);
 
+    let conferma =
 
+    confirm(
 
-if(!conferma){
+        "Terminare il turno?"
 
-return;
-
-}
-
-
-
-localStorage.removeItem(
-"taxipilot_turno"
-);
-
-
-
-mostraTurno();
-
-
-alert(
-"Turno terminato correttamente"
-);
-
-
-}
-
-// ===============================
-// CONFIGURAZIONE INIZIALE
-// ===============================
-
-
-let contattiSOS = JSON.parse(
-    localStorage.getItem("taxipilot_contatti_sos")
-) || [];
-
-
-
-
-
-// Controllo primo accesso
-
-function controlloPrimoAccesso(){
-
-
-    let configurato =
-    localStorage.getItem("taxipilot_configurato");
-
-
-    if(
-        !configurato &&
-        !window.location.pathname.includes("setup.html")
-    ){
-
-        window.location.href="setup.html";
-
-    }
-
-
-}
-
-
-
-
-
-// Aggiunta contatto SOS
-
-function aggiungiContatto(){
-
-
-    let nome =
-    prompt("Inserisci nome contatto");
-
-
-    if(!nome){
-
-        return;
-
-    }
-
-
-
-    let numero =
-    prompt("Inserisci numero telefono");
-
-
-    if(!numero){
-
-        return;
-
-    }
-
-
-
-    let contatto = {
-
-
-        id: Date.now(),
-
-        nome:nome,
-
-        telefono:numero
-
-
-    };
-
-
-
-    contattiSOS.push(contatto);
-
-
-
-    localStorage.setItem(
-        "taxipilot_contatti_sos",
-        JSON.stringify(contattiSOS)
     );
-
-
-
-    mostraContatti();
-
-
-}
-
-
-
-
-
-// Visualizzazione contatti nella configurazione
-
-
-function mostraContatti(){
-
-
-    let contenitore =
-    document.getElementById("contatti");
-
-
-    if(!contenitore){
-
-        return;
-
-    }
-
-
-
-    contenitore.innerHTML="";
-
-
-
-    if(contattiSOS.length===0){
-
-
-        contenitore.innerHTML=
-        `
-        <p class="empty">
-        Nessun contatto salvato
-        </p>
-        `;
-
-
-        return;
-
-    }
-
-
-
-
-
-    contattiSOS.forEach(contatto=>{
-
-
-        contenitore.innerHTML +=
-        `
-
-        <div class="trip-card">
-
-        <h3>
-        ${contatto.nome}
-        </h3>
-
-
-        <p>
-        ${contatto.telefono}
-        </p>
-
-
-        </div>
-
-        `;
-
-
-    });
-
-
-}
-
-
-
-
-
-// Completamento configurazione
-
-
-function completaSetup(){
-
-
-
-    let nome =
-    document.getElementById("setupNome").value;
-
-
-
-    if(nome===""){
-
-
-        alert(
-        "Inserisci il nome del tassista"
-        );
-
-
-        return;
-
-
-    }
-
-
-
-    if(contattiSOS.length===0){
-
-
-        alert(
-        "Inserisci almeno un contatto SOS"
-        );
-
-
-        return;
-
-
-    }
-
-
-
-
-
-    let profilo = {
-
-
-        nome:nome
-
-
-    };
-
-
-
-    localStorage.setItem(
-        "taxipilot_profilo",
-        JSON.stringify(profilo)
-    );
-
-
-
-    localStorage.setItem(
-        "taxipilot_configurato",
-        "true"
-    );
-
-
-
-    window.location.href="index.html";
-
-
-}
-
-
-
-
-
-
-// ===============================
-// SISTEMA SOS WHATSAPP
-// ===============================
-
-
-function attivaSOS(){
-
-
-    if(contattiSOS.length===0){
-
-
-        alert(
-        "Nessun contatto SOS configurato"
-        );
-
-
-        return;
-
-
-    }
 
 
 
 
 
     if(
-        !confirm(
-        "Attivare richiesta di emergenza?"
-        )
+        !conferma
     ){
 
         return;
@@ -1561,182 +2423,77 @@ function attivaSOS(){
 
 
 
-    if(
-    navigator.geolocation
-    ){
+
+    localStorage.removeItem(
+
+        "taxipilot_turno"
+
+    );
 
 
 
-        navigator.geolocation.getCurrentPosition(
-
-        posizione=>{
-
-
-            let lat =
-            posizione.coords.latitude;
-
-
-            let lng =
-            posizione.coords.longitude;
 
 
 
-            inviaMessaggioSOS(lat,lng);
-            // ===============================
-// VISUALIZZA CONTATTI SOS
+    mostraTurno();
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+// ===============================
+// STATO SERVIZIO
 // ===============================
 
-function mostraListaSOS(){
 
 
-let box =
-document.getElementById("listaSOS");
+function cambiaStato(){
 
 
-if(!box){
 
-return;
+    let stato =
 
-}
+    localStorage.getItem(
 
+        "taxipilot_stato"
 
-box.innerHTML="";
+    )
 
+    ||
 
+    "Disponibile";
 
-if(contattiSOS.length === 0){
 
 
-box.innerHTML =
-`
-<p class="empty">
-Nessun contatto salvato
-</p>
-`;
 
-return;
 
-}
 
 
+    let pulsante =
 
+    document.getElementById(
+        "statoServizio"
+    );
 
-contattiSOS.forEach(contatto=>{
 
 
-box.innerHTML +=
-`
 
-<div class="trip-card">
 
+    if(
+        pulsante
+    ){
 
-<h3>
-${contatto.nome}
-</h3>
-
-
-<p>
-${contatto.telefono}
-</p>
-
-
-<button 
-class="delete-btn"
-onclick="eliminaContattoSOS(${contatto.id})">
-
-Elimina
-
-</button>
-
-
-</div>
-
-`;
-
-
-
-});
-
-
-}
-
-
-
-box.innerHTML="";
-
-
-
-if(contattiSOS.length===0){
-
-box.innerHTML=
-`
-<p class="empty">
-Nessun contatto salvato
-</p>
-`;
-
-return;
-
-}
-
-
-
-contattiSOS.forEach(contatto=>{
-
-
-box.innerHTML +=
-`
-
-<div class="trip-card">
-
-<h3>
-${contatto.nome}
-</h3>
-
-<p>
-${contatto.telefono}
-</p>
-
-</div>
-
-`;
-
-
-
-});
-
-
-}
-
-
-
-        },
-
-
-        ()=>{
-
-
-            inviaMessaggioSOS(
-                "non disponibile",
-                "non disponibile"
-            );
-
-
-        }
-
-        );
-
-
-
-
-    }else{
-
-
-        inviaMessaggioSOS(
-            "non disponibile",
-            "non disponibile"
-        );
-
+        pulsante.innerHTML =
+        stato;
 
     }
 
@@ -1748,105 +2505,205 @@ ${contatto.telefono}
 
 
 
-function inviaMessaggioSOS(lat,lng){
 
 
 
-let profilo =
-JSON.parse(
-localStorage.getItem("taxipilot_profilo")
-);
+
+function cambiaStatoServizio(){
 
 
 
-let nome =
-profilo?.nome || "Tassista";
+    let attuale =
 
+    localStorage.getItem(
 
+        "taxipilot_stato"
 
-let messaggio =
+    )
 
-`ALLARME TAXIPILOT
+    ||
 
-Richiesta di assistenza.
-
-Autista:
-${nome}
-
-Posizione:
-https://maps.google.com/?q=${lat},${lng}
-
-Ora:
-${new Date().toLocaleString("it-IT")}`;
-
-
-
-let testo =
-encodeURIComponent(messaggio);
+    "Disponibile";
 
 
 
 
 
-contattiSOS.forEach(contatto=>{
 
-
-let url =
-
-`https://wa.me/${contatto.telefono}?text=${testo}`;
+    let nuovo;
 
 
 
-window.open(url,"_blank");
+    if(
+        attuale === "Disponibile"
+    ){
+
+        nuovo =
+        "In servizio";
+
+
+    }
+
+    else{
+
+
+        nuovo =
+        "Disponibile";
+
+
+    }
 
 
 
-});
+
+
+
+
+    localStorage.setItem(
+
+        "taxipilot_stato",
+
+        nuovo
+
+    );
+
+
+
+
+
+    cambiaStato();
+
 
 
 }
+
+
+
+
+
+
+
+
 
 // ===============================
-// PROFILO COMPLETO
+// STATISTICHE HOME
 // ===============================
 
 
-function salvaProfiloCompleto(){
 
-
-let profilo = {
-
-
-nome:
-document.getElementById("nomeProfilo").value,
-
-
-numeroTaxi:
-document.getElementById("numeroTaxi").value,
-
-
-veicolo:
-document.getElementById("modelloVeicolo").value,
-
-
-targa:
-document.getElementById("targaVeicolo").value
-
-
-};
+function aggiornaStatistiche(){
 
 
 
-localStorage.setItem(
-"taxipilot_profilo",
-JSON.stringify(profilo)
-);
+    let boxCorse =
+
+    document.getElementById(
+        "numeroCorse"
+    );
 
 
 
-alert(
-"Profilo aggiornato"
-);
+
+    let boxIncasso =
+
+    document.getElementById(
+        "incassoGiornaliero"
+    );
+
+
+
+
+
+
+    if(
+        !boxCorse ||
+        !boxIncasso
+    ){
+
+        return;
+
+    }
+
+
+
+
+
+
+
+    let oggi =
+
+    new Date()
+
+    .toLocaleDateString(
+        "it-IT"
+    );
+
+
+
+
+
+
+
+
+    let corseOggi =
+
+
+    corse.filter(
+
+        corsa =>
+
+        corsa.data === oggi
+
+    );
+
+
+
+
+
+
+
+    let incasso =
+
+
+    corseOggi.reduce(
+
+        (totale,corsa)=>
+
+        totale +
+
+        Number(
+            corsa.importo
+        ),
+
+        0
+
+    );
+
+
+
+
+
+
+
+    boxCorse.innerHTML =
+
+    corseOggi.length;
+
+
+
+
+
+
+
+    boxIncasso.innerHTML =
+
+
+    incasso.toFixed(2)
+
+    +
+
+    " €";
+
 
 
 }
@@ -1854,278 +2711,147 @@ alert(
 
 
 
-function caricaProfiloCompleto(){
 
 
-let profilo =
-JSON.parse(
-localStorage.getItem("taxipilot_profilo")
-);
 
 
-
-if(!profilo){
-
-return;
-
-}
-
-
-
-
-let campi = {
-
-
-nomeProfilo:
-profilo.nome || "",
-
-
-numeroTaxi:
-profilo.numeroTaxi || "",
-
-
-modelloVeicolo:
-profilo.veicolo || "",
-
-
-targaVeicolo:
-profilo.targa || ""
-
-
-};
-
-
-
-
-
-for(let id in campi){
-
-
-let campo =
-document.getElementById(id);
-
-
-
-if(campo){
-
-campo.value = campi[id];
-
-}
-
-
-}
-
-
-
-mostraContattiProfilo();
-
-
-}
-
-
-
-
-
-
-
-function mostraContattiProfilo(){
-
-
-let box =
-document.getElementById("listaContattiProfilo");
-
-
-
-if(!box){
-
-return;
-
-}
-
-
-
-box.innerHTML="";
-
-
-
-if(contattiSOS.length === 0){
-
-
-box.innerHTML =
-`
-<p class="empty">
-Nessun contatto configurato
-</p>
-`;
-
-return;
-
-}
-
-
-
-
-
-contattiSOS.forEach(contatto=>{
-
-
-box.innerHTML +=
-`
-
-<div class="trip-card">
-
-
-<h3>
-${contatto.nome}
-</h3>
-
-
-<p>
-${contatto.telefono}
-</p>
-
-
-
-<button
-class="delete-btn"
-onclick="eliminaContattoSOS(${contatto.id})">
-
-Elimina
-
-</button>
-
-
-</div>
-
-`;
-
-
-
-});
-
-
-}
-
-function eliminaContattoSOS(id){
-
-
-
-let conferma =
-confirm(
-"Eliminare questo contatto?"
-);
-
-
-
-if(!conferma){
-
-return;
-
-}
-
-
-
-
-contattiSOS =
-contattiSOS.filter(
-contatto => contatto.id !== id
-);
-
-
-
-localStorage.setItem(
-"taxipilot_contatti_sos",
-JSON.stringify(contattiSOS)
-);
-
-
-
-mostraListaSOS();
-
-mostraContattiProfilo();
-
-
-}
-
-
-
-box.innerHTML="";
-
-
-
-if(contattiSOS.length===0){
-
-
-box.innerHTML=
-`
-<p class="empty">
-Nessun contatto configurato
-</p>
-`;
-
-return;
-
-}
-
-
-
-
-contattiSOS.forEach(contatto=>{
-
-
-box.innerHTML +=
-`
-
-<div class="trip-card">
-
-<h3>
-${contatto.nome}
-</h3>
-
-<p>
-${contatto.telefono}
-</p>
-
-
-</div>
-
-`;
-
-
-
-});
-
-
-}
 
 // ===============================
-// AVVIO
+// AGGIORNAMENTO ORE AUTOMATICO
 // ===============================
+
+
+
+setInterval(
+
+()=>{
+
+
+    aggiornaOreTurno();
+
+
+},
+
+60000
+
+);
+
+// ======================================================
+// TaxiPilot
+// BLOCCO 5/5
+// AVVIO APPLICAZIONE
+// ======================================================
+
+
+
+// ===============================
+// APERTURA FORM CORSA
+// ===============================
+
+
+
+function openForm(){
+
+
+
+    let form =
+
+    document.getElementById(
+        "formCorsa"
+    );
+
+
+
+    if(
+        !form
+    ){
+
+        return;
+
+    }
+
+
+
+
+
+    form.classList.toggle(
+        "hidden"
+    );
+
+
+}
+
+
+
+
+
+
+
+
+
+// ===============================
+// CARICAMENTO COMPLETO APP
+// ===============================
+
 
 
 document.addEventListener(
+
 "DOMContentLoaded",
+
 ()=>{
-controlloAccesso();
 
-caricaNomeHome();
 
-mostraContattiLogin();
 
-mostraListaSOS();
+    // controllo login dispositivo
 
-mostraCorse();
+    controlloAccesso();
 
-aggiornaStatistiche();
 
-mostraProssimaCorsa();
 
-cambiaStato();
 
-mostraTurno();
+    // HOME
 
-caricaProfiloCompleto();
+    caricaNomeHome();
+
+    aggiornaStatistiche();
+
+    mostraProssimaCorsa();
+
+    cambiaStato();
+
+
+
+
+    // CORSE
+
+    mostraCorse();
+
+
+
+
+    // SOS
+
+    mostraListaSOS();
+
+    mostraContattiProfilo();
+
+
+
+
+    // PROFILO
+
+    caricaProfiloCompleto();
+
+
+
+
+    // TURNO
+
+    mostraTurno();
+
 
 
 }
+
 );
