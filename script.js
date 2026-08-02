@@ -2767,7 +2767,303 @@ function openForm(){
 // AVVIO APPLICAZIONE
 // ===============================
 
+// ======================================================
+// STATISTICHE PROFILO
+// ======================================================
 
+
+let grafico1;
+let grafico2;
+let grafico3;
+
+
+
+
+function caricaStatistiche(){
+
+
+let filtro =
+document.getElementById(
+"filtroStatistiche"
+)?.value || "oggi";
+
+
+
+let turni = JSON.parse(
+
+localStorage.getItem(
+"taxipilot_turni"
+
+)
+
+) || [];
+
+
+
+
+let dati = filtraTurni(
+turni,
+filtro
+);
+
+
+
+
+let corse = 0;
+let incasso = 0;
+let ore = 0;
+let km = 0;
+
+
+
+
+dati.forEach(t=>{
+
+
+corse += t.corse;
+
+incasso += t.incasso;
+
+ore += t.ore;
+
+km += t.kmPercorsi;
+
+
+});
+
+
+
+
+document.getElementById(
+"statCorse"
+).innerHTML = corse;
+
+
+
+document.getElementById(
+"statIncasso"
+).innerHTML =
+
+incasso.toFixed(2)+" €";
+
+
+
+document.getElementById(
+"statOre"
+).innerHTML =
+
+ore.toFixed(1)+" h";
+
+
+
+document.getElementById(
+"statKm"
+).innerHTML =
+
+km+" km";
+
+
+
+
+creaGrafici(dati);
+
+
+}
+
+
+
+
+
+
+function filtraTurni(turni,filtro){
+
+
+let oggi = new Date();
+
+
+
+return turni.filter(t=>{
+
+
+let data =
+new Date(
+t.data.split("/").reverse().join("-")
+);
+
+
+
+if(filtro==="oggi"){
+
+return data.toDateString()
+===
+oggi.toDateString();
+
+}
+
+
+
+if(filtro==="mese"){
+
+return data.getMonth()
+===
+oggi.getMonth();
+
+}
+
+
+
+if(filtro==="anno"){
+
+return data.getFullYear()
+===
+oggi.getFullYear();
+
+}
+
+
+
+return true;
+
+
+
+});
+
+
+}
+
+
+
+
+
+
+
+function creaGrafici(dati){
+
+
+let giorni =
+dati.map(
+d=>d.data
+);
+
+
+
+if(grafico1)
+grafico1.destroy();
+
+
+grafico1 =
+new Chart(
+
+document.getElementById(
+"graficoIncassi"
+),
+
+{
+
+type:"line",
+
+data:{
+
+labels:giorni,
+
+datasets:[{
+
+label:"Incassi €",
+
+data:dati.map(
+d=>d.incasso
+)
+
+}]
+
+}
+
+}
+
+);
+
+
+
+
+
+if(grafico2)
+grafico2.destroy();
+
+
+grafico2 =
+new Chart(
+
+document.getElementById(
+"graficoOre"
+),
+
+{
+
+type:"line",
+
+data:{
+
+labels:giorni,
+
+datasets:[{
+
+label:"Ore lavorate",
+
+data:dati.map(
+d=>d.ore
+)
+
+}]
+
+}
+
+}
+
+);
+
+
+
+
+
+
+if(grafico3)
+grafico3.destroy();
+
+
+grafico3 =
+new Chart(
+
+document.getElementById(
+"graficoKm"
+),
+
+{
+
+type:"line",
+
+data:{
+
+labels:giorni,
+
+datasets:[{
+
+label:"Km percorsi",
+
+data:dati.map(
+d=>d.kmPercorsi
+)
+
+}]
+
+}
+
+}
+
+);
+
+
+
+}
 
 document.addEventListener(
 
@@ -2818,6 +3114,8 @@ document.addEventListener(
 
 
     cambiaStato();
+
+    caricaStatistiche();
 
 
 
