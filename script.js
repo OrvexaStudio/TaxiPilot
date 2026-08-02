@@ -10,7 +10,6 @@ localStorage.getItem("taxipilot_contatti_sos")
 
 
 
-
 function controlloAccesso(){
 
 
@@ -308,6 +307,9 @@ let nuovaCorsa = {
     importo: Number(importo) || 0,
 
     stato:"Programmata"
+
+    data:
+new Date().toLocaleDateString("it-IT"),
 
 };
 
@@ -716,26 +718,70 @@ form.classList.toggle("hidden");
 // STATISTICHE HOME
 // ===============================
 
-
 function aggiornaStatistiche(){
 
 
-
-let numeroCorse =
+let numero =
 document.getElementById("numeroCorse");
 
 
-
 let incasso =
-document.getElementById("incassoTotale");
+document.getElementById("incassoGiornaliero");
 
 
 
-if(numeroCorse){
+if(!numero || !incasso){
+
+return;
+
+}
 
 
-numeroCorse.innerHTML =
-corse.length;
+
+
+
+let oggi =
+new Date()
+.toLocaleDateString("it-IT");
+
+
+
+
+
+let corseOggi = corse.filter(
+
+corsa =>
+
+corsa.data === oggi
+
+);
+
+
+
+
+
+let totale = corseOggi.reduce(
+
+(sum,corsa)=>
+
+sum + Number(corsa.importo),
+
+0
+
+);
+
+
+
+
+
+numero.innerHTML =
+corseOggi.length;
+
+
+
+incasso.innerHTML =
+totale.toFixed(0)+"€";
+
 
 
 }
