@@ -1,33 +1,43 @@
 <!DOCTYPE html>
 <html lang="it">
 
+
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>TaxiPilot - Emergenza</title>
+
+<title>SOS - TaxiPilot</title>
+
 
 <link rel="stylesheet" href="style.css">
 
+
 </head>
+
 
 
 <body>
 
 
+
 <header class="topbar">
 
 
-<div class="brand">
+<div>
 
-<div class="brand-name">
-TaxiPilot
-</div>
 
-<div class="brand-sub">
-Sistema sicurezza
-</div>
+<h1>
+SOS
+</h1>
+
+
+<p>
+Emergenza e contatti rapidi
+</p>
+
 
 </div>
 
@@ -38,103 +48,37 @@ Sistema sicurezza
 
 
 
-<main>
 
 
-
-<section class="page-header">
-
-<h1>
-Emergenza
-</h1>
-
-
-<p>
-Attiva una richiesta di assistenza immediata.
-</p>
-
-
-</section>
+<main class="container">
 
 
 
 
 
-
-
-<section class="card sos-card">
+<section class="dashboard-card">
 
 
 
 <h2>
-Stato sicurezza
+Contatti emergenza
 </h2>
 
-
-
-<div class="security-status">
-
-
-<span class="status-dot"></span>
-
-
-Sistema pronto
-
-
-</div>
-
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<section class="card emergency-panel">
-
-
-<h2>
-Richiesta assistenza
-</h2>
-
-
-<p>
-Premendo il pulsante verrà preparato un messaggio WhatsApp con la tua posizione e inviato ai contatti di sicurezza salvati.
-</p>
 
 
 
 <button
-class="sos-button"
-onclick="attivaSOS()">
 
-ATTIVA EMERGENZA
+class="main-button"
+
+onclick="aggiungiContatto()"
+
+>
+
+Aggiungi contatto
 
 </button>
 
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<section class="card">
-
-
-<h2>
-Contatti configurati
-</h2>
 
 
 
@@ -142,7 +86,9 @@ Contatti configurati
 
 
 <p class="empty">
+
 Nessun contatto salvato
+
 </p>
 
 
@@ -152,6 +98,49 @@ Nessun contatto salvato
 
 </section>
 
+
+
+
+
+
+
+
+<section class="dashboard-card sos-box">
+
+
+<h2>
+Richiesta assistenza
+</h2>
+
+
+
+
+<p>
+
+Invia posizione e richiesta di aiuto ai contatti configurati.
+
+</p>
+
+
+
+
+
+<button
+
+class="main-button"
+
+onclick="attivaSOS()"
+
+>
+
+ATTIVA SOS
+
+</button>
+
+
+
+
+</section>
 
 
 
@@ -170,9 +159,7 @@ Nessun contatto salvato
 
 <a href="index.html">
 
-<span>
 Home
-</span>
 
 </a>
 
@@ -180,9 +167,7 @@ Home
 
 <a href="corse.html">
 
-<span>
 Corse
-</span>
 
 </a>
 
@@ -190,19 +175,15 @@ Corse
 
 <a href="turno.html">
 
-<span>
 Turno
-</span>
 
 </a>
 
 
 
-<a href="sos.html" class="active">
+<a class="active" href="sos.html">
 
-<span>
 SOS
-</span>
 
 </a>
 
@@ -210,12 +191,9 @@ SOS
 
 <a href="profilo.html">
 
-<span>
 Profilo
-</span>
 
 </a>
-
 
 
 </nav>
@@ -226,6 +204,7 @@ Profilo
 
 
 <script src="script.js"></script>
+
 
 
 </body>
