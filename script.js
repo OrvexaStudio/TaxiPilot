@@ -328,6 +328,24 @@ return;
 
 }
 
+function navigaCorsa(destinazione){
+
+
+let url =
+
+"https://www.google.com/maps/search/?api=1&query="
++
+encodeURIComponent(destinazione);
+
+
+
+window.open(
+url,
+"_blank"
+);
+
+
+}
 
 
 let stati = [
