@@ -587,3 +587,26 @@ margin-top:20px;
 background:#8e1d17;
 
 }
+
+
+.trip-card button{
+
+margin-top:10px;
+
+}
+
+
+
+.trip-card .main-button{
+
+background:#111;
+
+}
+
+
+
+.trip-card .main-button:hover{
+
+background:#e87517;
+
+}
