@@ -1,34 +1,46 @@
 <!DOCTYPE html>
 <html lang="it">
 
+
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>TaxiPilot - Profilo</title>
+
+<title>SOS - TaxiPilot</title>
+
 
 <link rel="stylesheet" href="style.css">
 
+
 </head>
+
 
 
 <body>
 
 
+
 <header class="topbar">
 
-<div class="brand">
 
-<div class="brand-name">
-TaxiPilot
+<div>
+
+
+<h1>
+SOS
+</h1>
+
+
+<p>
+Emergenza e contatti rapidi
+</p>
+
+
 </div>
 
-<div class="brand-sub">
-Profilo tassista
-</div>
-
-</div>
 
 </header>
 
@@ -36,148 +48,32 @@ Profilo tassista
 
 
 
-<main>
 
 
-<section class="page-header">
-
-<h1>
-Il mio profilo
-</h1>
-
-<p>
-Gestisci i tuoi dati e i contatti di sicurezza.
-</p>
-
-</section>
+<main class="container">
 
 
 
 
 
+<section class="dashboard-card">
 
-
-
-<section class="card">
 
 
 <h2>
-Dati personali
+Contatti emergenza
 </h2>
 
 
 
-<label>
-Nome tassista
-</label>
 
+<button
 
-<input 
-id="nomeProfilo"
-type="text"
-placeholder="Nome e cognome">
-
-
-
-
-
-<label>
-Numero taxi
-</label>
-
-
-<input 
-id="numeroTaxi"
-type="text"
-placeholder="Taxi 12">
-
-
-
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<section class="card">
-
-
-<h2>
-Veicolo
-</h2>
-
-
-
-<label>
-Modello veicolo
-</label>
-
-
-<input 
-id="modelloVeicolo"
-type="text"
-placeholder="BMW Serie 5">
-
-
-
-
-
-<label>
-Targa
-</label>
-
-
-<input 
-id="targaVeicolo"
-type="text"
-placeholder="AB123CD">
-
-
-
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<section class="card">
-
-
-<h2>
-Contatti sicurezza
-</h2>
-
-
-
-<div id="listaContattiProfilo">
-
-
-<p class="empty">
-Nessun contatto configurato
-</p>
-
-
-</div>
-
-
-
-
-
-<button 
 class="main-button"
-onclick="aggiungiContatto()">
+
+onclick="aggiungiContatto()"
+
+>
 
 Aggiungi contatto
 
@@ -185,6 +81,21 @@ Aggiungi contatto
 
 
 
+
+<div id="listaSOS">
+
+
+<p class="empty">
+
+Nessun contatto salvato
+
+</p>
+
+
+</div>
+
+
+
 </section>
 
 
@@ -194,14 +105,42 @@ Aggiungi contatto
 
 
 
-<button 
-class="main-button"
-onclick="salvaProfiloCompleto()">
+<section class="dashboard-card sos-box">
 
-Salva modifiche
+
+<h2>
+Richiesta assistenza
+</h2>
+
+
+
+
+<p>
+
+Invia posizione e richiesta di aiuto ai contatti configurati.
+
+</p>
+
+
+
+
+
+<button
+
+class="main-button"
+
+onclick="attivaSOS()"
+
+>
+
+ATTIVA SOS
 
 </button>
 
+
+
+
+</section>
 
 
 
@@ -215,15 +154,12 @@ Salva modifiche
 
 
 
-
 <nav class="bottom-nav">
 
 
 <a href="index.html">
 
-<span>
 Home
-</span>
 
 </a>
 
@@ -231,9 +167,7 @@ Home
 
 <a href="corse.html">
 
-<span>
 Corse
-</span>
 
 </a>
 
@@ -241,29 +175,23 @@ Corse
 
 <a href="turno.html">
 
-<span>
 Turno
-</span>
 
 </a>
 
 
 
-<a href="sos.html">
+<a class="active" href="sos.html">
 
-<span>
 SOS
-</span>
 
 </a>
 
 
 
-<a href="profilo.html" class="active">
+<a href="profilo.html">
 
-<span>
 Profilo
-</span>
 
 </a>
 
@@ -275,8 +203,8 @@ Profilo
 
 
 
-
 <script src="script.js"></script>
+
 
 
 </body>
