@@ -4,9 +4,10 @@
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>TaxiPilot - Corse</title>
+<title>Corse - TaxiPilot</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -16,17 +17,18 @@
 <body>
 
 
+
 <header class="topbar">
 
-<div class="brand">
+<div>
 
-<div class="brand-name">
-TaxiPilot
-</div>
+<h1>
+Corse
+</h1>
 
-<div class="brand-sub">
-Gestione corse
-</div>
+<p>
+Gestione clienti e trasferimenti
+</p>
 
 </div>
 
@@ -36,107 +38,46 @@ Gestione corse
 
 
 
-<main>
-
-
-<section class="page-header">
-
-<h1>
-Le mie corse
-</h1>
-
-<p>
-Gestisci tutte le prenotazioni del tuo turno.
-</p>
-
-</section>
 
 
 
-
-
-<section class="card">
-
-
-<button class="main-button" onclick="openForm()">
-
-Nuova corsa
-
-</button>
-
-
-</section>
+<main class="container">
 
 
 
-
-
-
-
-<section id="formCorsa" class="card hidden">
+<section class="dashboard-card">
 
 
 <h2>
-Inserisci nuova corsa
+Nuova corsa
 </h2>
 
 
 
-<label>
-Cliente
-</label>
-
 <input 
 id="nomeCliente"
-type="text"
-placeholder="Nome e cognome">
+placeholder="Nome cliente">
 
 
-
-
-
-<label>
-Telefono
-</label>
 
 <input 
 id="telefono"
-type="tel"
-placeholder="Numero telefono">
+placeholder="Telefono cliente"
+type="tel">
 
 
-
-
-
-<label>
-Partenza
-</label>
 
 <input 
 id="partenza"
-type="text"
 placeholder="Indirizzo partenza">
 
 
 
-
-
-<label>
-Destinazione
-</label>
-
 <input 
 id="destinazione"
-type="text"
 placeholder="Destinazione">
 
 
-
-
-
-<label>
-Orario
-</label>
 
 <input 
 id="orario"
@@ -144,24 +85,22 @@ type="time">
 
 
 
-
-
-<label>
-Importo
-</label>
-
 <input 
 id="importo"
-type="number"
-placeholder="€">
+placeholder="Importo €"
+type="number">
 
 
 
 
 
-<button 
+<button
+
 class="main-button"
-onclick="salvaCorsa()">
+
+onclick="salvaCorsa()"
+
+>
 
 Salva corsa
 
@@ -177,19 +116,23 @@ Salva corsa
 
 
 
-<section class="card">
+
+<section class="dashboard-card">
 
 
 <h2>
-Programmate
+Le mie corse
 </h2>
+
 
 
 <div id="listaCorse">
 
 
 <p class="empty">
+
 Nessuna corsa inserita
+
 </p>
 
 
@@ -197,8 +140,6 @@ Nessuna corsa inserita
 
 
 </section>
-
-
 
 
 
@@ -215,53 +156,39 @@ Nessuna corsa inserita
 
 <a href="index.html">
 
-<span>
 Home
-</span>
 
 </a>
 
 
 
+<a class="active" href="corse.html">
 
-<a href="corse.html" class="active">
-
-<span>
 Corse
-</span>
 
 </a>
-
 
 
 
 <a href="turno.html">
 
-<span>
 Turno
-</span>
 
 </a>
-
 
 
 
 <a href="sos.html">
 
-<span>
 SOS
-</span>
 
 </a>
 
 
 
-
 <a href="profilo.html">
 
-<span>
 Profilo
-</span>
 
 </a>
 
