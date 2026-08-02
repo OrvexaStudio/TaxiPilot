@@ -2388,40 +2388,99 @@ localStorage.setItem(
 
 
 
-    let turnoChiuso = {
+let oraFine =
+new Date().toLocaleTimeString(
+    "it-IT",
+    {
+        hour:"2-digit",
+        minute:"2-digit"
+    }
+);
 
 
-        data:oggi,
-
-
-        kmInizio:
-        turno.kmInizio,
-
-
-        kmFine:
-        kmFinali,
-
-
-        kmPercorsi:
-        kmPercorsi,
-
-
-        ore:
-        Number(
-            ore.toFixed(2)
-        ),
-
-
-        corse:
-        corseTurno.length,
-
-
-        incasso:
-        incasso
+let dataOraFine =
+new Date();
 
 
 
-    };
+
+let minutiTotali =
+Math.floor(
+    durata / 60000
+);
+
+
+let oreIntere =
+Math.floor(
+    minutiTotali / 60
+);
+
+
+let minutiRimanenti =
+minutiTotali % 60;
+
+
+
+let durataFormattata =
+oreIntere +
+" h " +
+minutiRimanenti +
+" min";
+
+
+
+
+
+let turnoChiuso = {
+
+
+    id:
+    Date.now(),
+
+
+    data:
+    oggi,
+
+
+    oraInizio:
+    turno.oraInizio,
+
+
+    oraFine:
+    oraFine,
+
+
+    durata:
+    durataFormattata,
+
+
+    ore:
+    Number(
+        ore.toFixed(2)
+    ),
+
+
+    kmInizio:
+    turno.kmInizio,
+
+
+    kmFine:
+    kmFinali,
+
+
+    kmPercorsi:
+    kmPercorsi,
+
+
+    corse:
+    corseTurno.length,
+
+
+    incasso:
+    incasso
+
+
+};
 
 
 
