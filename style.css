@@ -725,3 +725,35 @@ button:hover {
 
 
 }
+
+.security-status {
+
+display:flex;
+
+align-items:center;
+
+gap:10px;
+
+font-weight:600;
+
+}
+
+
+.status-dot {
+
+
+width:12px;
+
+height:12px;
+
+border-radius:50%;
+
+background:#e87517;
+
+
+box-shadow:
+
+0 0 15px #e87517;
+
+
+}
