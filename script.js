@@ -1131,6 +1131,192 @@ window.open(url,"_blank");
 
 }
 
+// ===============================
+// PROFILO COMPLETO
+// ===============================
+
+
+function salvaProfiloCompleto(){
+
+
+let profilo = {
+
+
+nome:
+document.getElementById("nomeProfilo").value,
+
+
+numeroTaxi:
+document.getElementById("numeroTaxi").value,
+
+
+veicolo:
+document.getElementById("modelloVeicolo").value,
+
+
+targa:
+document.getElementById("targaVeicolo").value
+
+
+};
+
+
+
+localStorage.setItem(
+"taxipilot_profilo",
+JSON.stringify(profilo)
+);
+
+
+
+alert(
+"Profilo aggiornato"
+);
+
+
+}
+
+
+
+
+function caricaProfiloCompleto(){
+
+
+let profilo =
+JSON.parse(
+localStorage.getItem("taxipilot_profilo")
+);
+
+
+
+if(!profilo){
+
+return;
+
+}
+
+
+
+
+let campi = {
+
+
+nomeProfilo:
+profilo.nome || "",
+
+
+numeroTaxi:
+profilo.numeroTaxi || "",
+
+
+modelloVeicolo:
+profilo.veicolo || "",
+
+
+targaVeicolo:
+profilo.targa || ""
+
+
+};
+
+
+
+
+
+for(let id in campi){
+
+
+let campo =
+document.getElementById(id);
+
+
+
+if(campo){
+
+campo.value = campi[id];
+
+}
+
+
+}
+
+
+
+mostraContattiProfilo();
+
+
+}
+
+
+
+
+
+
+
+function mostraContattiProfilo(){
+
+
+let box =
+document.getElementById("listaContattiProfilo");
+
+
+
+if(!box){
+
+return;
+
+}
+
+
+
+box.innerHTML="";
+
+
+
+if(contattiSOS.length===0){
+
+
+box.innerHTML=
+`
+<p class="empty">
+Nessun contatto configurato
+</p>
+`;
+
+return;
+
+}
+
+
+
+
+contattiSOS.forEach(contatto=>{
+
+
+box.innerHTML +=
+`
+
+<div class="trip-card">
+
+<h3>
+${contatto.nome}
+</h3>
+
+<p>
+${contatto.telefono}
+</p>
+
+
+</div>
+
+`;
+
+
+
+});
+
+
+}
 
 // ===============================
 // AVVIO
