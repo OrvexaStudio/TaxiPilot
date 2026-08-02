@@ -16,30 +16,21 @@
 <body>
 
 
+
 <header class="topbar">
 
 
-<div class="brand">
+<div>
 
 <div class="brand-name">
-TaxiPilot
+Taxi<span>Pilot</span>
 </div>
+
 
 <div class="brand-sub">
-Il tuo copilota professionale
+Digital taxi assistant
 </div>
 
-</div>
-
-
-
-<div class="service-status">
-
-<span class="status-dot"></span>
-
-<span id="statoServizio">
-Disponibile
-</span>
 
 </div>
 
@@ -50,11 +41,13 @@ Disponibile
 
 
 
+
 <main>
 
 
 
-<section class="welcome">
+
+<section class="page-header">
 
 
 <h1>
@@ -66,7 +59,7 @@ Autista
 
 
 <p>
-Gestisci il tuo turno, le tue corse e la tua sicurezza in un'unica applicazione.
+La tua giornata operativa.
 </p>
 
 
@@ -78,7 +71,42 @@ Gestisci il tuo turno, le tue corse e la tua sicurezza in un'unica applicazione.
 
 
 
-<section class="card next-trip">
+
+<section class="card">
+
+
+<h2>
+Stato servizio
+</h2>
+
+
+
+<div class="security-status">
+
+
+<span class="status-dot"></span>
+
+
+<span id="statoTurno">
+Fuori servizio
+</span>
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<section class="card">
 
 
 <h2>
@@ -108,11 +136,20 @@ Nessuna corsa programmata
 
 
 
-<section class="stats">
+
+<section class="card">
+
+
+<h2>
+Statistiche giornata
+</h2>
 
 
 
-<div class="card stat-card">
+<div class="stats">
+
+
+<div class="stat-card">
 
 
 <h3 id="numeroCorse">
@@ -121,109 +158,79 @@ Nessuna corsa programmata
 
 
 <p>
-Corse effettuate
-</p>
-
-
-</div>
-
-
-
-
-
-
-<div class="card stat-card">
-
-
-<h3 id="incassoTotale">
-0 €
-</h3>
-
-
-<p>
-Incasso giornaliero
-</p>
-
-
-</div>
-
-
-
-</section>
-
-
-
-
-
-
-
-
-<section class="quick-actions">
-
-
-
-
-
-<a href="corse.html" class="action-card">
-
-
-<h3>
 Corse
+</p>
+
+
+</div>
+
+
+
+
+
+<div class="stat-card">
+
+
+<h3 id="incassoGiornaliero">
+0€
 </h3>
 
 
 <p>
-Gestisci le prenotazioni
+Incasso
 </p>
 
 
-</a>
+</div>
 
 
 
 
 
-
-<a href="turno.html" class="action-card">
-
-
-<h3>
-Turno
-</h3>
-
-
-<p>
-Monitora attività e guadagni
-</p>
-
-
-</a>
-
-
-
-
-
-
-<a href="sos.html" class="action-card emergency">
-
-
-<h3>
-Emergenza
-</h3>
-
-
-<p>
-Sistema sicurezza
-</p>
-
-
-</a>
-
-
+</div>
 
 
 
 </section>
+
+
+
+
+
+
+
+
+
+<section class="card">
+
+
+<h2>
+Azioni rapide
+</h2>
+
+
+
+<button
+onclick="location.href='corse.html'">
+
+Gestisci corse
+
+</button>
+
+
+
+<button
+onclick="location.href='sos.html'"
+class="secondary-button">
+
+Sistema SOS
+
+</button>
+
+
+
+</section>
+
 
 
 
@@ -238,64 +245,52 @@ Sistema sicurezza
 
 
 
+
 <nav class="bottom-nav">
 
 
 <a href="index.html" class="active">
 
-<span>
 Home
-</span>
 
 </a>
-
 
 
 
 <a href="corse.html">
 
-<span>
 Corse
-</span>
 
 </a>
-
 
 
 
 <a href="turno.html">
 
-<span>
 Turno
-</span>
 
 </a>
-
 
 
 
 <a href="sos.html">
 
-<span>
 SOS
-</span>
 
 </a>
 
 
 
-
 <a href="profilo.html">
 
-<span>
 Profilo
-</span>
 
 </a>
 
 
 
 </nav>
+
 
 
 
