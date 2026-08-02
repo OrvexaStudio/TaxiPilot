@@ -18,6 +18,7 @@
 
 <header class="topbar">
 
+
 <div class="brand">
 
 <div class="brand-name">
@@ -31,35 +32,45 @@ Il tuo copilota professionale
 </div>
 
 
+
 <div class="service-status">
 
 <span class="status-dot"></span>
 
-<span>
+<span id="statoServizio">
 Disponibile
 </span>
 
 </div>
 
+
 </header>
+
+
 
 
 
 <main>
 
 
+
 <section class="welcome">
+
 
 <h1>
 Buonasera,
 <span>Francesco</span>
 </h1>
 
+
 <p>
 Gestisci il tuo turno, le tue corse e la tua sicurezza in un'unica applicazione.
 </p>
 
+
 </section>
+
+
 
 
 
@@ -68,50 +79,27 @@ Gestisci il tuo turno, le tue corse e la tua sicurezza in un'unica applicazione.
 <section class="card next-trip">
 
 
-<div class="card-title">
-
 <h2>
 Prossima corsa
 </h2>
 
-</div>
 
 
-<div class="trip-box">
+<div id="prossimaCorsa">
 
 
-<div class="trip-time">
-
-06:30
-
-</div>
-
-
-<div class="trip-info">
-
-
-<h3>
-Mario Rossi
-</h3>
-
-
-<p>
-Lecce Centro → Aeroporto di Brindisi
-</p>
-
-
-<p class="price">
-80,00 €
+<p class="empty">
+Nessuna corsa programmata
 </p>
 
 
 </div>
 
-
-</div>
 
 
 </section>
+
+
 
 
 
@@ -121,12 +109,14 @@ Lecce Centro → Aeroporto di Brindisi
 <section class="stats">
 
 
+
 <div class="card stat-card">
 
 
-<h3>
-8
+<h3 id="numeroCorse">
+0
 </h3>
+
 
 <p>
 Corse effettuate
@@ -137,12 +127,16 @@ Corse effettuate
 
 
 
+
+
+
 <div class="card stat-card">
 
 
-<h3>
-320 €
+<h3 id="incassoTotale">
+0 €
 </h3>
+
 
 <p>
 Incasso giornaliero
@@ -152,7 +146,9 @@ Incasso giornaliero
 </div>
 
 
+
 </section>
+
 
 
 
@@ -164,6 +160,8 @@ Incasso giornaliero
 
 
 
+
+
 <a href="corse.html" class="action-card">
 
 
@@ -171,12 +169,14 @@ Incasso giornaliero
 Corse
 </h3>
 
+
 <p>
-Visualizza e gestisci le prenotazioni
+Gestisci le prenotazioni
 </p>
 
 
 </a>
+
 
 
 
@@ -189,12 +189,14 @@ Visualizza e gestisci le prenotazioni
 Turno
 </h3>
 
+
 <p>
 Monitora attività e guadagni
 </p>
 
 
 </a>
+
 
 
 
@@ -207,8 +209,9 @@ Monitora attività e guadagni
 Emergenza
 </h3>
 
+
 <p>
-Attiva il sistema di sicurezza
+Sistema sicurezza
 </p>
 
 
@@ -216,7 +219,10 @@ Attiva il sistema di sicurezza
 
 
 
+
+
 </section>
+
 
 
 
@@ -291,6 +297,10 @@ Profilo
 
 
 
+
+
+
+<script src="script.js"></script>
 
 
 </body>
