@@ -1939,11 +1939,11 @@ ${contatto.telefono}
 document.addEventListener(
 "DOMContentLoaded",
 ()=>{
+controlloAccesso();
 
+caricaNomeHome();
 
-controlloPrimoAccesso();
-
-mostraContatti();
+mostraContattiLogin();
 
 mostraListaSOS();
 
