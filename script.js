@@ -1344,6 +1344,8 @@ cambiaStato();
 
 mostraTurno();
 
+caricaProfiloCompleto();
+
 
 }
 );
