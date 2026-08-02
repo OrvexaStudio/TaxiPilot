@@ -2302,7 +2302,13 @@ localStorage.setItem(
     kmFinali =
     Number(kmFinali);
 
+localStorage.setItem(
 
+    "taxipilot_ultimo_km",
+
+    kmFinali
+
+);
 
 
 
