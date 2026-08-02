@@ -2482,34 +2482,32 @@ localStorage.setItem(
 function caricaUltimiKm(){
 
 
-let campo =
-document.getElementById(
-"kmInizio"
-);
+    let campo =
+    document.getElementById(
+        "kmInizio"
+    );
+
+
+    if(!campo){
+
+        return;
+
+    }
 
 
 
-if(!campo){
-
-return;
-
-}
-
-
-
-let ultimoKm =
-localStorage.getItem(
-"taxipilot_ultimo_km"
-);
+    let ultimoKm =
+    localStorage.getItem(
+        "taxipilot_ultimo_km"
+    );
 
 
 
-if(ultimoKm){
+    if(ultimoKm !== null){
 
-campo.value =
-ultimoKm;
+        campo.value = ultimoKm;
 
-}
+    }
 
 
 }
