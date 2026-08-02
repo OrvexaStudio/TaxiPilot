@@ -354,7 +354,82 @@ elemento.innerHTML = stato;
 
 
 
+function mostraProssimaCorsa(){
 
+
+let box =
+document.getElementById("prossimaCorsa");
+
+
+if(!box){
+
+return;
+
+}
+
+
+
+if(corse.length === 0){
+
+box.innerHTML=
+`
+<p class="empty">
+Nessuna corsa programmata
+</p>
+`;
+
+return;
+
+}
+
+
+
+
+let prossima = corse[0];
+
+
+
+box.innerHTML =
+`
+
+<div class="trip-box">
+
+
+<div class="trip-time">
+
+${prossima.orario}
+
+</div>
+
+
+<div class="trip-info">
+
+
+<h3>
+${prossima.cliente}
+</h3>
+
+
+<p>
+${prossima.partenza}
+→
+${prossima.destinazione}
+</p>
+
+
+<p class="price">
+${prossima.importo.toFixed(2)} €
+</p>
+
+
+</div>
+
+
+</div>
+
+`;
+
+}
 
 // ===============================
 // AVVIO
