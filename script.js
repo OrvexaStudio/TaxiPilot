@@ -3157,7 +3157,11 @@ document.addEventListener(
 
     cambiaStato();
 
+   if(document.getElementById("graficoIncassi")){
+
     caricaStatistiche();
+
+}
 
 
 
