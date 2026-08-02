@@ -674,6 +674,8 @@ mostraProssimaCorsa();
 
 cambiaStato();
 
+mostraTurno();
+
 
 }
 );
