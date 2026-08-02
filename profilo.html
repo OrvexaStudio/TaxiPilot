@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TaxiPilot - Profilo</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<header class="topbar">
+
+<div class="brand">
+
+<div class="brand-name">
+TaxiPilot
+</div>
+
+<div class="brand-sub">
+Profilo tassista
+</div>
+
+</div>
+
+</header>
+
+
+
+
+
+<main>
+
+
+<section class="page-header">
+
+<h1>
+Il mio profilo
+</h1>
+
+<p>
+Gestisci i tuoi dati e i contatti di sicurezza.
+</p>
+
+</section>
+
+
+
+
+
+
+
+
+<section class="card">
+
+
+<h2>
+Dati personali
+</h2>
+
+
+
+<label>
+Nome tassista
+</label>
+
+
+<input 
+id="nomeProfilo"
+type="text"
+placeholder="Nome e cognome">
+
+
+
+
+
+<label>
+Numero taxi
+</label>
+
+
+<input 
+id="numeroTaxi"
+type="text"
+placeholder="Taxi 12">
+
+
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<section class="card">
+
+
+<h2>
+Veicolo
+</h2>
+
+
+
+<label>
+Modello veicolo
+</label>
+
+
+<input 
+id="modelloVeicolo"
+type="text"
+placeholder="BMW Serie 5">
+
+
+
+
+
+<label>
+Targa
+</label>
+
+
+<input 
+id="targaVeicolo"
+type="text"
+placeholder="AB123CD">
+
+
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<section class="card">
+
+
+<h2>
+Contatti sicurezza
+</h2>
+
+
+
+<div id="listaContattiProfilo">
+
+
+<p class="empty">
+Nessun contatto configurato
+</p>
+
+
+</div>
+
+
+
+
+
+<button 
+class="main-button"
+onclick="aggiungiContatto()">
+
+Aggiungi contatto
+
+</button>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+<button 
+class="main-button"
+onclick="salvaProfiloCompleto()">
+
+Salva modifiche
+
+</button>
+
+
+
+
+
+
+</main>
+
+
+
+
+
+
+
+
+<nav class="bottom-nav">
+
+
+<a href="index.html">
+
+<span>
+Home
+</span>
+
+</a>
+
+
+
+<a href="corse.html">
+
+<span>
+Corse
+</span>
+
+</a>
+
+
+
+<a href="turno.html">
+
+<span>
+Turno
+</span>
+
+</a>
+
+
+
+<a href="sos.html">
+
+<span>
+SOS
+</span>
+
+</a>
+
+
+
+<a href="profilo.html" class="active">
+
+<span>
+Profilo
+</span>
+
+</a>
+
+
+</nav>
+
+
+
+
+
+
+
+<script src="script.js"></script>
+
+
+</body>
+
+</html>
