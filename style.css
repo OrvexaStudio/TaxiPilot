@@ -917,3 +917,174 @@ line-height:1.5;
 
 
 }
+
+/* ===============================
+   SPLASH SCREEN TAXIPILOT
+================================ */
+
+
+.splash-body{
+
+margin:0;
+
+height:100vh;
+
+background:#080808;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-family:Arial, sans-serif;
+
+color:white;
+
+}
+
+
+
+.splash-container{
+
+text-align:center;
+
+animation:fadeIn 1s ease;
+
+}
+
+
+
+.splash-logo{
+
+width:140px;
+
+height:140px;
+
+object-fit:contain;
+
+margin-bottom:25px;
+
+animation:pulse 2s infinite;
+
+}
+
+
+
+.splash-container h1{
+
+font-size:42px;
+
+letter-spacing:2px;
+
+margin:0;
+
+color:#e87517;
+
+}
+
+
+
+.splash-container p{
+
+color:#aaa;
+
+font-size:15px;
+
+margin-top:10px;
+
+}
+
+
+
+.loader{
+
+width:45px;
+
+height:45px;
+
+border:4px solid #333;
+
+border-top:4px solid #e87517;
+
+border-radius:50%;
+
+margin:35px auto 0;
+
+animation:spin 1s linear infinite;
+
+}
+
+
+
+
+@keyframes spin{
+
+from{
+
+transform:rotate(0deg);
+
+}
+
+to{
+
+transform:rotate(360deg);
+
+}
+
+}
+
+
+
+
+@keyframes pulse{
+
+
+0%{
+
+transform:scale(1);
+
+}
+
+
+50%{
+
+transform:scale(1.08);
+
+}
+
+
+100%{
+
+transform:scale(1);
+
+}
+
+
+}
+
+
+
+
+@keyframes fadeIn{
+
+
+from{
+
+opacity:0;
+
+transform:translateY(20px);
+
+}
+
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+
+}
