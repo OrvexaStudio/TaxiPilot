@@ -1,7 +1,8 @@
 // ======================================================
 // TaxiPilot
-// BLOCCO 1/5
-// ACCESSO DISPOSITIVO + PROFILO + LOGIN
+// SCRIPT DEFINITIVO
+// PARTE 1/4
+// ACCESSO + PROFILO
 // ======================================================
 
 
@@ -13,21 +14,28 @@
 
 let profiloTaxi =
 JSON.parse(
-    localStorage.getItem("taxipilot_profilo")
+localStorage.getItem("taxipilot_profilo")
 ) || null;
 
 
 
 let contattiSOS =
 JSON.parse(
-    localStorage.getItem("taxipilot_contatti_sos")
+localStorage.getItem("taxipilot_contatti_sos")
+) || [];
+
+
+
+let corse =
+JSON.parse(
+localStorage.getItem("taxipilot_corse")
 ) || [];
 
 
 
 
 // ===============================
-// CONTROLLO PRIMO ACCESSO
+// CONTROLLO ACCESSO
 // ===============================
 
 
@@ -40,25 +48,24 @@ function controlloAccesso(){
     );
 
 
-
     let pagina =
     window.location.pathname;
 
 
-
-    let login =
-    pagina.includes("login.html");
+    let eLogin =
+    pagina.includes(
+        "login.html"
+    );
 
 
 
     if(
         !configurato &&
-        !login
+        !eLogin
     ){
 
-        window.location.replace(
-            "login.html"
-        );
+        window.location.href =
+        "login.html";
 
         return;
 
@@ -66,14 +73,14 @@ function controlloAccesso(){
 
 
 
+
     if(
         configurato &&
-        login
+        eLogin
     ){
 
-        window.location.replace(
-            "index.html"
-        );
+        window.location.href =
+        "index.html";
 
         return;
 
@@ -89,7 +96,7 @@ function controlloAccesso(){
 
 
 // ===============================
-// PRIMO ACCESSO LOGIN
+// LOGIN PRIMO ACCESSO
 // ===============================
 
 
@@ -103,8 +110,7 @@ function aggiungiContattoLogin(){
     );
 
 
-
-    let numero =
+    let telefono =
     prompt(
         "Numero telefono"
     );
@@ -113,7 +119,7 @@ function aggiungiContattoLogin(){
 
     if(
         !nome ||
-        !numero
+        !telefono
     ){
 
         return;
@@ -122,7 +128,8 @@ function aggiungiContattoLogin(){
 
 
 
-    let contatto = {
+
+    contattiSOS.push({
 
 
         id:
@@ -134,33 +141,24 @@ function aggiungiContattoLogin(){
 
 
         telefono:
-        numero
+        telefono
 
 
-    };
-
-
-
-    contattiSOS.push(
-        contatto
-    );
+    });
 
 
 
-    localStorage.setItem(
 
-        "taxipilot_contatti_sos",
-
-        JSON.stringify(contattiSOS)
-
-    );
+    salvaContatti();
 
 
 
     mostraContattiLogin();
 
 
+
 }
+
 
 
 
@@ -186,15 +184,37 @@ function mostraContattiLogin(){
 
 
 
+
     box.innerHTML = "";
 
 
 
+    if(
+        contattiSOS.length===0
+    ){
+
+        box.innerHTML =
+
+        `<p class="empty">
+        Nessun contatto aggiunto
+        </p>`;
+
+        return;
+
+    }
+
+
+
+
+
     contattiSOS.forEach(
-        contatto=>{
+    contatto=>{
 
 
-        box.innerHTML += `
+        box.innerHTML +=
+
+
+        `
 
         <div class="trip-card">
 
@@ -225,6 +245,8 @@ function mostraContattiLogin(){
 
 
 
+
+
 function salvaAccesso(){
 
 
@@ -240,6 +262,8 @@ function salvaAccesso(){
     document.getElementById(
         "loginTaxi"
     ).value;
+
+
 
 
 
@@ -259,6 +283,7 @@ function salvaAccesso(){
 
 
 
+
     profiloTaxi = {
 
 
@@ -270,10 +295,16 @@ function salvaAccesso(){
         taxi,
 
 
+        veicolo:
+        "",
+
+
+        targa:
+        "",
+
+
         creato:
-        new Date().toLocaleDateString(
-            "it-IT"
-        )
+        Date.now()
 
 
     };
@@ -286,22 +317,16 @@ function salvaAccesso(){
 
         "taxipilot_profilo",
 
-        JSON.stringify(profiloTaxi)
+        JSON.stringify(
+            profiloTaxi
+        )
 
     );
 
 
 
 
-
-    localStorage.setItem(
-
-        "taxipilot_contatti_sos",
-
-        JSON.stringify(contattiSOS)
-
-    );
-
+    salvaContatti();
 
 
 
@@ -318,8 +343,39 @@ function salvaAccesso(){
 
 
 
-    window.location.replace(
-        "index.html"
+    window.location.href =
+    "index.html";
+
+
+
+}
+
+
+
+
+
+
+
+
+
+// ===============================
+// SALVATAGGIO CONTATTI
+// ===============================
+
+
+
+function salvaContatti(){
+
+
+
+    localStorage.setItem(
+
+        "taxipilot_contatti_sos",
+
+        JSON.stringify(
+            contattiSOS
+        )
+
     );
 
 
@@ -334,7 +390,7 @@ function salvaAccesso(){
 
 
 // ===============================
-// CARICAMENTO PROFILO
+// HOME NOME TASSISTA
 // ===============================
 
 
@@ -342,7 +398,8 @@ function salvaAccesso(){
 function caricaNomeHome(){
 
 
-    let elemento =
+
+    let box =
     document.getElementById(
         "nomeAutista"
     );
@@ -350,7 +407,7 @@ function caricaNomeHome(){
 
 
     if(
-        !elemento
+        !box
     ){
 
         return;
@@ -360,12 +417,11 @@ function caricaNomeHome(){
 
 
 
-
     if(
         profiloTaxi
     ){
 
-        elemento.innerHTML =
+        box.innerHTML =
         profiloTaxi.nome;
 
     }
@@ -379,7 +435,15 @@ function caricaNomeHome(){
 
 
 
+
+// ===============================
+// PROFILO COMPLETO
+// ===============================
+
+
+
 function caricaProfiloCompleto(){
+
 
 
     if(
@@ -400,16 +464,21 @@ function caricaProfiloCompleto(){
         profiloTaxi.nome || "",
 
 
+
         numeroTaxi:
         profiloTaxi.taxi || "",
+
 
 
         modelloVeicolo:
         profiloTaxi.veicolo || "",
 
 
+
         targaVeicolo:
         profiloTaxi.targa || ""
+
+
 
     };
 
@@ -417,12 +486,13 @@ function caricaProfiloCompleto(){
 
 
 
-    for(
-        let id in campi
-    ){
+
+    Object.keys(campi).forEach(
+
+    id=>{
 
 
-        let campo =
+        let elemento =
         document.getElementById(
             id
         );
@@ -430,19 +500,22 @@ function caricaProfiloCompleto(){
 
 
         if(
-            campo
+            elemento
         ){
 
-            campo.value =
+            elemento.value =
             campi[id];
 
         }
 
 
-    }
+    });
+
 
 
 }
+
+
 
 
 
@@ -457,10 +530,15 @@ function salvaProfiloCompleto(){
     profiloTaxi = {
 
 
+        ...profiloTaxi,
+
+
+
         nome:
         document.getElementById(
             "nomeProfilo"
         ).value,
+
 
 
         taxi:
@@ -469,10 +547,12 @@ function salvaProfiloCompleto(){
         ).value,
 
 
+
         veicolo:
         document.getElementById(
             "modelloVeicolo"
         ).value,
+
 
 
         targa:
@@ -492,30 +572,32 @@ function salvaProfiloCompleto(){
 
         "taxipilot_profilo",
 
-        JSON.stringify(profiloTaxi)
+        JSON.stringify(
+            profiloTaxi
+        )
 
     );
+
 
 
 
     alert(
-        "Profilo salvato"
+        "Profilo aggiornato"
     );
-
 
 
 }
 
 // ======================================================
 // TaxiPilot
-// BLOCCO 2/5
+// PARTE 2/4
 // SISTEMA SOS
 // ======================================================
 
 
 
 // ===============================
-// AGGIUNTA CONTATTO SOS
+// AGGIUNGI CONTATTO SOS
 // ===============================
 
 
@@ -526,6 +608,7 @@ function aggiungiContatto(){
     prompt(
         "Nome contatto"
     );
+
 
 
     let telefono =
@@ -548,7 +631,7 @@ function aggiungiContatto(){
 
 
 
-    let nuovoContatto = {
+    contattiSOS.push({
 
 
         id:
@@ -564,29 +647,14 @@ function aggiungiContatto(){
 
 
 
-    };
+    });
 
 
 
 
 
-    contattiSOS.push(
-        nuovoContatto
-    );
 
-
-
-
-
-    localStorage.setItem(
-
-        "taxipilot_contatti_sos",
-
-        JSON.stringify(contattiSOS)
-
-    );
-
-
+    salvaContatti();
 
 
 
@@ -604,8 +672,10 @@ function aggiungiContatto(){
 
 
 
+
+
 // ===============================
-// VISUALIZZA CONTATTI SOS
+// MOSTRA CONTATTI SOS
 // ===============================
 
 
@@ -632,8 +702,7 @@ function mostraListaSOS(){
 
 
 
-
-    box.innerHTML = "";
+    box.innerHTML="";
 
 
 
@@ -647,13 +716,9 @@ function mostraListaSOS(){
         box.innerHTML =
 
         `
-
         <p class="empty">
-
         Nessun contatto salvato
-
         </p>
-
         `;
 
 
@@ -681,16 +746,12 @@ function mostraListaSOS(){
 
 
         <h3>
-
         ${contatto.nome}
-
         </h3>
 
 
         <p>
-
         ${contatto.telefono}
-
         </p>
 
 
@@ -719,7 +780,6 @@ function mostraListaSOS(){
     });
 
 
-
 }
 
 
@@ -729,8 +789,9 @@ function mostraListaSOS(){
 
 
 
+
 // ===============================
-// VISUALIZZA IN PROFILO
+// CONTATTI PROFILO
 // ===============================
 
 
@@ -764,6 +825,31 @@ function mostraContattiProfilo(){
 
 
 
+    if(
+        contattiSOS.length===0
+    ){
+
+
+        box.innerHTML =
+
+        `
+        <p class="empty">
+        Nessun contatto configurato
+        </p>
+        `;
+
+
+        return;
+
+
+    }
+
+
+
+
+
+
+
     contattiSOS.forEach(
     contatto=>{
 
@@ -777,24 +863,19 @@ function mostraContattiProfilo(){
 
 
         <h3>
-
         ${contatto.nome}
-
         </h3>
 
 
         <p>
-
         ${contatto.telefono}
-
         </p>
-
 
 
         </div>
 
-
         `;
+
 
 
     });
@@ -854,15 +935,7 @@ function eliminaContattoSOS(id){
 
 
 
-    localStorage.setItem(
-
-        "taxipilot_contatti_sos",
-
-        JSON.stringify(contattiSOS)
-
-    );
-
-
+    salvaContatti();
 
 
 
@@ -881,8 +954,9 @@ function eliminaContattoSOS(id){
 
 
 
+
 // ===============================
-// ATTIVAZIONE SOS
+// ATTIVA SOS
 // ===============================
 
 
@@ -903,7 +977,6 @@ function attivaSOS(){
 
         return;
 
-
     }
 
 
@@ -911,17 +984,10 @@ function attivaSOS(){
 
 
 
-    let conferma =
-    confirm(
-
-        "Inviare richiesta di emergenza?"
-
-    );
-
-
-
     if(
-        !conferma
+        !confirm(
+        "Inviare richiesta di emergenza?"
+        )
     ){
 
         return;
@@ -947,23 +1013,15 @@ function attivaSOS(){
 
 
 
-            let lat =
-
-            posizione.coords.latitude;
-
-
-
-            let lng =
-
-            posizione.coords.longitude;
-
-
-
-
-
             inviaMessaggioSOS(
-                lat,
-                lng
+
+
+            posizione.coords.latitude,
+
+
+            posizione.coords.longitude
+
+
             );
 
 
@@ -977,9 +1035,9 @@ function attivaSOS(){
 
             inviaMessaggioSOS(
 
-                "non disponibile",
+            "non disponibile",
 
-                "non disponibile"
+            "non disponibile"
 
             );
 
@@ -999,9 +1057,9 @@ function attivaSOS(){
 
         inviaMessaggioSOS(
 
-            "non disponibile",
+        "non disponibile",
 
-            "non disponibile"
+        "non disponibile"
 
         );
 
@@ -1011,6 +1069,7 @@ function attivaSOS(){
 
 
 }
+
 
 
 
@@ -1033,8 +1092,11 @@ lng
 
 
     let nome =
+
     profiloTaxi?.nome ||
+
     "Tassista";
+
 
 
 
@@ -1050,14 +1112,10 @@ Richiesta assistenza.
 Autista:
 ${nome}
 
-
 Posizione:
-
 https://maps.google.com/?q=${lat},${lng}
 
-
 Ora:
-
 ${new Date().toLocaleString("it-IT")}
 
 `;
@@ -1096,20 +1154,12 @@ ${new Date().toLocaleString("it-IT")}
 
 
 
-        let url =
-
-
-        `https://wa.me/${numero}?text=${testo}`;
-
-
-
-
 
         window.open(
 
-            url,
+        `https://wa.me/${numero}?text=${testo}`,
 
-            "_blank"
+        "_blank"
 
         );
 
@@ -1126,7 +1176,7 @@ ${new Date().toLocaleString("it-IT")}
 
 // ======================================================
 // TaxiPilot
-// BLOCCO 3/5
+// PARTE 3/4
 // GESTIONE CORSE
 // ======================================================
 
@@ -1137,8 +1187,8 @@ ${new Date().toLocaleString("it-IT")}
 // ===============================
 
 
-function salvaCorsa(){
 
+function salvaCorsa(){
 
 
     let cliente =
@@ -1178,11 +1228,10 @@ function salvaCorsa(){
 
     let importo =
     Number(
-        document.getElementById(
-            "importo"
-        ).value
+    document.getElementById(
+        "importo"
+    ).value
     ) || 0;
-
 
 
 
@@ -1195,14 +1244,11 @@ function salvaCorsa(){
         !orario
     ){
 
-
         alert(
             "Compila tutti i campi obbligatori"
         );
 
-
         return;
-
 
     }
 
@@ -1212,7 +1258,7 @@ function salvaCorsa(){
 
 
 
-    let nuovaCorsa = {
+    let corsa = {
 
 
         id:
@@ -1247,8 +1293,10 @@ function salvaCorsa(){
         "Programmata",
 
 
+
         data:
-        new Date().toLocaleDateString(
+        new Date()
+        .toLocaleDateString(
             "it-IT"
         )
 
@@ -1260,12 +1308,9 @@ function salvaCorsa(){
 
 
 
-
     corse.push(
-        nuovaCorsa
+        corsa
     );
-
-
 
 
 
@@ -1279,11 +1324,7 @@ function salvaCorsa(){
 
     mostraCorse();
 
-
-
     mostraProssimaCorsa();
-
-
 
     aggiornaStatistiche();
 
@@ -1297,15 +1338,18 @@ function salvaCorsa(){
 
 
 
-function salvaCorse(){
 
+
+function salvaCorse(){
 
 
     localStorage.setItem(
 
         "taxipilot_corse",
 
-        JSON.stringify(corse)
+        JSON.stringify(
+            corse
+        )
 
     );
 
@@ -1321,8 +1365,9 @@ function salvaCorse(){
 
 
 // ===============================
-// VISUALIZZA CORSE
+// MOSTRA CORSE
 // ===============================
+
 
 
 function mostraCorse(){
@@ -1354,7 +1399,6 @@ function mostraCorse(){
 
 
 
-
     if(
         corse.length===0
     ){
@@ -1363,14 +1407,9 @@ function mostraCorse(){
         box.innerHTML=
 
         `
-
         <p class="empty">
-
         Nessuna corsa inserita
-
         </p>
-
-
         `;
 
 
@@ -1384,18 +1423,18 @@ function mostraCorse(){
 
 
 
-
-    let lista = [...corse];
+    let lista =
+    [...corse];
 
 
 
     lista.sort(
 
-        (a,b)=>
+    (a,b)=>
 
-        a.orario.localeCompare(
-            b.orario
-        )
+    a.orario.localeCompare(
+        b.orario
+    )
 
     );
 
@@ -1405,9 +1444,8 @@ function mostraCorse(){
 
 
 
-
-
     lista.forEach(
+
     corsa=>{
 
 
@@ -1417,139 +1455,148 @@ function mostraCorse(){
 
         `
 
-<div class="trip-card">
+        <div class="trip-card">
 
 
-<h3>
+        <h3>
 
-${corsa.orario}
+        ${corsa.orario}
 
--
+        -
 
-${corsa.cliente}
+        ${corsa.cliente}
 
-</h3>
+        </h3>
 
 
 
-<p>
 
-${corsa.partenza}
+        <p>
 
-→
+        ${corsa.partenza}
 
-${corsa.destinazione}
+        →
 
-</p>
+        ${corsa.destinazione}
 
+        </p>
 
 
-<p>
 
-Importo:
 
-<strong>
+        <p>
 
-${corsa.importo.toFixed(2)} €
+        Importo:
 
-</strong>
+        <strong>
 
-</p>
+        ${corsa.importo.toFixed(2)}
+        €
 
+        </strong>
 
+        </p>
 
-<p>
 
-Stato:
 
-<strong>
 
-${corsa.stato}
 
-</strong>
+        <p>
 
-</p>
+        Stato:
 
+        <strong>
 
+        ${corsa.stato}
 
+        </strong>
 
+        </p>
 
-<button
 
-class="main-button"
 
-onclick="cambiaStatoCorsa(${corsa.id})"
 
->
 
-Cambia stato
 
-</button>
+        <button
 
+        class="main-button"
 
+        onclick="cambiaStatoCorsa(${corsa.id})"
 
+        >
 
+        Cambia stato
 
+        </button>
 
 
-<button
 
-class="main-button"
 
-onclick="chiamaCliente('${corsa.telefono}')"
 
->
 
-Chiama cliente
 
-</button>
+        <button
 
+        class="main-button"
 
+        onclick="chiamaCliente('${corsa.telefono}')"
 
+        >
 
+        Chiama
 
+        </button>
 
 
-<button
 
-class="main-button"
 
-onclick="navigaCorsa('${corsa.destinazione}')"
 
->
 
-Naviga
 
-</button>
+        <button
 
+        class="main-button"
 
+        onclick="navigaCorsa('${corsa.destinazione}')"
 
+        >
 
+        Naviga
 
+        </button>
 
 
-<button
 
-class="delete-btn"
 
-onclick="eliminaCorsa(${corsa.id})"
 
->
 
-Elimina
 
-</button>
+        <button
 
+        class="delete-btn"
 
+        onclick="eliminaCorsa(${corsa.id})"
 
-</div>
+        >
 
+        Elimina
 
-`;
+        </button>
+
+
+
+
+
+        </div>
+
+
+        `;
 
 
 
     });
+
 
 
 }
@@ -1563,7 +1610,7 @@ Elimina
 
 
 // ===============================
-// CAMBIO STATO CORSA
+// CAMBIO STATO
 // ===============================
 
 
@@ -1576,9 +1623,9 @@ function cambiaStatoCorsa(id){
 
     corse.find(
 
-        c =>
+    c=>
 
-        c.id===id
+    c.id===id
 
     );
 
@@ -1601,16 +1648,17 @@ function cambiaStatoCorsa(id){
     let stati = [
 
 
-        "Programmata",
+    "Programmata",
 
 
-        "In arrivo",
+    "In arrivo",
 
 
-        "Cliente a bordo",
+    "Cliente a bordo",
 
 
-        "Completata"
+    "Completata"
+
 
 
     ];
@@ -1626,6 +1674,7 @@ function cambiaStatoCorsa(id){
     stati.indexOf(
         corsa.stato
     );
+
 
 
 
@@ -1649,7 +1698,6 @@ function cambiaStatoCorsa(id){
 
 
 
-
     corsa.stato =
 
     stati[posizione];
@@ -1661,10 +1709,7 @@ function cambiaStatoCorsa(id){
     salvaCorse();
 
 
-
     mostraCorse();
-
-
 
     mostraProssimaCorsa();
 
@@ -1694,13 +1739,11 @@ function eliminaCorsa(id){
 
     corse.filter(
 
-        c =>
+    c =>
 
-        c.id !== id
+    c.id !== id
 
     );
-
-
 
 
 
@@ -1710,11 +1753,7 @@ function eliminaCorsa(id){
 
     mostraCorse();
 
-
-
     mostraProssimaCorsa();
-
-
 
     aggiornaStatistiche();
 
@@ -1731,7 +1770,7 @@ function eliminaCorsa(id){
 
 
 // ===============================
-// CHIAMATA CLIENTE
+// TELEFONO CLIENTE
 // ===============================
 
 
@@ -1739,11 +1778,12 @@ function eliminaCorsa(id){
 function chiamaCliente(numero){
 
 
-
-    if(!numero){
+    if(
+        !numero
+    ){
 
         alert(
-            "Numero non disponibile"
+        "Numero non disponibile"
         );
 
         return;
@@ -1769,13 +1809,12 @@ function chiamaCliente(numero){
 
 
 // ===============================
-// NAVIGAZIONE
+// GOOGLE MAPS
 // ===============================
 
 
 
 function navigaCorsa(destinazione){
-
 
 
     let url =
@@ -1791,14 +1830,14 @@ function navigaCorsa(destinazione){
 
 
 
-
     window.open(
 
-        url,
+    url,
 
-        "_blank"
+    "_blank"
 
     );
+
 
 }
 
@@ -1811,7 +1850,7 @@ function navigaCorsa(destinazione){
 
 
 // ===============================
-// PULIZIA FORM
+// PULISCI FORM
 // ===============================
 
 
@@ -1820,25 +1859,21 @@ function svuotaForm(){
 
 
 
-    let campi = [
+    let campi=[
 
 
-        "nomeCliente",
+    "nomeCliente",
 
+    "telefono",
 
-        "telefono",
+    "partenza",
 
+    "destinazione",
 
-        "partenza",
+    "orario",
 
+    "importo"
 
-        "destinazione",
-
-
-        "orario",
-
-
-        "importo"
 
 
     ];
@@ -1860,7 +1895,9 @@ function svuotaForm(){
 
 
 
-        if(campo){
+        if(
+            campo
+        ){
 
             campo.value="";
 
@@ -1898,7 +1935,9 @@ function mostraProssimaCorsa(){
 
 
 
-    if(!box){
+    if(
+        !box
+    ){
 
         return;
 
@@ -1908,15 +1947,13 @@ function mostraProssimaCorsa(){
 
 
 
-
     let disponibili =
-
 
     corse.filter(
 
-        c =>
+    c =>
 
-        c.stato !== "Completata"
+    c.stato !== "Completata"
 
     );
 
@@ -1929,23 +1966,16 @@ function mostraProssimaCorsa(){
         disponibili.length===0
     ){
 
-
         box.innerHTML=
 
         `
-
-        <p>
-
+        <p class="empty">
         Nessuna corsa programmata
-
         </p>
-
-
         `;
 
 
         return;
-
 
     }
 
@@ -1956,11 +1986,11 @@ function mostraProssimaCorsa(){
 
     disponibili.sort(
 
-        (a,b)=>
+    (a,b)=>
 
-        a.orario.localeCompare(
-            b.orario
-        )
+    a.orario.localeCompare(
+        b.orario
+    )
 
     );
 
@@ -1977,59 +2007,62 @@ function mostraProssimaCorsa(){
 
 
 
+    box.innerHTML =
 
-    box.innerHTML=
 
     `
 
-<div class="trip-box">
+    <div class="trip-box">
 
 
-<div class="trip-time">
+    <div class="trip-time">
 
-${corsa.orario}
+    ${corsa.orario}
 
-</div>
-
-
-
-<div class="trip-info">
-
-
-<h3>
-
-${corsa.cliente}
-
-</h3>
+    </div>
 
 
 
-<p>
-
-${corsa.partenza}
-
-↓
-
-${corsa.destinazione}
-
-</p>
+    <div class="trip-info">
 
 
+    <h3>
 
-<strong>
+    ${corsa.cliente}
 
-${corsa.importo.toFixed(2)} €
-
-</strong>
+    </h3>
 
 
 
-</div>
+    <p>
+
+    ${corsa.partenza}
+
+    →
+
+    ${corsa.destinazione}
+
+    </p>
 
 
-</div>
 
-`;
+    <strong>
+
+    ${corsa.importo.toFixed(2)}
+
+    €
+
+    </strong>
+
+
+
+    </div>
+
+
+    </div>
+
+
+    `;
 
 
 
@@ -2037,8 +2070,8 @@ ${corsa.importo.toFixed(2)} €
 
 // ======================================================
 // TaxiPilot
-// BLOCCO 4/5
-// TURNO + STATISTICHE + STATO SERVIZIO
+// PARTE 4/4
+// TURNO + STATISTICHE + AVVIO APP
 // ======================================================
 
 
@@ -2052,7 +2085,6 @@ ${corsa.importo.toFixed(2)} €
 function iniziaTurno(){
 
 
-
     let km =
     document.getElementById(
         "kmInizio"
@@ -2060,23 +2092,17 @@ function iniziaTurno(){
 
 
 
-
-
     if(
         km === ""
     ){
-
 
         alert(
             "Inserisci i chilometri iniziali"
         );
 
-
         return;
 
-
     }
-
 
 
 
@@ -2085,15 +2111,11 @@ function iniziaTurno(){
     let turno = {
 
 
-
-        attivo:
-        true,
-
+        attivo:true,
 
 
         inizio:
         Date.now(),
-
 
 
         kmInizio:
@@ -2107,17 +2129,15 @@ function iniziaTurno(){
 
 
 
-
-
     localStorage.setItem(
 
         "taxipilot_turno",
 
-        JSON.stringify(turno)
+        JSON.stringify(
+            turno
+        )
 
     );
-
-
 
 
 
@@ -2140,19 +2160,19 @@ function mostraTurno(){
 
 
     let box =
-
     document.getElementById(
         "statoTurno"
     );
 
 
 
-    if(!box){
+    if(
+        !box
+    ){
 
         return;
 
     }
-
 
 
 
@@ -2176,23 +2196,16 @@ function mostraTurno(){
 
 
     if(
-        !turno ||
-        !turno.attivo
+        !turno
     ){
 
 
-
-        box.innerHTML=
+        box.innerHTML =
 
         `
-
         <p class="empty">
-
         Nessun turno attivo
-
         </p>
-
-
         `;
 
 
@@ -2214,11 +2227,17 @@ function mostraTurno(){
     )
 
     .toLocaleTimeString(
+
         "it-IT",
+
         {
-            hour:"2-digit",
-            minute:"2-digit"
+
+        hour:"2-digit",
+
+        minute:"2-digit"
+
         }
+
     );
 
 
@@ -2227,60 +2246,60 @@ function mostraTurno(){
 
 
 
-    box.innerHTML=
+    box.innerHTML =
+
 
     `
 
-<div class="trip-card">
+    <div class="trip-card">
 
 
-<h3>
+    <h3>
 
-Turno attivo
+    Turno attivo
 
-</h3>
-
-
-
-<p>
-
-Inizio:
-
-${ora}
-
-</p>
+    </h3>
 
 
 
-<p>
+    <p>
 
-Km iniziali:
+    Inizio:
 
-${turno.kmInizio}
+    ${ora}
 
-</p>
-
-
-
-<p>
-
-Ore lavorate:
-
-<span id="oreTurno">
-
-0
-
-</span>
-
-</p>
+    </p>
 
 
 
-</div>
+    <p>
+
+    Km iniziali:
+
+    ${turno.kmInizio}
+
+    </p>
 
 
-`;
 
+    <p>
+
+    Ore lavorate:
+
+    <span id="oreTurno">
+
+    0
+
+    </span>
+
+    </p>
+
+
+
+    </div>
+
+
+    `;
 
 
 
@@ -2310,13 +2329,13 @@ function aggiornaOreTurno(){
 
 
 
-    if(!box){
+    if(
+        !box
+    ){
 
         return;
 
     }
-
-
 
 
 
@@ -2334,8 +2353,6 @@ function aggiornaOreTurno(){
 
 
 
-
-
     if(
         !turno
     ){
@@ -2348,8 +2365,7 @@ function aggiornaOreTurno(){
 
 
 
-
-    let differenza =
+    let tempo =
 
     Date.now()
 
@@ -2361,20 +2377,15 @@ function aggiornaOreTurno(){
 
 
 
-
-
     let ore =
 
     Math.floor(
 
-        differenza /
+        tempo /
 
         3600000
 
     );
-
-
-
 
 
 
@@ -2398,27 +2409,17 @@ function terminaTurno(){
 
 
 
-    let conferma =
-
-    confirm(
-
-        "Terminare il turno?"
-
-    );
-
-
-
-
-
     if(
-        !conferma
+
+        !confirm(
+        "Terminare il turno?"
+        )
+
     ){
 
         return;
 
     }
-
-
 
 
 
@@ -2433,10 +2434,7 @@ function terminaTurno(){
 
 
 
-
-
     mostraTurno();
-
 
 
 
@@ -2460,6 +2458,61 @@ function cambiaStato(){
 
 
 
+    let box =
+
+    document.getElementById(
+        "statoServizio"
+    );
+
+
+
+    if(
+        !box
+    ){
+
+        return;
+
+    }
+
+
+
+
+
+    let stato =
+
+    localStorage.getItem(
+
+        "taxipilot_stato"
+
+    )
+
+    ||
+
+    "Disponibile";
+
+
+
+
+
+    box.innerHTML =
+    stato;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+function cambiaStatoServizio(){
+
+
+
     let stato =
 
     localStorage.getItem(
@@ -2478,69 +2531,16 @@ function cambiaStato(){
 
 
 
-    let pulsante =
-
-    document.getElementById(
-        "statoServizio"
-    );
-
-
-
-
-
-    if(
-        pulsante
-    ){
-
-        pulsante.innerHTML =
-        stato;
-
-    }
-
-
-
-}
-
-
-
-
-
-
-
-
-
-function cambiaStatoServizio(){
-
-
-
-    let attuale =
-
-    localStorage.getItem(
-
-        "taxipilot_stato"
-
-    )
-
-    ||
-
-    "Disponibile";
-
-
-
-
-
-
     let nuovo;
 
 
 
     if(
-        attuale === "Disponibile"
+        stato === "Disponibile"
     ){
 
         nuovo =
         "In servizio";
-
 
     }
 
@@ -2549,7 +2549,6 @@ function cambiaStatoServizio(){
 
         nuovo =
         "Disponibile";
-
 
     }
 
@@ -2586,7 +2585,7 @@ function cambiaStatoServizio(){
 
 
 // ===============================
-// STATISTICHE HOME
+// STATISTICHE
 // ===============================
 
 
@@ -2603,13 +2602,11 @@ function aggiornaStatistiche(){
 
 
 
-
     let boxIncasso =
 
     document.getElementById(
         "incassoGiornaliero"
     );
-
 
 
 
@@ -2628,8 +2625,6 @@ function aggiornaStatistiche(){
 
 
 
-
-
     let oggi =
 
     new Date()
@@ -2643,16 +2638,13 @@ function aggiornaStatistiche(){
 
 
 
-
-
     let corseOggi =
-
 
     corse.filter(
 
-        corsa =>
+    corsa =>
 
-        corsa.data === oggi
+    corsa.data === oggi
 
     );
 
@@ -2661,24 +2653,21 @@ function aggiornaStatistiche(){
 
 
 
-
-    let incasso =
-
+    let totale =
 
     corseOggi.reduce(
 
-        (totale,corsa)=>
+    (somma,corsa)=>
 
-        totale +
+    somma +
 
-        Number(
-            corsa.importo
-        ),
+    Number(
+        corsa.importo
+    ),
 
-        0
+    0
 
     );
-
 
 
 
@@ -2691,14 +2680,9 @@ function aggiornaStatistiche(){
 
 
 
-
-
-
-
     boxIncasso.innerHTML =
 
-
-    incasso.toFixed(2)
+    totale.toFixed(2)
 
     +
 
@@ -2717,35 +2701,7 @@ function aggiornaStatistiche(){
 
 
 // ===============================
-// AGGIORNAMENTO ORE AUTOMATICO
-// ===============================
-
-
-
-setInterval(
-
-()=>{
-
-
-    aggiornaOreTurno();
-
-
-},
-
-60000
-
-);
-
-// ======================================================
-// TaxiPilot
-// BLOCCO 5/5
-// AVVIO APPLICAZIONE
-// ======================================================
-
-
-
-// ===============================
-// APERTURA FORM CORSA
+// FORM CORSA
 // ===============================
 
 
@@ -2763,20 +2719,14 @@ function openForm(){
 
 
     if(
-        !form
+        form
     ){
 
-        return;
+        form.classList.toggle(
+            "hidden"
+        );
 
     }
-
-
-
-
-
-    form.classList.toggle(
-        "hidden"
-    );
 
 
 }
@@ -2790,7 +2740,7 @@ function openForm(){
 
 
 // ===============================
-// CARICAMENTO COMPLETO APP
+// AVVIO APPLICAZIONE
 // ===============================
 
 
@@ -2803,55 +2753,75 @@ document.addEventListener(
 
 
 
-    // controllo login dispositivo
-
     controlloAccesso();
 
 
 
-
-    // HOME
-
     caricaNomeHome();
 
-    aggiornaStatistiche();
 
-    mostraProssimaCorsa();
-
-    cambiaStato();
-
-
-
-
-    // CORSE
-
-    mostraCorse();
-
-
-
-
-    // SOS
-
-    mostraListaSOS();
-
-    mostraContattiProfilo();
-
-
-
-
-    // PROFILO
 
     caricaProfiloCompleto();
 
 
 
+    mostraContattiLogin();
 
-    // TURNO
+
+
+    mostraListaSOS();
+
+
+
+    mostraContattiProfilo();
+
+
+
+    mostraCorse();
+
+
+
+    mostraProssimaCorsa();
+
+
+
+    aggiornaStatistiche();
+
+
 
     mostraTurno();
 
 
 
+    cambiaStato();
+
+
+
 }
+
+);
+
+
+
+
+
+
+
+
+
+// aggiornamento ore turno ogni minuto
+
+
+setInterval(
+
+()=>{
+
+
+    aggiornaOreTurno();
+
+
+},
+
+60000
 
 );
