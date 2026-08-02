@@ -2851,18 +2851,17 @@ filtro
 
 
 
-let Corse = 0;
+let numeroCorse = 0;
 let incasso = 0;
 let ore = 0;
 let km = 0;
 
 
 
-
 dati.forEach(t=>{
 
 
-corse += t.corse;
+numeroCorse += t.corse;
 
 incasso += t.incasso;
 
@@ -2892,7 +2891,7 @@ document.getElementById("statKm");
 
 if(statCorse){
 
-    statCorse.innerHTML = corse;
+    statCorse.innerHTML = numeroCorse;
 
 }
 
