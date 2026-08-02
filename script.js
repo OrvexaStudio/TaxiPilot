@@ -968,6 +968,70 @@ function attivaSOS(){
 
 
             inviaMessaggioSOS(lat,lng);
+            // ===============================
+// VISUALIZZA CONTATTI SOS
+// ===============================
+
+function mostraListaSOS(){
+
+
+let box =
+document.getElementById("listaSOS");
+
+
+if(!box){
+
+return;
+
+}
+
+
+
+box.innerHTML="";
+
+
+
+if(contattiSOS.length===0){
+
+box.innerHTML=
+`
+<p class="empty">
+Nessun contatto salvato
+</p>
+`;
+
+return;
+
+}
+
+
+
+contattiSOS.forEach(contatto=>{
+
+
+box.innerHTML +=
+`
+
+<div class="trip-card">
+
+<h3>
+${contatto.nome}
+</h3>
+
+<p>
+${contatto.telefono}
+</p>
+
+</div>
+
+`;
+
+
+
+});
+
+
+}
 
 
 
