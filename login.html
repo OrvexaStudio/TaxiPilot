@@ -1,35 +1,32 @@
 <!DOCTYPE html>
 <html lang="it">
 
+
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>TaxiPilot - Accesso</title>
+
+<title>Accesso - TaxiPilot</title>
+
 
 <link rel="stylesheet" href="style.css">
 
+
 </head>
+
 
 
 <body class="login-page">
 
 
+
+
+
+
 <main class="login-container">
-
-
-<div class="login-logo">
-
-<h1>
-Taxi<span>Pilot</span>
-</h1>
-
-<p>
-Il copilota digitale del tassista
-</p>
-
-</div>
 
 
 
@@ -38,65 +35,77 @@ Il copilota digitale del tassista
 <section class="login-card">
 
 
-<h2>
-Configura dispositivo
-</h2>
+
+<h1>
+TaxiPilot
+</h1>
 
 
-<p>
-Inserisci i tuoi dati. Rimarranno salvati solo su questo dispositivo.
+
+<p class="login-subtitle">
+
+Configurazione dispositivo tassista
+
 </p>
 
 
 
 
 
-<label>
-Nome tassista
-</label>
 
-<input 
+
+<input
+
 id="loginNome"
-type="text"
-placeholder="Nome e cognome">
+
+placeholder="Nome tassista"
+
+>
 
 
 
 
 
+<input
 
-<label>
-Numero taxi
-</label>
-
-<input 
 id="loginTaxi"
-type="text"
-placeholder="Taxi 12">
+
+placeholder="Numero taxi"
+
+>
 
 
 
 
 
 
-<h3>
-Contatti emergenza
-</h3>
 
+<h2>
 
+Contatti SOS
 
-<div id="loginContatti">
-
-
-</div>
+</h2>
 
 
 
 
+<p>
 
-<button 
-class="secondary-button"
-onclick="aggiungiContattoLogin()">
+Aggiungi i numeri che riceveranno gli allarmi.
+
+</p>
+
+
+
+
+
+<button
+
+class="main-button"
+
+onclick="aggiungiContattoLogin()"
+
+>
 
 Aggiungi contatto
 
@@ -106,17 +115,47 @@ Aggiungi contatto
 
 
 
-<button 
-class="main-button"
-onclick="salvaAccesso()">
 
-Entra in TaxiPilot
+
+<div id="loginContatti">
+
+
+
+<p class="empty">
+
+Nessun contatto aggiunto
+
+</p>
+
+
+
+</div>
+
+
+
+
+
+
+
+<button
+
+class="main-button"
+
+onclick="salvaAccesso()"
+
+>
+
+Completa configurazione
 
 </button>
 
 
 
+
+
 </section>
+
+
 
 
 
@@ -126,9 +165,13 @@ Entra in TaxiPilot
 
 
 
+
+
+
 <script src="script.js"></script>
 
 
 </body>
+
 
 </html>
