@@ -800,7 +800,6 @@ elemento.innerHTML = stato;
 }
 
 
-
 function mostraProssimaCorsa(){
 
 
@@ -808,9 +807,131 @@ let box =
 document.getElementById("prossimaCorsa");
 
 
+
 if(!box){
 
 return;
+
+}
+
+
+
+
+let corseDisponibili = corse.filter(
+
+corsa => corsa.stato !== "Completata"
+
+);
+
+
+
+
+if(corseDisponibili.length === 0){
+
+
+box.innerHTML =
+
+`
+<p class="empty">
+Nessuna corsa programmata
+</p>
+`;
+
+return;
+
+
+}
+
+
+
+
+
+// ordina per orario
+
+corseDisponibili.sort(
+
+(a,b)=>
+
+a.orario.localeCompare(b.orario)
+
+);
+
+
+
+
+
+let corsa =
+corseDisponibili[0];
+
+
+
+
+
+box.innerHTML =
+
+`
+
+<div class="trip-box">
+
+
+<div class="trip-time">
+
+${corsa.orario}
+
+</div>
+
+
+
+<div class="trip-info">
+
+
+<h3>
+
+${corsa.cliente}
+
+</h3>
+
+
+
+<p>
+
+${corsa.partenza}
+
+</p>
+
+
+
+<p>
+
+↓
+
+</p>
+
+
+
+<p>
+
+${corsa.destinazione}
+
+</p>
+
+
+
+<strong>
+
+${corsa.importo.toFixed(2)} €
+
+</strong>
+
+
+</div>
+
+
+</div>
+
+`;
+
+
 
 }
 
