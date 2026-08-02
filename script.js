@@ -1146,6 +1146,8 @@ controlloPrimoAccesso();
 
 mostraContatti();
 
+mostraListaSOS();
+
 mostraCorse();
 
 aggiornaStatistiche();
