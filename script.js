@@ -2094,17 +2094,18 @@ function iniziaTurno(){
 
 
     let km =
-    document.getElementById("kmInizio").value;
+    document.getElementById(
+        "kmInizio"
+    ).value;
 
 
 
     if(km === ""){
 
-        alert(
-            "Inserisci i chilometri iniziali"
+        km =
+        localStorage.getItem(
+            "taxipilot_ultimo_km"
         );
-
-        return;
 
     }
 
@@ -2283,7 +2284,10 @@ function terminaTurno(){
         "Inserisci chilometri finali"
 
     );
-
+localStorage.setItem(
+    "taxipilot_ultimo_km",
+    kmFinali
+);
 
 
     if(!kmFinali){
@@ -2469,7 +2473,40 @@ function terminaTurno(){
 
 
 
+function caricaUltimiKm(){
 
+
+let campo =
+document.getElementById(
+"kmInizio"
+);
+
+
+
+if(!campo){
+
+return;
+
+}
+
+
+
+let ultimoKm =
+localStorage.getItem(
+"taxipilot_ultimo_km"
+);
+
+
+
+if(ultimoKm){
+
+campo.value =
+ultimoKm;
+
+}
+
+
+}
 
 
 // ===============================
@@ -3111,7 +3148,7 @@ document.addEventListener(
 
     mostraTurno();
 
-
+    caricaUltimiKm();
 
     cambiaStato();
 
