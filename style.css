@@ -922,14 +922,13 @@ line-height:1.5;
    SPLASH SCREEN TAXIPILOT
 ================================ */
 
-
 .splash-body{
 
 margin:0;
 
 height:100vh;
 
-background:#080808;
+background:#000000;
 
 display:flex;
 
