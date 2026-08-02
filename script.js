@@ -432,6 +432,231 @@ ${prossima.importo.toFixed(2)} €
 }
 
 // ===============================
+// GESTIONE TURNO
+// ===============================
+
+
+function iniziaTurno(){
+
+
+let km =
+document.getElementById("kmInizio").value;
+
+
+
+if(km === ""){
+
+alert("Inserisci i chilometri iniziali");
+
+return;
+
+}
+
+
+
+let turno = {
+
+
+attivo:true,
+
+inizio:
+new Date().getTime(),
+
+kmInizio:
+km
+
+
+};
+
+
+
+localStorage.setItem(
+"taxipilot_turno",
+JSON.stringify(turno)
+);
+
+
+
+mostraTurno();
+
+
+
+}
+
+
+
+
+
+function mostraTurno(){
+
+
+
+let box =
+document.getElementById("statoTurno");
+
+
+
+if(!box){
+
+return;
+
+}
+
+
+
+let turno =
+JSON.parse(
+localStorage.getItem("taxipilot_turno")
+);
+
+
+
+if(!turno || !turno.attivo){
+
+
+box.innerHTML =
+`
+<p class="empty">
+Nessun turno attivo
+</p>
+`;
+
+return;
+
+}
+
+
+
+let ora =
+new Date(turno.inizio)
+.toLocaleTimeString(
+"it-IT",
+{
+hour:"2-digit",
+minute:"2-digit"
+}
+);
+
+
+
+box.innerHTML =
+`
+
+<div class="trip-card">
+
+<h3>
+Turno attivo
+</h3>
+
+
+<p>
+Inizio:
+${ora}
+</p>
+
+
+<p>
+Km iniziali:
+${turno.kmInizio}
+</p>
+
+
+</div>
+
+`;
+
+
+
+calcolaOreTurno();
+
+
+}
+
+
+
+
+
+function calcolaOreTurno(){
+
+
+let turno =
+JSON.parse(
+localStorage.getItem("taxipilot_turno")
+);
+
+
+
+let oreBox =
+document.getElementById("oreTurno");
+
+
+
+if(!turno || !oreBox){
+
+return;
+
+}
+
+
+
+let differenza =
+Date.now()-turno.inizio;
+
+
+
+let ore =
+Math.floor(
+differenza / 3600000
+);
+
+
+
+oreBox.innerHTML =
+ore;
+
+
+
+}
+
+
+
+
+function terminaTurno(){
+
+
+let conferma =
+confirm(
+"Terminare il turno?"
+);
+
+
+
+if(!conferma){
+
+return;
+
+}
+
+
+
+localStorage.removeItem(
+"taxipilot_turno"
+);
+
+
+
+mostraTurno();
+
+
+alert(
+"Turno terminato correttamente"
+);
+
+
+}
+
+
+// ===============================
 // AVVIO
 // ===============================
 
