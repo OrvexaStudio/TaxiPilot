@@ -986,6 +986,67 @@ return;
 }
 
 
+box.innerHTML="";
+
+
+
+if(contattiSOS.length === 0){
+
+
+box.innerHTML =
+`
+<p class="empty">
+Nessun contatto salvato
+</p>
+`;
+
+return;
+
+}
+
+
+
+
+contattiSOS.forEach(contatto=>{
+
+
+box.innerHTML +=
+`
+
+<div class="trip-card">
+
+
+<h3>
+${contatto.nome}
+</h3>
+
+
+<p>
+${contatto.telefono}
+</p>
+
+
+<button 
+class="delete-btn"
+onclick="eliminaContattoSOS(${contatto.id})">
+
+Elimina
+
+</button>
+
+
+</div>
+
+`;
+
+
+
+});
+
+
+}
+
+
 
 box.innerHTML="";
 
@@ -1264,6 +1325,111 @@ document.getElementById("listaContattiProfilo");
 if(!box){
 
 return;
+
+}
+
+
+
+box.innerHTML="";
+
+
+
+if(contattiSOS.length === 0){
+
+
+box.innerHTML =
+`
+<p class="empty">
+Nessun contatto configurato
+</p>
+`;
+
+return;
+
+}
+
+
+
+
+
+contattiSOS.forEach(contatto=>{
+
+
+box.innerHTML +=
+`
+
+<div class="trip-card">
+
+
+<h3>
+${contatto.nome}
+</h3>
+
+
+<p>
+${contatto.telefono}
+</p>
+
+
+
+<button
+class="delete-btn"
+onclick="eliminaContattoSOS(${contatto.id})">
+
+Elimina
+
+</button>
+
+
+</div>
+
+`;
+
+
+
+});
+
+
+}
+
+function eliminaContattoSOS(id){
+
+
+
+let conferma =
+confirm(
+"Eliminare questo contatto?"
+);
+
+
+
+if(!conferma){
+
+return;
+
+}
+
+
+
+
+contattiSOS =
+contattiSOS.filter(
+contatto => contatto.id !== id
+);
+
+
+
+localStorage.setItem(
+"taxipilot_contatti_sos",
+JSON.stringify(contattiSOS)
+);
+
+
+
+mostraListaSOS();
+
+mostraContattiProfilo();
+
 
 }
 
