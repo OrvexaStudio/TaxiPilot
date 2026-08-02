@@ -2876,33 +2876,49 @@ km += t.kmPercorsi;
 
 
 
-document.getElementById(
-"statCorse"
-).innerHTML = corse;
+let statCorse =
+document.getElementById("statCorse");
+
+let statIncasso =
+document.getElementById("statIncasso");
+
+let statOre =
+document.getElementById("statOre");
+
+let statKm =
+document.getElementById("statKm");
 
 
 
-document.getElementById(
-"statIncasso"
-).innerHTML =
+if(statCorse){
 
-incasso.toFixed(2)+" €";
+    statCorse.innerHTML = corse;
 
-
-
-document.getElementById(
-"statOre"
-).innerHTML =
-
-ore.toFixed(1)+" h";
+}
 
 
+if(statIncasso){
 
-document.getElementById(
-"statKm"
-).innerHTML =
+    statIncasso.innerHTML =
+    incasso.toFixed(2)+" €";
 
-km+" km";
+}
+
+
+if(statOre){
+
+    statOre.innerHTML =
+    ore.toFixed(1)+" h";
+
+}
+
+
+if(statKm){
+
+    statKm.innerHTML =
+    km+" km";
+
+}
 
 
 
