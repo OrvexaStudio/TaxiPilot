@@ -4,11 +4,15 @@
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 
 <title>TaxiPilot</title>
 
+
 <link rel="stylesheet" href="style.css">
+
 
 </head>
 
@@ -16,21 +20,31 @@
 <body>
 
 
-
 <header class="topbar">
 
 
 <div>
 
-<div class="brand-name">
-Taxi<span>Pilot</span>
+<h1>
+TaxiPilot
+</h1>
+
+
+<p>
+Bentornato,
+<span id="nomeAutista">
+</span>
+</p>
+
 </div>
 
 
-<div class="brand-sub">
-Digital taxi assistant
-</div>
 
+<div 
+id="statoServizio"
+class="status">
+
+Disponibile
 
 </div>
 
@@ -42,71 +56,11 @@ Digital taxi assistant
 
 
 
-<main>
+<main class="container">
 
 
 
-
-<section class="page-header">
-
-
-<h1>
-Buonasera,
-<span id="nomeAutista">
-Autista
-</span>
-</h1>
-
-
-<p>
-La tua giornata operativa.
-</p>
-
-
-</section>
-
-
-
-
-
-
-
-
-<section class="card">
-
-
-<h2>
-Stato servizio
-</h2>
-
-
-
-<div class="security-status">
-
-
-<span class="status-dot"></span>
-
-
-<span id="statoTurno">
-Fuori servizio
-</span>
-
-
-</div>
-
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<section class="card">
+<section class="hero-card">
 
 
 <h2>
@@ -114,16 +68,65 @@ Prossima corsa
 </h2>
 
 
-
 <div id="prossimaCorsa">
 
 
 <p class="empty">
+
 Nessuna corsa programmata
+
 </p>
 
 
 </div>
+
+
+</section>
+
+
+
+
+
+
+
+<section class="stats-grid">
+
+
+
+<div class="stat-card">
+
+
+<span>
+Corse oggi
+</span>
+
+
+<strong id="numeroCorse">
+0
+</strong>
+
+
+</div>
+
+
+
+
+
+<div class="stat-card">
+
+
+<span>
+Incasso
+</span>
+
+
+<strong id="incassoGiornaliero">
+0 €
+</strong>
+
+
+</div>
+
 
 
 
@@ -135,60 +138,17 @@ Nessuna corsa programmata
 
 
 
-
-
-<section class="card">
+<section class="dashboard-card">
 
 
 <h2>
-Statistiche giornata
+Turno
 </h2>
 
 
-
-<div class="stats">
-
-
-<div class="stat-card">
-
-
-<h3 id="numeroCorse">
-0
-</h3>
-
-
-<p>
-Corse
-</p>
-
+<div id="statoTurno">
 
 </div>
-
-
-
-
-
-<div class="stat-card">
-
-
-<h3 id="incassoGiornaliero">
-0€
-</h3>
-
-
-<p>
-Incasso
-</p>
-
-
-</div>
-
-
-
-
-
-</div>
-
 
 
 </section>
@@ -199,9 +159,7 @@ Incasso
 
 
 
-
-
-<section class="card">
+<section class="dashboard-card">
 
 
 <h2>
@@ -209,31 +167,28 @@ Azioni rapide
 </h2>
 
 
-
-<button
+<button 
+class="main-button"
 onclick="location.href='corse.html'">
 
-Gestisci corse
+Nuova corsa
 
 </button>
 
 
 
-<button
-onclick="location.href='sos.html'"
-class="secondary-button">
 
-Sistema SOS
+<button 
+class="main-button"
+onclick="attivaSOS()">
+
+SOS
 
 </button>
 
 
 
 </section>
-
-
-
-
 
 
 
@@ -245,15 +200,17 @@ Sistema SOS
 
 
 
-
 <nav class="bottom-nav">
 
 
-<a href="index.html" class="active">
+
+<a class="active"
+href="index.html">
 
 Home
 
 </a>
+
 
 
 
@@ -265,6 +222,7 @@ Corse
 
 
 
+
 <a href="turno.html">
 
 Turno
@@ -273,11 +231,13 @@ Turno
 
 
 
+
 <a href="sos.html">
 
 SOS
 
 </a>
+
 
 
 
@@ -295,11 +255,10 @@ Profilo
 
 
 
-
-
 <script src="script.js"></script>
 
 
 </body>
+
 
 </html>
