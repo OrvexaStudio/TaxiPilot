@@ -1,4 +1,257 @@
 // ===============================
+// ACCESSO DISPOSITIVO
+// ===============================
+
+
+let contattiLogin = JSON.parse(
+localStorage.getItem("taxipilot_contatti_sos")
+) || [];
+
+
+
+
+
+function controlloAccesso(){
+
+
+let configurato =
+localStorage.getItem(
+"taxipilot_configurato"
+);
+
+
+
+if(
+!configurato &&
+!window.location.pathname.includes("login.html")
+){
+
+window.location.href="login.html";
+
+}
+
+
+}
+
+
+
+
+
+function aggiungiContattoLogin(){
+
+
+let nome =
+prompt("Nome contatto");
+
+
+
+let numero =
+prompt("Numero telefono");
+
+
+
+if(!nome || !numero){
+
+return;
+
+}
+
+
+
+contattiLogin.push({
+
+id:Date.now(),
+
+nome:nome,
+
+telefono:numero
+
+});
+
+
+
+mostraContattiLogin();
+
+
+}
+
+
+
+
+
+
+
+function mostraContattiLogin(){
+
+
+let box =
+document.getElementById(
+"loginContatti"
+);
+
+
+
+if(!box){
+
+return;
+
+}
+
+
+
+box.innerHTML="";
+
+
+
+contattiLogin.forEach(contatto=>{
+
+
+box.innerHTML +=
+`
+
+<div class="trip-card">
+
+<h3>
+${contatto.nome}
+</h3>
+
+<p>
+${contatto.telefono}
+</p>
+
+</div>
+
+`;
+
+
+
+});
+
+
+}
+
+
+
+
+
+
+function salvaAccesso(){
+
+
+
+let nome =
+document.getElementById(
+"loginNome"
+).value;
+
+
+
+let taxi =
+document.getElementById(
+"loginTaxi"
+).value;
+
+
+
+
+if(!nome){
+
+alert(
+"Inserisci il nome tassista"
+);
+
+return;
+
+}
+
+
+
+
+
+let profilo={
+
+
+nome:nome,
+
+taxi:taxi
+
+
+};
+
+
+
+
+
+localStorage.setItem(
+"taxipilot_profilo",
+JSON.stringify(profilo)
+);
+
+
+
+
+localStorage.setItem(
+"taxipilot_contatti_sos",
+JSON.stringify(contattiLogin)
+);
+
+
+
+
+localStorage.setItem(
+"taxipilot_configurato",
+"true"
+);
+
+
+
+window.location.href="index.html";
+
+
+}
+
+
+
+
+
+
+
+function caricaNomeHome(){
+
+
+let nomeBox =
+document.getElementById(
+"nomeAutista"
+);
+
+
+
+if(!nomeBox){
+
+return;
+
+}
+
+
+
+let profilo =
+JSON.parse(
+localStorage.getItem("taxipilot_profilo")
+);
+
+
+
+if(profilo){
+
+nomeBox.innerHTML =
+profilo.nome;
+
+}
+
+
+}
+
+// ===============================
 // TaxiPilot - Script principale
 // ===============================
 
