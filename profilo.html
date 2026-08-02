@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-<title>SOS - TaxiPilot</title>
+<title>Profilo - TaxiPilot</title>
 
 
 <link rel="stylesheet" href="style.css">
@@ -28,14 +28,13 @@
 
 <div>
 
-
 <h1>
-SOS
+Profilo
 </h1>
 
 
 <p>
-Emergenza e contatti rapidi
+Configurazione tassista
 </p>
 
 
@@ -43,6 +42,7 @@ Emergenza e contatti rapidi
 
 
 </header>
+
 
 
 
@@ -59,10 +59,108 @@ Emergenza e contatti rapidi
 <section class="dashboard-card">
 
 
+<h2>
+Dati tassista
+</h2>
+
+
+
+<input
+
+id="nomeProfilo"
+
+placeholder="Nome tassista"
+
+>
+
+
+
+<input
+
+id="numeroTaxi"
+
+placeholder="Numero taxi"
+
+>
+
+
+
+<input
+
+id="modelloVeicolo"
+
+placeholder="Modello veicolo"
+
+>
+
+
+
+<input
+
+id="targaVeicolo"
+
+placeholder="Targa veicolo"
+
+>
+
+
+
+
+
+<button
+
+class="main-button"
+
+onclick="salvaProfiloCompleto()"
+
+>
+
+Salva profilo
+
+</button>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<section class="dashboard-card">
+
 
 <h2>
-Contatti emergenza
+Contatti SOS salvati
 </h2>
+
+
+
+<p>
+
+Questi contatti riceveranno gli allarmi di emergenza.
+
+</p>
+
+
+
+
+<div id="listaContattiProfilo">
+
+
+<p class="empty">
+
+Nessun contatto configurato
+
+</p>
+
+
+</div>
+
 
 
 
@@ -75,24 +173,9 @@ onclick="aggiungiContatto()"
 
 >
 
-Aggiungi contatto
+Aggiungi contatto SOS
 
 </button>
-
-
-
-
-<div id="listaSOS">
-
-
-<p class="empty">
-
-Nessun contatto salvato
-
-</p>
-
-
-</div>
 
 
 
@@ -105,48 +188,40 @@ Nessun contatto salvato
 
 
 
-<section class="dashboard-card sos-box">
+<section class="dashboard-card">
 
 
 <h2>
-Richiesta assistenza
+Informazioni dispositivo
 </h2>
-
 
 
 
 <p>
 
-Invia posizione e richiesta di aiuto ai contatti configurati.
+I dati vengono salvati solo su questo dispositivo.
 
 </p>
 
 
 
+<p>
 
+Ogni tassista può utilizzare il proprio telefono con il proprio profilo.
 
-<button
-
-class="main-button"
-
-onclick="attivaSOS()"
-
->
-
-ATTIVA SOS
-
-</button>
-
+</p>
 
 
 
 </section>
+
 
 
 
 
 
 </main>
+
 
 
 
@@ -181,7 +256,7 @@ Turno
 
 
 
-<a class="active" href="sos.html">
+<a href="sos.html">
 
 SOS
 
@@ -189,7 +264,7 @@ SOS
 
 
 
-<a href="profilo.html">
+<a class="active" href="profilo.html">
 
 Profilo
 
@@ -197,6 +272,7 @@ Profilo
 
 
 </nav>
+
 
 
 
