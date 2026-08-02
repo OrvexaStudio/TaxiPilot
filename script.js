@@ -3001,45 +3001,161 @@ let oggi = new Date();
 return turni.filter(t=>{
 
 
+let parti =
+t.data.split("/");
+
+
 let data =
 new Date(
-t.data.split("/").reverse().join("-")
+parti[2],
+parti[1]-1,
+parti[0]
 );
 
 
 
-if(filtro==="oggi"){
+switch(filtro){
+
+
+case "oggi":
 
 return data.toDateString()
 ===
 oggi.toDateString();
 
-}
 
 
+case "ieri":
 
-if(filtro==="mese"){
+let ieri =
+new Date();
 
-return data.getMonth()
+ieri.setDate(
+ieri.getDate()-1
+);
+
+return data.toDateString()
 ===
-oggi.getMonth();
-
-}
+ieri.toDateString();
 
 
 
-if(filtro==="anno"){
+
+case "settimana":
+
+let settimana =
+new Date();
+
+settimana.setDate(
+oggi.getDate()-7
+);
+
+return data >= settimana;
+
+
+
+
+case "mese":
+
+return (
+data.getMonth()
+===
+oggi.getMonth()
+&&
+data.getFullYear()
+===
+oggi.getFullYear()
+);
+
+
+
+
+case "meseScorso":
+
+let meseScorso =
+new Date(
+oggi.getFullYear(),
+oggi.getMonth()-1,
+1
+);
+
+
+return (
+data.getMonth()
+===
+meseScorso.getMonth()
+&&
+data.getFullYear()
+===
+meseScorso.getFullYear()
+);
+
+
+
+
+case "anno":
 
 return data.getFullYear()
 ===
 oggi.getFullYear();
 
-}
 
 
+
+
+case "gennaio":
+case "febbraio":
+case "marzo":
+case "aprile":
+case "maggio":
+case "giugno":
+case "luglio":
+case "agosto":
+case "settembre":
+case "ottobre":
+case "novembre":
+case "dicembre":
+
+
+let mesi = {
+
+gennaio:0,
+febbraio:1,
+marzo:2,
+aprile:3,
+maggio:4,
+giugno:5,
+luglio:6,
+agosto:7,
+settembre:8,
+ottobre:9,
+novembre:10,
+dicembre:11
+
+};
+
+
+return data.getMonth()
+===
+mesi[filtro];
+
+
+
+
+
+case "tutto":
 
 return true;
 
+
+
+default:
+
+return true;
+
+
+
+}
 
 
 });
