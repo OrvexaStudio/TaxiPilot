@@ -1078,6 +1078,10 @@ document.addEventListener(
 ()=>{
 
 
+controlloPrimoAccesso();
+
+mostraContatti();
+
 mostraCorse();
 
 aggiornaStatistiche();
