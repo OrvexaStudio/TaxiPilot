@@ -38,26 +38,25 @@ function salvaCorsa() {
     }
 
 
+let nuovaCorsa = {
 
-    let nuovaCorsa = {
+    id: Date.now(),
 
-        id: Date.now(),
+    cliente: cliente,
 
-        cliente: cliente,
+    telefono: telefono,
 
-        telefono: telefono,
+    partenza: partenza,
 
-        partenza: partenza,
+    destinazione: destinazione,
 
-        destinazione: destinazione,
+    orario: orario,
 
-        orario: orario,
+    importo: Number(importo) || 0,
 
-        importo: Number(importo) || 0,
+    stato:"Programmata"
 
-        completata:false
-
-    };
+};
 
 
 
@@ -91,15 +90,126 @@ function salvaCorsa() {
 function mostraCorse(){
 
 
-    let contenitore = document.getElementById("listaCorse");
+let contenitore =
+document.getElementById("listaCorse");
 
 
 
-    if(!contenitore){
+if(!contenitore){
 
-        return;
+return;
 
-    }
+}
+
+
+
+contenitore.innerHTML="";
+
+
+
+if(corse.length===0){
+
+contenitore.innerHTML =
+`
+<p class="empty">
+Nessuna corsa inserita
+</p>
+`;
+
+return;
+
+}
+
+
+
+
+corse.forEach(corsa=>{
+
+
+contenitore.innerHTML +=
+
+`
+
+<div class="trip-card">
+
+
+<h3>
+${corsa.orario} - ${corsa.cliente}
+</h3>
+
+
+
+<p>
+${corsa.partenza}
+→
+${corsa.destinazione}
+</p>
+
+
+
+<p>
+Importo:
+<strong>
+${corsa.importo.toFixed(2)} €
+</strong>
+</p>
+
+
+
+<p>
+Stato:
+<strong>
+${corsa.stato}
+</strong>
+</p>
+
+
+
+
+
+<button
+class="main-button"
+onclick="cambiaStatoCorsa(${corsa.id})">
+
+Cambia stato
+
+</button>
+
+
+
+
+
+<button
+class="main-button"
+onclick="navigaCorsa('${corsa.destinazione}')">
+
+Naviga
+
+</button>
+
+
+
+
+
+<button
+class="delete-btn"
+onclick="eliminaCorsa(${corsa.id})">
+
+Elimina
+
+</button>
+
+
+</div>
+
+`;
+
+
+
+});
+
+
+}
 
 
 
@@ -202,7 +312,73 @@ function eliminaCorsa(id){
 
 }
 
+function cambiaStatoCorsa(id){
 
+
+let corsa =
+corse.find(
+c => c.id === id
+);
+
+
+
+if(!corsa){
+
+return;
+
+}
+
+
+
+let stati = [
+
+"Programmata",
+
+"In arrivo",
+
+"Cliente a bordo",
+
+"Completata"
+
+];
+
+
+
+let posizione =
+stati.indexOf(corsa.stato);
+
+
+
+posizione++;
+
+
+
+if(posizione >= stati.length){
+
+posizione=0;
+
+}
+
+
+
+corsa.stato =
+stati[posizione];
+
+
+
+localStorage.setItem(
+"taxipilot_corse",
+JSON.stringify(corse)
+);
+
+
+
+mostraCorse();
+
+mostraProssimaCorsa();
+
+
+}
 
 
 
