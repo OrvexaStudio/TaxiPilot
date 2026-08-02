@@ -655,6 +655,418 @@ alert(
 
 }
 
+// ===============================
+// CONFIGURAZIONE INIZIALE
+// ===============================
+
+
+let contattiSOS = JSON.parse(
+    localStorage.getItem("taxipilot_contatti_sos")
+) || [];
+
+
+
+
+
+// Controllo primo accesso
+
+function controlloPrimoAccesso(){
+
+
+    let configurato =
+    localStorage.getItem("taxipilot_configurato");
+
+
+    if(
+        !configurato &&
+        !window.location.pathname.includes("setup.html")
+    ){
+
+        window.location.href="setup.html";
+
+    }
+
+
+}
+
+
+
+
+
+// Aggiunta contatto SOS
+
+function aggiungiContatto(){
+
+
+    let nome =
+    prompt("Inserisci nome contatto");
+
+
+    if(!nome){
+
+        return;
+
+    }
+
+
+
+    let numero =
+    prompt("Inserisci numero telefono");
+
+
+    if(!numero){
+
+        return;
+
+    }
+
+
+
+    let contatto = {
+
+
+        id: Date.now(),
+
+        nome:nome,
+
+        telefono:numero
+
+
+    };
+
+
+
+    contattiSOS.push(contatto);
+
+
+
+    localStorage.setItem(
+        "taxipilot_contatti_sos",
+        JSON.stringify(contattiSOS)
+    );
+
+
+
+    mostraContatti();
+
+
+}
+
+
+
+
+
+// Visualizzazione contatti nella configurazione
+
+
+function mostraContatti(){
+
+
+    let contenitore =
+    document.getElementById("contatti");
+
+
+    if(!contenitore){
+
+        return;
+
+    }
+
+
+
+    contenitore.innerHTML="";
+
+
+
+    if(contattiSOS.length===0){
+
+
+        contenitore.innerHTML=
+        `
+        <p class="empty">
+        Nessun contatto salvato
+        </p>
+        `;
+
+
+        return;
+
+    }
+
+
+
+
+
+    contattiSOS.forEach(contatto=>{
+
+
+        contenitore.innerHTML +=
+        `
+
+        <div class="trip-card">
+
+        <h3>
+        ${contatto.nome}
+        </h3>
+
+
+        <p>
+        ${contatto.telefono}
+        </p>
+
+
+        </div>
+
+        `;
+
+
+    });
+
+
+}
+
+
+
+
+
+// Completamento configurazione
+
+
+function completaSetup(){
+
+
+
+    let nome =
+    document.getElementById("setupNome").value;
+
+
+
+    if(nome===""){
+
+
+        alert(
+        "Inserisci il nome del tassista"
+        );
+
+
+        return;
+
+
+    }
+
+
+
+    if(contattiSOS.length===0){
+
+
+        alert(
+        "Inserisci almeno un contatto SOS"
+        );
+
+
+        return;
+
+
+    }
+
+
+
+
+
+    let profilo = {
+
+
+        nome:nome
+
+
+    };
+
+
+
+    localStorage.setItem(
+        "taxipilot_profilo",
+        JSON.stringify(profilo)
+    );
+
+
+
+    localStorage.setItem(
+        "taxipilot_configurato",
+        "true"
+    );
+
+
+
+    window.location.href="index.html";
+
+
+}
+
+
+
+
+
+
+// ===============================
+// SISTEMA SOS WHATSAPP
+// ===============================
+
+
+function attivaSOS(){
+
+
+    if(contattiSOS.length===0){
+
+
+        alert(
+        "Nessun contatto SOS configurato"
+        );
+
+
+        return;
+
+
+    }
+
+
+
+
+
+    if(
+        !confirm(
+        "Attivare richiesta di emergenza?"
+        )
+    ){
+
+        return;
+
+    }
+
+
+
+
+
+
+    if(
+    navigator.geolocation
+    ){
+
+
+
+        navigator.geolocation.getCurrentPosition(
+
+        posizione=>{
+
+
+            let lat =
+            posizione.coords.latitude;
+
+
+            let lng =
+            posizione.coords.longitude;
+
+
+
+            inviaMessaggioSOS(lat,lng);
+
+
+
+        },
+
+
+        ()=>{
+
+
+            inviaMessaggioSOS(
+                "non disponibile",
+                "non disponibile"
+            );
+
+
+        }
+
+        );
+
+
+
+
+    }else{
+
+
+        inviaMessaggioSOS(
+            "non disponibile",
+            "non disponibile"
+        );
+
+
+    }
+
+
+
+}
+
+
+
+
+
+function inviaMessaggioSOS(lat,lng){
+
+
+
+let profilo =
+JSON.parse(
+localStorage.getItem("taxipilot_profilo")
+);
+
+
+
+let nome =
+profilo?.nome || "Tassista";
+
+
+
+let messaggio =
+
+`ALLARME TAXIPILOT
+
+Richiesta di assistenza.
+
+Autista:
+${nome}
+
+Posizione:
+https://maps.google.com/?q=${lat},${lng}
+
+Ora:
+${new Date().toLocaleString("it-IT")}`;
+
+
+
+let testo =
+encodeURIComponent(messaggio);
+
+
+
+
+
+contattiSOS.forEach(contatto=>{
+
+
+let url =
+
+`https://wa.me/${contatto.telefono}?text=${testo}`;
+
+
+
+window.open(url,"_blank");
+
+
+
+});
+
+
+}
+
 
 // ===============================
 // AVVIO
