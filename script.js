@@ -2851,7 +2851,7 @@ filtro
 
 
 
-let numeroCorse = 0;
+let Corse = 0;
 let incasso = 0;
 let ore = 0;
 let km = 0;
