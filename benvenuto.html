@@ -7,9 +7,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Benvenuto TaxiPilot</title>
+<title>Benvenuto - TaxiPilot</title>
 
 <link rel="stylesheet" href="style.css">
+
+<meta name="theme-color" content="#e87517">
 
 </head>
 
@@ -17,14 +19,17 @@
 <body>
 
 
-<main class="container">
+<main class="welcome-container">
 
 
-<section class="dashboard-card">
+<section class="welcome-card">
 
 
-<img src="logo.png" 
-style="width:120px; display:block; margin:auto;">
+<img 
+src="logo.png" 
+class="welcome-logo"
+>
+
 
 
 <h1>
@@ -32,74 +37,138 @@ Benvenuto in TaxiPilot
 </h1>
 
 
-<p>
-L'app creata per aiutare gli autisti nella gestione quotidiana del servizio taxi.
+
+<p class="welcome-subtitle">
+Il sistema digitale pensato per migliorare la sicurezza e l'efficienza del lavoro dei tassisti.
 </p>
 
 
 
+
+
+<div class="welcome-section">
+
+
 <h2>
-Perché nasce TaxiPilot?
+Perché è stato creato TaxiPilot
 </h2>
 
 
 <p>
-TaxiPilot nasce per aumentare la sicurezza degli autisti, migliorare la gestione delle corse e rendere il servizio più efficiente.
+TaxiPilot nasce con l'obiettivo di offrire agli autisti uno strumento semplice e professionale per gestire il proprio lavoro quotidiano, aumentare la sicurezza durante il servizio e avere sempre sotto controllo le proprie attività.
 </p>
 
+
+</div>
+
+
+
+
+
+<div class="welcome-section">
 
 
 <h2>
-Cosa puoi fare con TaxiPilot?
+Cosa puoi fare con TaxiPilot
 </h2>
 
 
-<p>
-Aggiungere e gestire le corse dei clienti e avere sempre sotto controllo le prenotazioni.
-</p>
+
+<div class="feature-box">
+
+
+<h3>
+Gestione corse
+</h3>
 
 
 <p>
-Controllare incassi, chilometri percorsi e ore lavorate tramite le statistiche generate automaticamente.
+Inserisci, organizza e gestisci le prenotazioni dei clienti in modo rapido e ordinato.
 </p>
+
+
+</div>
+
+
+
+
+<div class="feature-box">
+
+
+<h3>
+Gestione turni
+</h3>
 
 
 <p>
-Registrare i tuoi turni di lavoro creando uno storico completo.
+Registra l'inizio e la fine del turno, chilometri percorsi, durata e risultati del lavoro.
 </p>
+
+
+</div>
+
+
+
+
+<div class="feature-box">
+
+
+<h3>
+Statistiche professionali
+</h3>
 
 
 <p>
-Utilizzare il sistema SOS per inviare rapidamente una richiesta di assistenza ai numeri selezionati.
+Analizza incassi, chilometri, ore lavorate e andamento del servizio attraverso grafici e report PDF.
 </p>
 
 
+</div>
 
-<h2>
-Come funziona?
-</h2>
+
+
+
+<div class="feature-box">
+
+
+<h3>
+Sistema SOS
+</h3>
 
 
 <p>
-Inserisci i tuoi dati personali, aggiungi i contatti di emergenza e inizia a utilizzare tutte le funzioni disponibili.
+Invia rapidamente una richiesta di assistenza ai contatti configurati in caso di necessità.
 </p>
 
 
+</div>
 
-<p>
-Tutti i dati vengono salvati sul TUO dispositivo e rimangono sempre disponibili.
-ATTENZIONE: se l'app viene cancellata TUTTI I DATI VERRANNO PERSI E NON POTRANNO ESSERE RECUPERATI.
+
+</div>
+
+
+
+
+
+<p class="welcome-footer">
+
+TaxiPilot è stato progettato per rendere il lavoro dell'autista più organizzato, sicuro ed efficiente.
+
 </p>
+
+
 
 
 
 <button 
 class="main-button"
-onclick="iniziaTaxiPilot()">
+onclick="iniziaTaxiPilot()"
+>
 
-Inizia
+Inizia a utilizzare TaxiPilot
 
 </button>
+
 
 
 </section>
@@ -109,25 +178,9 @@ Inizia
 
 
 
-<script>
 
 
-function iniziaTaxiPilot(){
-
-
-localStorage.setItem(
-"taxipilot_benvenuto",
-"true"
-);
-
-
-window.location.href="index.html";
-
-
-}
-
-
-</script>
+<script src="script.js"></script>
 
 
 </body>
