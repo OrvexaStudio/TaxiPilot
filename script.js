@@ -1154,14 +1154,10 @@ ${new Date().toLocaleString("it-IT")}
 
 
 
-
-        window.open(
-
-        `https://wa.me/${numero}?text=${testo}`,
-
-        "_blank"
-
-        );
+window.open(
+    `https://wa.me/${numero}?text=${testo}`,
+    "_blank"
+);
 
 
 
