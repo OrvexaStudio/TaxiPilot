@@ -2885,6 +2885,11 @@ function esportaPDF(){
     let nome =
     profiloTaxi?.nome || "Tassista";
 
+    let periodo =
+document.getElementById(
+"filtroStatistiche"
+)?.value || "tutto";
+
 
 
     pdf.setFontSize(12);
@@ -2896,6 +2901,11 @@ function esportaPDF(){
         35
     );
 
+    pdf.text(
+"Periodo: " + periodo,
+15,
+45
+);
 
 
     let corse =
@@ -2925,33 +2935,133 @@ function esportaPDF(){
 
 
     pdf.text(
-        "Corse: " + corse,
-        15,
-        55
-    );
+"Corse: " + corse,
+15,
+70
+);
+
+
+pdf.text(
+"Incasso: " + incasso,
+15,
+80
+);
 
 
     pdf.text(
-        "Incasso: " + incasso,
-        15,
-        65
-    );
+"Ore: " + ore,
+15,
+90
+);
+
+
+  pdf.text(
+"Km: " + km,
+15,
+100
+);
+
+// TABELLA TURNI
+
+let turni =
+JSON.parse(
+localStorage.getItem("taxipilot_turni")
+) || [];
+
+
+
+let turniPeriodo =
+filtraTurni(
+    turni,
+    periodo
+);
+
+
+
+if(turniPeriodo.length > 0){
+
+
+    pdf.addPage();
+
+
+    pdf.setFontSize(16);
 
 
     pdf.text(
-        "Ore: " + ore,
+        "Storico turni",
         15,
-        75
+        20
     );
 
 
-    pdf.text(
-        "Km: " + km,
-        15,
-        85
-    );
+
+    let righe = turniPeriodo.map(
+    turno => [
 
 
+        turno.data,
+
+
+        turno.kmInizio + " km",
+
+
+        turno.kmFine + " km",
+
+
+        turno.kmPercorsi + " km",
+
+
+        turno.ore + " h",
+
+
+        turno.corse,
+
+
+        turno.incasso.toFixed(2) + " €"
+
+
+    ]);
+
+
+
+
+
+    pdf.autoTable({
+
+
+        startY:30,
+
+
+        head:[
+
+        [
+
+        "Data",
+
+        "Km iniziali",
+
+        "Km finali",
+
+        "Km percorsi",
+
+        "Ore",
+
+        "Corse",
+
+        "Incasso"
+
+        ]
+
+        ],
+
+
+        body:righe
+
+
+    });
+
+
+}
 
     pdf.save(
         "TaxiPilot_Report.pdf"
@@ -3087,174 +3197,248 @@ creaGrafici(dati);
 
 
 
-function filtraTurni(turni,filtro){
+function filtraTurni(turni, filtro){
 
 
-let oggi = new Date();
+    let oggi = new Date();
 
 
+    return turni.filter(t=>{
 
-return turni.filter(t=>{
 
+        let data =
+        new Date(
+            t.data.split("/").reverse().join("-")
+        );
 
-let parti =
-t.data.split("/");
 
 
-let data =
-new Date(
-parti[2],
-parti[1]-1,
-parti[0]
-);
+        // OGGI
 
+        if(filtro === "oggi"){
 
+            return data.toDateString()
+            ===
+            oggi.toDateString();
 
-switch(filtro){
+        }
 
 
-case "oggi":
 
-return data.toDateString()
-===
-oggi.toDateString();
 
+        // IERI
 
+        if(filtro === "ieri"){
 
-case "ieri":
+            let ieri = new Date();
 
-let ieri =
-new Date();
+            ieri.setDate(
+                oggi.getDate()-1
+            );
 
-ieri.setDate(
-ieri.getDate()-1
-);
 
-return data.toDateString()
-===
-ieri.toDateString();
+            return data.toDateString()
+            ===
+            ieri.toDateString();
 
+        }
 
 
 
-case "settimana":
 
-let settimana =
-new Date();
 
-settimana.setDate(
-oggi.getDate()-7
-);
+        // SETTIMANA
 
-return data >= settimana;
+        if(filtro === "settimana"){
 
 
+            let inizio =
+            new Date();
 
 
-case "mese":
+            inizio.setDate(
+                oggi.getDate()-7
+            );
 
-return (
-data.getMonth()
-===
-oggi.getMonth()
-&&
-data.getFullYear()
-===
-oggi.getFullYear()
-);
 
+            return data >= inizio;
 
+        }
 
 
-case "meseScorso":
 
-let meseScorso =
-new Date(
-oggi.getFullYear(),
-oggi.getMonth()-1,
-1
-);
 
 
-return (
-data.getMonth()
-===
-meseScorso.getMonth()
-&&
-data.getFullYear()
-===
-meseScorso.getFullYear()
-);
 
 
+        // QUESTO MESE
 
+        if(filtro === "mese"){
 
-case "anno":
 
-return data.getFullYear()
-===
-oggi.getFullYear();
+            return (
 
+            data.getMonth()
+            ===
+            oggi.getMonth()
 
+            &&
 
+            data.getFullYear()
+            ===
+            oggi.getFullYear()
 
+            );
 
-case "gennaio":
-case "febbraio":
-case "marzo":
-case "aprile":
-case "maggio":
-case "giugno":
-case "luglio":
-case "agosto":
-case "settembre":
-case "ottobre":
-case "novembre":
-case "dicembre":
 
+        }
 
-let mesi = {
 
-gennaio:0,
-febbraio:1,
-marzo:2,
-aprile:3,
-maggio:4,
-giugno:5,
-luglio:6,
-agosto:7,
-settembre:8,
-ottobre:9,
-novembre:10,
-dicembre:11
 
-};
 
 
-return data.getMonth()
-===
-mesi[filtro];
 
 
 
+        // MESE SCORSO
 
+        if(filtro === "meseScorso"){
 
-case "tutto":
 
-return true;
+            let mese =
+            oggi.getMonth()-1;
 
 
+            let anno =
+            oggi.getFullYear();
 
-default:
 
-return true;
 
+            if(mese < 0){
 
+                mese = 11;
 
-}
+                anno--;
 
+            }
 
-});
+
+
+            return (
+
+            data.getMonth()
+            ===
+            mese
+
+            &&
+
+            data.getFullYear()
+            ===
+            anno
+
+            );
+
+
+        }
+
+
+
+
+
+
+
+        // MESI
+
+        let mesi = {
+
+            gennaio:0,
+
+            febbraio:1,
+
+            marzo:2,
+
+            aprile:3,
+
+            maggio:4,
+
+            giugno:5,
+
+            luglio:6,
+
+            agosto:7,
+
+            settembre:8,
+
+            ottobre:9,
+
+            novembre:10,
+
+            dicembre:11
+
+        };
+
+
+
+
+
+        if(
+            mesi[filtro] !== undefined
+        ){
+
+
+            return (
+
+            data.getMonth()
+            ===
+            mesi[filtro]
+
+            );
+
+
+        }
+
+
+
+
+
+
+
+        // TUTTO
+
+        if(filtro==="tutto"){
+
+            return true;
+
+        }
+
+
+
+
+
+        // ANNO
+
+        if(filtro==="anno"){
+
+
+            return (
+
+            data.getFullYear()
+            ===
+            oggi.getFullYear()
+
+            );
+
+
+        }
+
+
+
+
+
+        return true;
+
+
+    });
 
 
 }
