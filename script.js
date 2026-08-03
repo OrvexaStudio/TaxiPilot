@@ -4246,3 +4246,115 @@ localStorage.setItem(
 
 
 }
+
+function aggiungiCalendario(id){
+
+
+let corsa =
+corse.find(
+c =>
+c.id === id
+);
+
+
+
+if(!corsa){
+
+return;
+
+}
+
+
+
+let dataOra =
+corsa.dataCorsa
++
+"T"
++
+corsa.orario;
+
+
+
+let inizio =
+new Date(dataOra);
+
+
+
+let fine =
+new Date(
+inizio.getTime()
++
+60 * 60 * 1000
+);
+
+
+
+function formattaICS(data){
+
+return data
+.toISOString()
+.replace(/[-:]/g,"")
+.split(".")[0]
++
+"Z";
+
+}
+
+
+
+
+let evento =
+
+`BEGIN:VCALENDAR
+VERSION:2.0
+BEGIN:VEVENT
+SUMMARY:Corsa TaxiPilot - ${corsa.cliente}
+DESCRIPTION:
+Cliente: ${corsa.cliente}
+Telefono: ${corsa.telefono}
+Partenza: ${corsa.partenza}
+Destinazione: ${corsa.destinazione}
+Importo: ${corsa.importo} euro
+DTSTART:${formattaICS(inizio)}
+DTEND:${formattaICS(fine)}
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:Promemoria corsa TaxiPilot
+END:VALARM
+END:VEVENT
+END:VCALENDAR`;
+
+
+
+
+let file =
+new Blob(
+[evento],
+{
+type:"text/calendar"
+}
+);
+
+
+
+let link =
+document.createElement("a");
+
+
+
+link.href =
+URL.createObjectURL(file);
+
+
+
+link.download =
+"Corsa_TaxiPilot.ics";
+
+
+
+link.click();
+
+
+
+}
