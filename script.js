@@ -3974,3 +3974,79 @@ function cercaCorse(){
     mostraCorse();
 
 }
+
+function esportaBackup(){
+
+
+let backup = {
+
+
+profilo:
+localStorage.getItem(
+"taxipilot_profilo"
+),
+
+
+corse:
+localStorage.getItem(
+"taxipilot_corse"
+),
+
+
+turni:
+localStorage.getItem(
+"taxipilot_turni"
+),
+
+
+contattiSOS:
+localStorage.getItem(
+"taxipilot_contatti_sos"
+)
+
+
+};
+
+
+
+let file = new Blob(
+
+[
+JSON.stringify(
+backup,
+null,
+2
+)
+],
+
+{
+type:"application/json"
+}
+
+);
+
+
+
+let link =
+document.createElement(
+"a"
+);
+
+
+
+link.href =
+URL.createObjectURL(
+file
+);
+
+
+
+link.download =
+"TaxiPilot_backup.json";
+
+
+
+link.click();
+
+
+}
