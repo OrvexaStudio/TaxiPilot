@@ -1228,3 +1228,54 @@ font-size:14px;
     color: #e87517;
 
 }
+
+body.dark-mode{
+
+background:#121212;
+
+color:white;
+
+}
+
+
+
+body.dark-mode .dashboard-card,
+body.dark-mode .trip-card,
+body.dark-mode .feature-box{
+
+background:#1e1e1e;
+
+color:white;
+
+}
+
+
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3{
+
+color:white;
+
+}
+
+
+
+body.dark-mode p{
+
+color:#ddd;
+
+}
+
+
+
+body.dark-mode input,
+body.dark-mode select{
+
+background:#222;
+
+color:white;
+
+border-color:#444;
+
+}
