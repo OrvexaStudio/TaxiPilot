@@ -1232,7 +1232,10 @@ function salvaCorsa(){
         "destinazione"
     ).value;
 
-
+let dataCorsa =
+document.getElementById(
+"dataCorsa"
+).value;
 
     let orario =
     document.getElementById(
@@ -1256,6 +1259,7 @@ function salvaCorsa(){
         !cliente ||
         !partenza ||
         !destinazione ||
+        !dataCorsa ||
         !orario
     ){
 
@@ -1294,7 +1298,9 @@ function salvaCorsa(){
 
         destinazione:
         destinazione,
-
+        
+        dataCorsa:
+        dataCorsa,
 
         orario:
         orario,
