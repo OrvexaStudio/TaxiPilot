@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Benvenuto TaxiPilot</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<main class="container">
+
+
+<section class="dashboard-card">
+
+
+<img src="logo.png" 
+style="width:120px; display:block; margin:auto;">
+
+
+<h1>
+Benvenuto in TaxiPilot
+</h1>
+
+
+<p>
+L'app creata per aiutare gli autisti nella gestione quotidiana del servizio taxi.
+</p>
+
+
+
+<h2>
+Perché nasce TaxiPilot?
+</h2>
+
+
+<p>
+TaxiPilot nasce per aumentare la sicurezza degli autisti, migliorare la gestione delle corse e rendere il servizio più efficiente.
+</p>
+
+
+
+<h2>
+Cosa puoi fare con TaxiPilot?
+</h2>
+
+
+<p>
+Aggiungere e gestire le corse dei clienti e avere sempre sotto controllo le prenotazioni.
+</p>
+
+
+<p>
+Controllare incassi, chilometri percorsi e ore lavorate tramite le statistiche generate automaticamente.
+</p>
+
+
+<p>
+Registrare i tuoi turni di lavoro creando uno storico completo.
+</p>
+
+
+<p>
+Utilizzare il sistema SOS per inviare rapidamente una richiesta di assistenza ai numeri selezionati.
+</p>
+
+
+
+<h2>
+Come funziona?
+</h2>
+
+
+<p>
+Inserisci i tuoi dati personali, aggiungi i contatti di emergenza e inizia a utilizzare tutte le funzioni disponibili.
+</p>
+
+
+
+<p>
+Tutti i dati vengono salvati sul TUO dispositivo e rimangono sempre disponibili.
+ATTENZIONE: se l'app viene cancellata TUTTI I DATI VERRANNO PERSI E NON POTRANNO ESSERE RECUPERATI.
+</p>
+
+
+
+<button 
+class="main-button"
+onclick="iniziaTaxiPilot()">
+
+Inizia
+
+</button>
+
+
+</section>
+
+
+</main>
+
+
+
+<script>
+
+
+function iniziaTaxiPilot(){
+
+
+localStorage.setItem(
+"taxipilot_benvenuto",
+"true"
+);
+
+
+window.location.href="index.html";
+
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>
