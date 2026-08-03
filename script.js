@@ -3820,7 +3820,17 @@ document.addEventListener(
 "DOMContentLoaded",
 
 ()=>{
+if(
+localStorage.getItem(
+"taxipilot_tema"
+)==="true"
+){
 
+document.body.classList.add(
+"dark-mode"
+);
+
+}
 
 
     controlloAccesso();
