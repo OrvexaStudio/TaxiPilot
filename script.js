@@ -4308,7 +4308,7 @@ let evento =
 `BEGIN:VCALENDAR
 VERSION:2.0
 BEGIN:VEVENT
-SUMMARY:Corsa TaxiPilot - ${corsa.cliente}
+SUMMARY:TaxiPilot | ${corsa.cliente} | ${corsa.destinazione}
 DESCRIPTION:
 Cliente: ${corsa.cliente}
 Telefono: ${corsa.telefono}
@@ -4347,13 +4347,15 @@ link.href =
 URL.createObjectURL(file);
 
 
-
 link.download =
-"Corsa_TaxiPilot.ics";
+"Corsa_" + corsa.cliente + "_TaxiPilot.ics";
 
 
 
 link.click();
+    alert(
+"Promemoria creato. Apri il file per aggiungere la corsa al calendario con avviso 30 minuti prima."
+);
 
 
 
