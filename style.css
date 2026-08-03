@@ -1377,3 +1377,63 @@ background:#ffffff;
 color:#111111;
 
 }
+
+/* ===============================
+   BARRE MODALITA CHIARA
+================================ */
+
+
+body.light-mode .topbar{
+
+background:#ffffff;
+
+border-bottom:1px solid #e87517;
+
+}
+
+
+
+body.light-mode .topbar h1{
+
+background:none;
+
+-webkit-background-clip:initial;
+
+color:#111111;
+
+}
+
+
+
+body.light-mode .topbar p{
+
+color:#555555;
+
+}
+
+
+
+
+body.light-mode .bottom-nav{
+
+background:#ffffff;
+
+border-top:1px solid #e87517;
+
+}
+
+
+
+body.light-mode .bottom-nav a{
+
+color:#111111;
+
+}
+
+
+
+body.light-mode .bottom-nav .active{
+
+color:#e87517;
+
+}
