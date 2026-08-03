@@ -2860,7 +2860,40 @@ function openForm(){
 
 
 
+let logoPDF = null;
 
+
+let immagineLogo = new Image();
+
+
+immagineLogo.src = "logo.png";
+
+
+immagineLogo.onload = function(){
+
+    let canvas = document.createElement("canvas");
+
+    canvas.width = immagineLogo.width;
+
+    canvas.height = immagineLogo.height;
+
+
+    let ctx = canvas.getContext("2d");
+
+
+    ctx.drawImage(
+        immagineLogo,
+        0,
+        0
+    );
+
+
+    logoPDF =
+    canvas.toDataURL(
+        "image/png"
+    );
+
+};
 
 function esportaPDF(){
 
@@ -2869,6 +2902,20 @@ function esportaPDF(){
 
 
     let pdf = new jsPDF();
+    if(logoPDF){
+
+
+pdf.addImage(
+logoPDF,
+"PNG",
+15,
+10,
+30,
+30
+);
+
+
+}
 
 let logo =
 new Image();
