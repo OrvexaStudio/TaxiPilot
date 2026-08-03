@@ -9,6 +9,7 @@ const files = [
 "sos.html",
 "turno.html",
 "corse.html",
+"aggiornamento.html",
 
 "style.css",
 "script.js",
