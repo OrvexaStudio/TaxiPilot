@@ -3253,10 +3253,12 @@ if(graficoKm){
     );
 
 }
-    pdf.save(
-        "TaxiPilot_Report.pdf"
-    );
+   pdf.save(
+    "TaxiPilot_Report.pdf"
+);
 
+
+};
 
 }
 
@@ -3854,17 +3856,17 @@ setInterval(
 
 );
 
-
 if(
 "serviceWorker" in navigator
 ){
-navigator.serviceWorker.register(
-"sw.js"
-)
-.then(registration=>{
 
-registration.update();
+    navigator.serviceWorker.register(
+        "sw.js"
+    )
+    .then(registration=>{
 
-});
+        registration.update();
+
+    });
 
 }
