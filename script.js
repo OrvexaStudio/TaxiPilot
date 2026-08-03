@@ -1783,7 +1783,15 @@ function cambiaStatoCorsa(id){
 
 function eliminaCorsa(id){
 
+if(
+!confirm(
+"Sei sicuro di voler eliminare questa corsa?"
+)
+){
 
+return;
+
+}
 
     corse =
 
