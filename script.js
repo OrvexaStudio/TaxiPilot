@@ -4143,3 +4143,27 @@ lettore.readAsText(file);
 
 
 }
+
+function cambiaTema(){
+
+
+document.body.classList.toggle(
+"dark-mode"
+);
+
+
+
+let tema =
+document.body.classList.contains(
+"dark-mode"
+);
+
+
+
+localStorage.setItem(
+"taxipilot_tema",
+tema
+);
+
+
+}
