@@ -1,4 +1,4 @@
-const cacheName = "taxipilot-v4";
+const cacheName = "taxipilot-v5";
 
 
 const files = [
@@ -12,7 +12,7 @@ const files = [
 
 "style.css",
 "script.js",
-"logo1.png"
+"logo.png"
 
 ];
 
