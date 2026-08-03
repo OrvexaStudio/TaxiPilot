@@ -1279,3 +1279,56 @@ color:white;
 border-color:#444;
 
 }
+
+body.light-mode{
+
+background:#ffffff;
+
+color:#111111;
+
+}
+
+
+
+body.light-mode .dashboard-card,
+body.light-mode .trip-card,
+body.light-mode .feature-box{
+
+background:#ffffff;
+
+color:#111111;
+
+border:1px solid #e87517;
+
+}
+
+
+
+body.light-mode h1,
+body.light-mode h2,
+body.light-mode h3{
+
+color:#e87517;
+
+}
+
+
+
+body.light-mode p{
+
+color:#222222;
+
+}
+
+
+
+body.light-mode input,
+body.light-mode select{
+
+background:#ffffff;
+
+color:#111111;
+
+border:1px solid #e87517;
+
+}
