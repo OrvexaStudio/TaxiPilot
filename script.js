@@ -3870,14 +3870,51 @@ setInterval(
 if(
 "serviceWorker" in navigator
 ){
+navigator.serviceWorker.register(
+"sw.js"
+)
+.then(registration=>{
 
-    navigator.serviceWorker.register(
-        "sw.js"
-    )
-    .then(registration=>{
 
-        registration.update();
+registration.update();
 
-    });
+
+
+registration.addEventListener(
+"updatefound",
+()=>{
+
+
+let nuovaVersione =
+registration.installing;
+
+
+
+nuovaVersione.addEventListener(
+"statechange",
+()=>{
+
+
+if(
+nuovaVersione.state === "installed"
+&&
+navigator.serviceWorker.controller
+){
+
+
+window.location.href =
+"aggiornamento.html";
+
+
+}
+
+
+});
+
+
+});
+
+
+});
 
 }
