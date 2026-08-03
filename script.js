@@ -2917,23 +2917,6 @@ logoPDF,
 
 }
 
-let logo =
-new Image();
-
-logo.src =
-"logo1.png";
-
-   logo.onload = function(){
-
-
-pdf.addImage(
-logo,
-"PNG",
-15,
-10,
-30,
-30
-);
 
 
 
