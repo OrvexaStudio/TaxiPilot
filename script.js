@@ -2117,6 +2117,8 @@ function iniziaTurno(){
 
         inizio:
         Date.now(),
+            indiceCorse:
+    corse.length,
 
         oraInizio:
         new Date().toLocaleTimeString(
@@ -2353,15 +2355,9 @@ localStorage.setItem(
 
 
 
-    let corseTurno =
-
-    corse.filter(
-
-        corsa =>
-
-        corsa.data === oggi
-
-    );
+   let corseTurno = corse.slice(
+    turno.indiceCorse || 0
+);
 
 
 
