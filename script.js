@@ -1138,33 +1138,31 @@ ${new Date().toLocaleString("it-IT")}
 
 
 
-    contattiSOS.forEach(
+contattiSOS.forEach(
 
-    contatto=>{
-
-
-        let numero =
-
-        contatto.telefono
-        .replace(
-            /\s/g,
-            ""
-        );
+(contatto, index)=>{
 
 
-
-
-window.open(
-    `https://wa.me/${numero}?text=${testo}`,
-    "_blank"
+let numero =
+contatto.telefono.replace(
+    /\s/g,
+    ""
 );
 
 
+setTimeout(()=>{
 
-    }
+
+window.location.href =
+`https://wa.me/${numero}?text=${testo}`;
 
 
-    );
+}, index * 1500);
+
+
+}
+
+);
 
 
 
