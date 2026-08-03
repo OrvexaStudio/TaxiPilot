@@ -2870,15 +2870,34 @@ function esportaPDF(){
 
     let pdf = new jsPDF();
 
+let logo =
+new Image();
+
+logo.src =
+"logo.png";
+
+   logo.onload = function(){
 
 
-    pdf.setFontSize(18);
+pdf.addImage(
+logo,
+"PNG",
+15,
+10,
+30,
+30
+);
 
-    pdf.text(
-        "TaxiPilot - Report lavoro",
-        15,
-        20
-    );
+
+
+pdf.setFontSize(18);
+
+
+pdf.text(
+"TaxiPilot - Report lavoro",
+55,
+25
+);
 
 
 
@@ -3063,6 +3082,130 @@ if(turniPeriodo.length > 0){
 
 }
 
+    // ===============================
+// INSERIMENTO GRAFICI NEL PDF
+// ===============================
+
+
+let graficoIncassi =
+document.getElementById(
+"graficoIncassi"
+);
+
+
+
+let graficoOre =
+document.getElementById(
+"graficoOre"
+);
+
+
+
+let graficoKm =
+document.getElementById(
+"graficoKm"
+);
+
+
+
+
+
+pdf.addPage();
+
+
+
+pdf.setFontSize(16);
+
+
+pdf.text(
+"Grafici lavoro",
+15,
+20
+);
+
+
+
+
+
+if(graficoIncassi){
+
+
+    let img1 =
+    graficoIncassi.toDataURL(
+        "image/png"
+    );
+
+
+    pdf.addImage(
+        img1,
+        "PNG",
+        15,
+        30,
+        180,
+        70
+    );
+
+}
+
+
+
+
+
+
+if(graficoOre){
+
+
+    let img2 =
+    graficoOre.toDataURL(
+        "image/png"
+    );
+
+
+    pdf.addImage(
+        img2,
+        "PNG",
+        15,
+        110,
+        180,
+        70
+    );
+
+}
+
+
+
+
+
+pdf.addPage();
+
+
+pdf.text(
+"Grafico chilometri",
+15,
+20
+);
+
+
+
+if(graficoKm){
+
+
+    let img3 =
+    graficoKm.toDataURL(
+        "image/png"
+    );
+
+
+    pdf.addImage(
+        img3,
+        "PNG",
+        15,
+        30,
+        180,
+        80
+    );
+
+}
     pdf.save(
         "TaxiPilot_Report.pdf"
     );
