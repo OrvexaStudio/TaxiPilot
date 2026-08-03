@@ -2964,13 +2964,13 @@ document.getElementById(
     pdf.text(
         "Autista: " + nome,
         15,
-        35
+        50
     );
 
     pdf.text(
 "Periodo: " + periodo,
 15,
-45
+60
 );
 
 
@@ -3003,28 +3003,28 @@ document.getElementById(
     pdf.text(
 "Corse: " + corse,
 15,
-70
+80
 );
 
 
 pdf.text(
 "Incasso: " + incasso,
 15,
-80
+90
 );
 
 
     pdf.text(
 "Ore: " + ore,
 15,
-90
+100
 );
 
 
   pdf.text(
 "Km: " + km,
 15,
-100
+110
 );
 
 // TABELLA TURNI
