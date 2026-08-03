@@ -4050,3 +4050,96 @@ link.click();
 
 
 }
+
+function importaBackup(event){
+
+
+let file =
+event.target.files[0];
+
+
+if(!file){
+
+    return;
+
+}
+
+
+
+let lettore =
+new FileReader();
+
+
+
+lettore.onload = function(e){
+
+
+let backup =
+JSON.parse(
+e.target.result
+);
+
+
+
+if(backup.profilo){
+
+localStorage.setItem(
+"taxipilot_profilo",
+backup.profilo
+);
+
+}
+
+
+
+if(backup.corse){
+
+localStorage.setItem(
+"taxipilot_corse",
+backup.corse
+);
+
+}
+
+
+
+if(backup.turni){
+
+localStorage.setItem(
+"taxipilot_turni",
+backup.turni
+);
+
+}
+
+
+
+if(backup.contattiSOS){
+
+localStorage.setItem(
+"taxipilot_contatti_sos",
+backup.contattiSOS
+);
+
+}
+
+
+
+alert(
+"Backup ripristinato correttamente"
+);
+
+
+
+location.reload();
+
+
+
+};
+
+
+
+lettore.readAsText(file);
+
+
+}
