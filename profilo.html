@@ -224,7 +224,52 @@ Ogni tassista può utilizzare il proprio telefono con il proprio profilo.
 
 </section>
 
+<section class="dashboard-card">
 
+
+<h2>
+Backup dati
+</h2>
+
+
+<p>
+Salva una copia dei dati di TaxiPilot per poterli ripristinare in caso di cambio dispositivo.
+</p>
+
+
+<button
+
+class="main-button"
+
+onclick="esportaBackup()"
+
+>
+
+Esporta backup
+
+</button>
+
+
+
+<br><br>
+
+
+
+<input
+
+type="file"
+
+id="fileBackup"
+
+accept=".json"
+
+onchange="importaBackup(event)"
+
+>
+
+
+
+</section>
 
 
 <!-- ===============================
