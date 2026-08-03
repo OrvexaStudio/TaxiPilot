@@ -2917,6 +2917,23 @@ logoPDF,
 
 }
 
+let logo =
+new Image();
+
+logo.src =
+"logo.png";
+
+   logo.onload = function(){
+
+
+pdf.addImage(
+logo,
+"PNG",
+15,
+10,
+30,
+30
+);
 
 
 
