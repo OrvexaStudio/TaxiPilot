@@ -1348,6 +1348,8 @@ document.getElementById(
     mostraProssimaCorsa();
 
     aggiornaStatistiche();
+   
+    aggiungiCalendario(corsa.id);
 
 
 
@@ -4318,9 +4320,15 @@ Importo: ${corsa.importo} euro
 DTSTART:${formattaICS(inizio)}
 DTEND:${formattaICS(fine)}
 BEGIN:VALARM
-TRIGGER:-PT30M
+TRIGGER:-PT45M
 ACTION:DISPLAY
-DESCRIPTION:Promemoria corsa TaxiPilot
+DESCRIPTION:TaxiPilot - Corsa tra 45 minuti
+END:VALARM
+
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:TaxiPilot - Corsa tra 15 minuti
 END:VALARM
 END:VEVENT
 END:VCALENDAR`;
