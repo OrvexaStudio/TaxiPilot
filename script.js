@@ -3820,14 +3820,31 @@ document.addEventListener(
 "DOMContentLoaded",
 
 ()=>{
-if(
+let tema =
 localStorage.getItem(
 "taxipilot_tema"
-)==="true"
+);
+
+
+
+if(
+tema==="dark"
 ){
 
 document.body.classList.add(
 "dark-mode"
+);
+
+}
+
+
+
+if(
+tema==="light"
+){
+
+document.body.classList.add(
+"light-mode"
 );
 
 }
@@ -4157,23 +4174,51 @@ lettore.readAsText(file);
 function cambiaTema(){
 
 
-document.body.classList.toggle(
-"dark-mode"
-);
-
-
-
-let tema =
+if(
 document.body.classList.contains(
 "dark-mode"
+)
+){
+
+
+document.body.classList.remove(
+"dark-mode"
 );
 
+
+document.body.classList.add(
+"light-mode"
+);
 
 
 localStorage.setItem(
 "taxipilot_tema",
-tema
+"light"
 );
+
+
+}
+
+else{
+
+
+document.body.classList.remove(
+"light-mode"
+);
+
+
+document.body.classList.add(
+"dark-mode"
+);
+
+
+localStorage.setItem(
+"taxipilot_tema",
+"dark"
+);
+
+
+}
 
 
 }
