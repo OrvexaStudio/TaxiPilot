@@ -22,8 +22,7 @@ self.addEventListener(
 "install",
 event=>{
 
-self.skipWaiting();
-  
+
 event.waitUntil(
 
 caches.open(cacheName)
@@ -33,45 +32,6 @@ caches.open(cacheName)
 return cache.addAll(files);
 
 })
-
-);
-
-
-});
-
-self.addEventListener(
-"activate",
-event=>{
-
-
-event.waitUntil(
-
-caches.keys()
-
-.then(keys=>{
-
-
-return Promise.all(
-
-keys.map(key=>{
-
-
-if(
-key !== cacheName
-){
-
-return caches.delete(key);
-
-}
-
-
-})
-
-);
-
-
-})
-
 
 );
 
