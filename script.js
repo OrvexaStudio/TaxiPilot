@@ -3918,3 +3918,18 @@ window.location.href =
 });
 
 }
+
+function iniziaTaxiPilot(){
+
+
+    localStorage.setItem(
+        "taxipilot_benvenuto",
+        "true"
+    );
+
+
+    window.location.href =
+    "index.html";
+
+
+}
