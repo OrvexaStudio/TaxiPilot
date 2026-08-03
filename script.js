@@ -1617,7 +1617,17 @@ corsa.destinazione
         </button>
 
 
+<button
 
+class="main-button"
+
+onclick="aggiungiCalendario(${corsa.id})"
+
+>
+
+Aggiungi al calendario
+
+</button>
 
 
 
