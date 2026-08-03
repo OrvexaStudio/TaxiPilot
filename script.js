@@ -1441,6 +1441,41 @@ function mostraCorse(){
     let lista =
     [...corse];
 
+    let ricerca =
+document.getElementById(
+"cercaCorsa"
+)?.value
+.toLowerCase()
+|| "";
+
+
+if(
+ricerca !== ""
+){
+
+
+lista =
+lista.filter(
+
+corsa =>
+
+
+corsa.cliente
+.toLowerCase()
+.includes(ricerca)
+
+||
+
+corsa.destinazione
+.toLowerCase()
+.includes(ricerca)
+
+
+);
+
+
+}
+
 
 
     lista.sort(
@@ -3931,5 +3966,11 @@ function iniziaTaxiPilot(){
     window.location.href =
     "index.html";
 
+
+}
+
+function cercaCorse(){
+
+    mostraCorse();
 
 }
