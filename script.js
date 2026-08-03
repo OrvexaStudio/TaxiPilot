@@ -56,7 +56,10 @@ function controlloAccesso(){
     pagina.includes(
         "login.html"
     );
-
+let eBenvenuto =
+pagina.includes(
+"benvenuto.html"
+);
 
 
     if(
@@ -75,16 +78,34 @@ function controlloAccesso(){
 
 
     if(
-        configurato &&
-        eLogin
-    ){
+configurato &&
+eLogin
+){
 
-        window.location.href =
-        "index.html";
+let visto =
+localStorage.getItem(
+"taxipilot_benvenuto"
+);
 
-        return;
 
-    }
+if(!visto){
+
+window.location.href =
+"benvenuto.html";
+
+}
+
+else{
+
+window.location.href =
+"index.html";
+
+}
+
+
+return;
+
+}
 
 
 }
@@ -343,8 +364,8 @@ function salvaAccesso(){
 
 
 
-    window.location.href =
-    "index.html";
+   window.location.href =
+"benvenuto.html";
 
 
 
