@@ -3866,3 +3866,5 @@ navigator.serviceWorker.register(
 registration.update();
 
 });
+
+}
