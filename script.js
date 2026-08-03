@@ -2866,7 +2866,7 @@ let logoPDF = null;
 let immagineLogo = new Image();
 
 
-immagineLogo.src = "logo1.png";
+immagineLogo.src = "logo.png";
 
 
 immagineLogo.onload = function(){
