@@ -2169,10 +2169,10 @@ let storicoTurni = JSON.parse(
 function iniziaTurno(){
 
 
-    let km =
-    document.getElementById(
-        "kmInizio"
-    ).value;
+let km =
+document.getElementById(
+    "kmInizio"
+)?.value || "";
 
 
 
@@ -2207,7 +2207,7 @@ function iniziaTurno(){
 
 
         kmInizio:
-        Number(km)
+        km === "" ? null : Number(km)
 
     };
 
@@ -2358,27 +2358,28 @@ function terminaTurno(){
 
 
     let kmFinali = prompt(
-
-        "Inserisci chilometri finali"
-
-    );
+"Inserisci chilometri finali (opzionale)"
+);
+    
 localStorage.setItem(
     "taxipilot_ultimo_km",
     kmFinali
 );
 
 
-    if(!kmFinali){
-
-        return;
-
-    }
 
 
 
+if(kmFinali === null || kmFinali === ""){
 
-    kmFinali =
-    Number(kmFinali);
+    kmFinali = null;
+
+}
+else{
+
+    kmFinali = Number(kmFinali);
+
+}
 
 localStorage.setItem(
 
@@ -2390,11 +2391,20 @@ localStorage.setItem(
 
 
 
-    let kmPercorsi =
+let kmPercorsi =
 
-    kmFinali -
+(
+kmFinali !== null &&
+turno.kmInizio !== null
+)
 
-    turno.kmInizio;
+?
+
+kmFinali - turno.kmInizio
+
+:
+
+null;
 
 
 
