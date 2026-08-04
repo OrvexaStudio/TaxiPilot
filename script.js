@@ -1523,7 +1523,7 @@ console.log(filtroGiornoCorse);
 
     });
 
-}
+
 
 // FILTRO GIORNO CORSE
 
