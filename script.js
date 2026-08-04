@@ -31,7 +31,7 @@ JSON.parse(
 localStorage.getItem("taxipilot_corse")
 ) || [];
 
-let vistaCorse = "future";
+let filtroGiornoCorse = "oggi";
 
 
 
@@ -1386,7 +1386,14 @@ function salvaCorse(){
 
 
 
+function cambiaGiornoCorse(giorno){
 
+    filtroGiornoCorse = giorno;
+
+
+    mostraCorse();
+
+}
 
 
 // ===============================
@@ -1482,6 +1489,75 @@ function mostraCorse(){
     let lista =
     [...corse];
 
+    // FILTRO GIORNO CORSE
+
+let oggi = new Date();
+
+oggi.setHours(0,0,0,0);
+
+
+if(filtroGiornoCorse === "oggi"){
+
+
+    lista = lista.filter(corsa=>{
+
+
+        let data =
+        new Date(corsa.data);
+
+
+        data.setHours(0,0,0,0);
+
+
+        return data.getTime() === oggi.getTime();
+
+
+    });
+
+
+}
+
+
+
+if(filtroGiornoCorse === "domani"){
+
+
+    let domani = new Date(oggi);
+
+
+    domani.setDate(
+        oggi.getDate()+1
+    );
+
+
+
+    lista = lista.filter(corsa=>{
+
+
+        let data =
+        new Date(corsa.data);
+
+
+        data.setHours(0,0,0,0);
+
+
+        return data.getTime() === domani.getTime();
+
+
+    });
+
+
+}
+
+
+
+if(filtroGiornoCorse === "tutte"){
+
+
+    lista = [...corse];
+
+
+}
     
     let ricerca =
 document.getElementById(
