@@ -1454,3 +1454,14 @@ input[type="time"] {
     -webkit-appearance:none;
 
 }
+
+label {
+
+    display:block;
+    margin-top:15px;
+    margin-bottom:6px;
+    font-size:14px;
+    font-weight:600;
+    color:#e87517;
+
+}
