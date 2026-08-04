@@ -1317,11 +1317,11 @@ document.getElementById(
 
 
 
-        data:
+        dataCreazione:
         new Date()
         .toLocaleDateString(
-            "it-IT"
-        )
+         "it-IT"
+)
 
 
     };
@@ -1615,15 +1615,19 @@ corsa.destinazione
         <div class="trip-card">
 
 
-        <h3>
+<p>
+Data: ${corsa.data}
+</p>
 
-        ${corsa.orario}
+<h3>
 
-        -
+${corsa.orario}
 
-        ${corsa.cliente}
+-
 
-        </h3>
+${corsa.cliente}
+
+</h3>
 
 
 
