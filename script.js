@@ -4599,3 +4599,55 @@ link.click();
 
 
 }
+
+function whatsappCliente(id){
+
+    let corsa = corse.find(
+        c => c.id === id
+    );
+
+
+    if(!corsa){
+        return;
+    }
+
+
+    let messaggio =
+
+`Salve ${corsa.cliente},
+
+sono l'autista della Cooperativa Taxi Lecce.
+
+Sto arrivando per la sua corsa:
+
+Partenza:
+${corsa.partenza}
+
+Destinazione:
+${corsa.destinazione}
+
+Orario:
+${corsa.orario}
+
+A tra poco.
+
+Cooperativa Taxi Lecce`;
+
+
+    let testo = encodeURIComponent(
+        messaggio
+    );
+
+
+    let numero = corsa.telefono.replace(
+        /\s/g,
+        ""
+    );
+
+
+    window.open(
+        "https://wa.me/" + numero + "?text=" + testo,
+        "_blank"
+    );
+
+}
