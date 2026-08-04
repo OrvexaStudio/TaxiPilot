@@ -1489,27 +1489,52 @@ function mostraCorse(){
     let lista =
     [...corse];
 
-    // FILTRO GIORNO CORSE
+// FILTRO GIORNO CORSE
 
-let oggi = new Date();
-
-oggi.setHours(0,0,0,0);
+if(filtroGiornoCorse !== "tutte"){
 
 
-if(filtroGiornoCorse === "oggi"){
+    let oggi = new Date();
+
+    oggi.setHours(0,0,0,0);
+
 
 
     lista = lista.filter(corsa=>{
 
 
         let data =
-        new Date(corsa.data);
+        new Date(
+            corsa.data + "T00:00:00"
+        );
 
 
         data.setHours(0,0,0,0);
 
 
-        return data.getTime() === oggi.getTime();
+
+        if(filtroGiornoCorse === "oggi"){
+
+            return data.getTime() === oggi.getTime();
+
+        }
+
+
+
+        if(filtroGiornoCorse === "domani"){
+
+
+            let domani = new Date(oggi);
+
+            domani.setDate(
+                oggi.getDate()+1
+            );
+
+
+            return data.getTime() === domani.getTime();
+
+
+        }
 
 
     });
