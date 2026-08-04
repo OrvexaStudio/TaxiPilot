@@ -1718,17 +1718,7 @@ ${corsa.cliente}
 
 
 
-        <p>
-
-        Stato:
-
-        <strong>
-
-        ${corsa.stato}
-
-        </strong>
-
-        </p>
+      
 
 <button
 
