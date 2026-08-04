@@ -4643,3 +4643,77 @@ Cooperativa Taxi Lecce`;
     );
 
 }
+
+function modificaCorsa(id){
+
+    let corsa = corse.find(
+        c => c.id === id
+    );
+
+
+    if(!corsa){
+        return;
+    }
+
+
+    let cliente = prompt(
+        "Nome cliente",
+        corsa.cliente || ""
+    );
+
+
+    let telefono = prompt(
+        "Telefono cliente",
+        corsa.telefono || ""
+    );
+
+
+    let partenza = prompt(
+        "Indirizzo partenza",
+        corsa.partenza || ""
+    );
+
+
+    let destinazione = prompt(
+        "Indirizzo arrivo",
+        corsa.destinazione || ""
+    );
+
+
+    let data = prompt(
+        "Data corsa (AAAA-MM-GG)",
+        corsa.data || ""
+    );
+
+
+    let orario = prompt(
+        "Orario corsa",
+        corsa.orario || ""
+    );
+
+
+    let importo = prompt(
+        "Importo €",
+        corsa.importo || 0
+    );
+
+
+    corsa.cliente = cliente;
+    corsa.telefono = telefono;
+    corsa.partenza = partenza;
+    corsa.destinazione = destinazione;
+    corsa.data = data;
+    corsa.orario = orario;
+    corsa.importo = Number(importo) || 0;
+
+
+    salvaCorse();
+
+    mostraCorse();
+
+    mostraProssimaCorsa();
+
+    aggiornaStatistiche();
+
+
+}
