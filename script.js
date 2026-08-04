@@ -1751,7 +1751,7 @@ ${corsa.cliente}
 
 
 
-
+<div class="action-buttons">
 
 
         <button
@@ -1777,7 +1777,7 @@ onclick="whatsappCliente(${corsa.id})"
 WhatsApp
 
 </button>
-
+</div>
 
 <button
 
