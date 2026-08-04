@@ -1493,7 +1493,7 @@ console.log(filtroGiornoCorse);
 
     // FILTRO FUTURE / PASSATE
 
-if(vistaCorse !== "tutte"){
+
 
     let adesso = new Date();
 
