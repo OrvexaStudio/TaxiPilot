@@ -682,6 +682,8 @@ textarea{
 
 width:100%;
 
+min-width:0;
+
 
 padding:15px;
 
@@ -1435,5 +1437,16 @@ color:#111111;
 body.light-mode .bottom-nav .active{
 
 color:#e87517;
+
+}
+
+input[type="date"],
+input[type="time"] {
+
+    width:100%;
+    max-width:100%;
+    display:block;
+    appearance:none;
+    -webkit-appearance:none;
 
 }
