@@ -1580,3 +1580,40 @@ font-size:14px;
 .action-buttons button {
     flex: 1;
 }
+
+.next-actions {
+
+    width: 33%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+}
+
+
+.next-actions button {
+
+    padding: 8px;
+
+    font-size: 12px;
+
+}
+
+
+.trip-box {
+
+    display: flex;
+
+    align-items: center;
+
+}
+
+
+.trip-info {
+
+    flex: 1;
+
+}
