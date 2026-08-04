@@ -4483,7 +4483,7 @@ link.download =
 
 link.click();
     alert(
-"Promemoria creato. Apri il file per aggiungere la corsa al calendario con avviso 30 minuti prima."
+"Promemoria creato. Apri il file per aggiungere la corsa al calendario con avvisi 45 e 15 minuti prima."
 );
 
 
