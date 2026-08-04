@@ -1769,7 +1769,17 @@ ${corsa.cliente}
 
 
 
+<button
 
+class="main-button"
+
+onclick="navigaCliente('${corsa.partenza}')"
+
+>
+
+Vai dal cliente
+
+</button>
 
 
         <button
@@ -2078,7 +2088,21 @@ function navigaCorsa(destinazione){
 }
 
 
+function navigaCliente(partenza){
 
+    let url =
+    "https://www.google.com/maps/search/?api=1&query="
+    +
+    encodeURIComponent(
+        partenza
+    );
+
+    window.open(
+        url,
+        "_blank"
+    );
+
+}
 
 
 
