@@ -1514,3 +1514,32 @@ background:linear-gradient(
 color:white;
 
 }
+
+/* SWITCH FILTRO CORSE */
+
+.switch-corse{
+
+display:flex;
+
+gap:10px;
+
+margin-top:15px;
+
+margin-bottom:20px;
+
+}
+
+
+.switch-corse .main-button{
+
+width:auto;
+
+flex:1;
+
+margin-top:0;
+
+padding:14px 8px;
+
+font-size:14px;
+
+}
