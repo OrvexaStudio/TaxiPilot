@@ -32,7 +32,7 @@ localStorage.getItem("taxipilot_corse")
 ) || [];
 
 let filtroGiornoCorse = "oggi";
-
+let vistaCorse = "future";
 
 
 
@@ -1490,6 +1490,40 @@ function mostraCorse(){
     [...corse];
     console.log(corse);
 console.log(filtroGiornoCorse);
+
+    // FILTRO FUTURE / PASSATE
+
+if(vistaCorse !== "tutte"){
+
+    let adesso = new Date();
+
+    lista = lista.filter(corsa=>{
+
+        let dataOra =
+        new Date(
+            corsa.data +
+            "T" +
+            corsa.orario
+        );
+
+
+        if(vistaCorse === "future"){
+
+            return dataOra >= adesso;
+
+        }
+
+
+        if(vistaCorse === "passate"){
+
+            return dataOra < adesso;
+
+        }
+
+
+    });
+
+}
 
 // FILTRO GIORNO CORSE
 
