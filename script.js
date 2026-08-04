@@ -1780,7 +1780,7 @@ ${corsa.cliente}
 
         >
 
-        Naviga
+        Indirizzo di arrivo
 
         </button>
 
