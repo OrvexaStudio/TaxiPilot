@@ -4635,10 +4635,16 @@ Cooperativa Taxi Lecce`;
     );
 
 
-    let numero = corsa.telefono.replace(
-        /\s/g,
-        ""
-    );
+let numero = corsa.telefono
+.replace(/\s/g,"")
+.replace("+","");
+
+
+if(!numero.startsWith("39")){
+
+    numero = "39" + numero;
+
+}
 
 
     window.open(
