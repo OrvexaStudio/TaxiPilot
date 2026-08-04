@@ -4618,7 +4618,7 @@ function whatsappCliente(id){
 
 sono l'autista della Cooperativa Taxi Lecce.
 
-Sto arrivando per la sua corsa:
+Le ricordiamo la sua corsa:
 
 Partenza:
 ${corsa.partenza}
