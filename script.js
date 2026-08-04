@@ -1390,6 +1390,11 @@ function cambiaGiornoCorse(giorno){
 
     filtroGiornoCorse = giorno;
 
+    if(giorno === "passate"){
+        vistaCorse = "passate";
+    } else {
+        vistaCorse = "future";
+    }
 
     mostraCorse();
 
