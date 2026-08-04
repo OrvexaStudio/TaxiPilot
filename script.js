@@ -2283,54 +2283,88 @@ function mostraProssimaCorsa(){
 
     `
 
-    <div class="trip-box">
+<div class="trip-box">
 
 
-    <div class="trip-time">
+<div class="trip-time">
 
-    ${corsa.orario}
+${corsa.orario}
 
-    </div>
-
-
-
-    <div class="trip-info">
-
-
-    <h3>
-
-    ${corsa.cliente}
-
-    </h3>
+</div>
 
 
 
-    <p>
-
-    ${corsa.partenza}
-
-    →
-
-    ${corsa.destinazione}
-
-    </p>
+<div class="trip-info">
 
 
+<h3>
 
-    <strong>
+${corsa.cliente || "Cliente"}
 
-    ${corsa.importo.toFixed(2)}
-
-    €
-
-    </strong>
+</h3>
 
 
 
-    </div>
+<p>
+
+${corsa.partenza}
+
+→
+
+${corsa.destinazione || ""}
+
+</p>
 
 
-    </div>
+
+<strong>
+
+${corsa.importo.toFixed(2)}
+
+€
+
+</strong>
+
+
+
+</div>
+
+
+
+<div class="next-actions">
+
+
+<button
+
+class="small-call"
+
+onclick="chiamaCliente('${corsa.telefono}')"
+
+>
+
+Chiama
+
+</button>
+
+
+
+<button
+
+class="small-whatsapp"
+
+onclick="whatsappCliente(${corsa.id})"
+
+>
+
+WhatsApp
+
+</button>
+
+
+</div>
+
+
+</div>
 
 
     `;
