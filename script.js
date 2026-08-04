@@ -1505,7 +1505,7 @@ if(filtroGiornoCorse !== "tutte"){
 
         let data =
         new Date(
-            corsa.data + "T00:00:00"
+            corsa.dataCorsa + "T00:00:00"
         );
 
 
@@ -1544,45 +1544,7 @@ if(filtroGiornoCorse !== "tutte"){
 
 
 
-if(filtroGiornoCorse === "domani"){
 
-
-    let domani = new Date(oggi);
-
-
-    domani.setDate(
-        oggi.getDate()+1
-    );
-
-
-
-    lista = lista.filter(corsa=>{
-
-
-        let data =
-        new Date(corsa.data);
-
-
-        data.setHours(0,0,0,0);
-
-
-        return data.getTime() === domani.getTime();
-
-
-    });
-
-
-}
-
-
-
-if(filtroGiornoCorse === "tutte"){
-
-
-    lista = [...corse];
-
-
-}
     
     let ricerca =
 document.getElementById(
@@ -2986,7 +2948,7 @@ function aggiornaStatistiche(){
 
     corsa =>
 
-    corsa.data === oggi
+    corsa.dataCorsa === oggi
 
     );
 
@@ -4414,7 +4376,7 @@ return;
 
 
 let dataOra =
-corsa.dataCorsa
+corsa.dataCorsaCorsa
 +
 "T"
 +
