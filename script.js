@@ -1530,50 +1530,68 @@ if(vistaCorse !== "tutte"){
 if(filtroGiornoCorse !== "tutte"){
 
 
-    let oggi = new Date();
+let oggi = new Date();
 
-    oggi.setHours(0,0,0,0);
-
-
-
-    lista = lista.filter(corsa=>{
+oggi.setHours(0,0,0,0);
 
 
-        let data =
-new Date(
-    corsa.data + "T00:00:00"
+
+lista = lista.filter(corsa=>{
+
+
+let dataOra = new Date(
+corsa.data +
+"T" +
+corsa.orario
 );
 
 
-        data.setHours(0,0,0,0);
+
+if(filtroGiornoCorse === "oggi"){
+
+
+return dataOra.toDateString()
+===
+oggi.toDateString();
+
+
+}
 
 
 
-        if(filtroGiornoCorse === "oggi"){
-
-            return data.getTime() === oggi.getTime();
-
-        }
+if(filtroGiornoCorse === "domani"){
 
 
+let domani = new Date(oggi);
 
-        if(filtroGiornoCorse === "domani"){
-
-
-            let domani = new Date(oggi);
-
-            domani.setDate(
-                oggi.getDate()+1
-            );
+domani.setDate(
+oggi.getDate()+1
+);
 
 
-            return data.getTime() === domani.getTime();
+
+return dataOra.toDateString()
+===
+domani.toDateString();
 
 
-        }
+}
 
 
-    });
+
+if(filtroGiornoCorse === "passate"){
+
+
+return dataOra < new Date();
+
+
+}
+
+
+});
+
+
+}
 
 
 }
