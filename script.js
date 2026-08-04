@@ -1506,9 +1506,9 @@ if(filtroGiornoCorse !== "tutte"){
 
 
         let data =
-        new Date(
-            corsa.dataCorsa + "T00:00:00"
-        );
+new Date(
+    corsa.data + "T00:00:00"
+);
 
 
         data.setHours(0,0,0,0);
