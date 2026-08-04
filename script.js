@@ -1616,7 +1616,7 @@ corsa.destinazione
 
 
 <p>
-Data: ${corsa.data}
+TEST DATA: ${corsa.data}
 </p>
 
 <h3>
