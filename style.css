@@ -1465,3 +1465,52 @@ label {
     color:#e87517;
 
 }
+
+/* ===============================
+   SWITCH GIORNI CORSE
+================================ */
+
+.switch-corse{
+
+display:flex;
+
+gap:10px;
+
+margin-top:15px;
+
+margin-bottom:20px;
+
+}
+
+
+
+.switch-corse button{
+
+flex:1;
+
+height:50px;
+
+margin-top:0;
+
+padding:0;
+
+border-radius:16px;
+
+font-size:15px;
+
+font-weight:700;
+
+}
+
+
+.switch-corse button:first-child{
+
+background:linear-gradient(
+135deg,
+#ff9800,
+#ff6d00
+);
+
+color:white;
+
+}
