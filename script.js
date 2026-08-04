@@ -1771,7 +1771,7 @@ ${corsa.cliente}
 
 <button
 
-class="main-button"
+class="btn-cliente"
 
 onclick="navigaCliente('${corsa.partenza}')"
 
@@ -1784,7 +1784,7 @@ Vai dal cliente
 
         <button
 
-        class="main-button"
+        class="btn-arrivo"
 
         onclick="navigaCorsa('${corsa.destinazione}')"
 
