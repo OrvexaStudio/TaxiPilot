@@ -4393,13 +4393,6 @@ new Date(dataOra);
 
 if(isNaN(inizio.getTime())){
 
-    alert(
-        "Errore: data o orario corsa non validi"
-    );
-
-    console.log("Data ricevuta:", dataOra);
-    console.log("Corsa:", corsa);
-
     return;
 
 }
