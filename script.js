@@ -1257,21 +1257,20 @@ document.getElementById(
 
 
 
-    if(
-        !cliente ||
-        !partenza ||
-        !destinazione ||
-        !dataCorsa ||
-        !orario
-    ){
+   if(
+    !partenza ||
+    !telefono ||
+    !dataCorsa ||
+    !orario
+){
 
-        alert(
-            "Compila tutti i campi obbligatori"
-        );
+    alert(
+        "Inserisci indirizzo di partenza, telefono, data e orario"
+    );
 
-        return;
+    return;
 
-    }
+}
 
 
 
@@ -1731,24 +1730,17 @@ ${corsa.cliente}
 
         </p>
 
+<button
 
+class="main-button"
 
+onclick="modificaCorsa(${corsa.id})"
 
+>
 
+Modifica corsa
 
-        <button
-
-        class="main-button"
-
-        onclick="cambiaStatoCorsa(${corsa.id})"
-
-        >
-
-        Cambia stato
-
-        </button>
-
-
+</button>
 
 
 <div class="action-buttons">
