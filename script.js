@@ -4680,10 +4680,24 @@ function modificaCorsa(id){
     );
 
 
-    let data = prompt(
-        "Data corsa (AAAA-MM-GG)",
-        corsa.data || ""
-    );
+let dataVisualizzata = "";
+
+if(corsa.data){
+
+    let parti = corsa.data.split("-");
+
+    dataVisualizzata =
+    parti[2] + "/" +
+    parti[1] + "/" +
+    parti[0];
+
+}
+
+
+let data = prompt(
+    "Data corsa (GG/MM/AAAA)",
+    dataVisualizzata
+);
 
 
     let orario = prompt(
@@ -4702,7 +4716,16 @@ function modificaCorsa(id){
     corsa.telefono = telefono;
     corsa.partenza = partenza;
     corsa.destinazione = destinazione;
-    corsa.data = data;
+    if(data){
+
+    let partiData = data.split("/");
+
+    corsa.data =
+    partiData[2] + "-" +
+    partiData[1] + "-" +
+    partiData[0];
+
+}
     corsa.orario = orario;
     corsa.importo = Number(importo) || 0;
 
