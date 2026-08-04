@@ -1571,3 +1571,12 @@ font-size:14px;
     border-radius: 10px;
 
 }
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.action-buttons button {
+    flex: 1;
+}
