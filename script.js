@@ -31,6 +31,8 @@ JSON.parse(
 localStorage.getItem("taxipilot_corse")
 ) || [];
 
+let vistaCorse = "future";
+
 
 
 
@@ -1299,7 +1301,7 @@ document.getElementById(
         destinazione:
         destinazione,
         
-        dataCorsa:
+        data:
         dataCorsa,
 
         orario:
@@ -1392,6 +1394,37 @@ function salvaCorse(){
 // ===============================
 
 
+function cambiaVistaCorse(vista){
+
+    vistaCorse = vista;
+
+
+    document.getElementById("btnFuture")
+    ?.classList.remove("switch-active");
+
+
+    document.getElementById("btnPassate")
+    ?.classList.remove("switch-active");
+
+
+
+    if(vista === "future"){
+
+        document.getElementById("btnFuture")
+        ?.classList.add("switch-active");
+
+    }
+    else{
+
+        document.getElementById("btnPassate")
+        ?.classList.add("switch-active");
+
+    }
+
+
+    mostraCorse();
+
+}
 
 function mostraCorse(){
 
@@ -1448,7 +1481,41 @@ function mostraCorse(){
 
     let lista =
     [...corse];
+// FILTRO FUTURE / PASSATE
 
+let adesso = new Date();
+
+
+lista =
+lista.filter(corsa=>{
+
+
+    let dataOraCorsa =
+    new Date(
+        corsa.data.split("/").reverse().join("-")
+        +
+        "T"
+        +
+        corsa.orario
+    );
+
+
+    if(vistaCorse === "future"){
+
+        return dataOraCorsa >= adesso;
+
+    }
+
+
+    else{
+
+        return dataOraCorsa < adesso;
+
+    }
+
+
+});
+    
     let ricerca =
 document.getElementById(
 "cercaCorsa"
