@@ -1488,6 +1488,8 @@ function mostraCorse(){
 
     let lista =
     [...corse];
+    console.log(corse);
+console.log(filtroGiornoCorse);
 
 // FILTRO GIORNO CORSE
 
