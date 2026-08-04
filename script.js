@@ -4382,7 +4382,7 @@ return;
 
 
 let dataOra =
-corsa.dataCorsa
+corsa.data
 +
 "T"
 +
