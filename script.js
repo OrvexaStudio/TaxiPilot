@@ -1481,40 +1481,7 @@ function mostraCorse(){
 
     let lista =
     [...corse];
-// FILTRO FUTURE / PASSATE
 
-let adesso = new Date();
-
-
-lista =
-lista.filter(corsa=>{
-
-
-    let dataOraCorsa =
-    new Date(
-        corsa.data.split("/").reverse().join("-")
-        +
-        "T"
-        +
-        corsa.orario
-    );
-
-
-    if(vistaCorse === "future"){
-
-        return dataOraCorsa >= adesso;
-
-    }
-
-
-    else{
-
-        return dataOraCorsa < adesso;
-
-    }
-
-
-});
     
     let ricerca =
 document.getElementById(
