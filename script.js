@@ -4382,12 +4382,27 @@ corsa.dataCorsa
 +
 "T"
 +
-corsa.orario;
-
+corsa.orario
++
+":00";
 
 
 let inizio =
 new Date(dataOra);
+
+
+if(isNaN(inizio.getTime())){
+
+    alert(
+        "Errore: data o orario corsa non validi"
+    );
+
+    console.log("Data ricevuta:", dataOra);
+    console.log("Corsa:", corsa);
+
+    return;
+
+}
 
 
 
