@@ -1543,3 +1543,14 @@ padding:14px 8px;
 font-size:14px;
 
 }
+
+.btn-cliente {
+    background: #e87517;
+    color: white;
+}
+
+
+.btn-arrivo {
+    background: #2e8b57;
+    color: white;
+}
