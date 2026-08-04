@@ -1616,7 +1616,7 @@ corsa.destinazione
 
 
 <p>
-TEST DATA: ${corsa.data}
+Data: ${new Date(corsa.data).toLocaleDateString("it-IT")}
 </p>
 
 <h3>
