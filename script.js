@@ -1766,7 +1766,17 @@ ${corsa.cliente}
 
         </button>
 
+<button
 
+class="main-button"
+
+onclick="whatsappCliente(${corsa.id})"
+
+>
+
+WhatsApp
+
+</button>
 
 
 <button
@@ -2047,7 +2057,26 @@ function chiamaCliente(numero){
 }
 
 
+let messaggio =
 
+`Salve ${corsa.cliente},
+
+sono l'autista della Cooperativa Taxi Lecce.
+
+Sto arrivando per la sua corsa:
+
+Partenza:
+${corsa.partenza}
+
+Destinazione:
+${corsa.destinazione}
+
+Orario:
+${corsa.orario}
+
+A tra poco.
+
+Cooperativa Taxi Lecce`;
 
 
 
