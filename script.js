@@ -4204,8 +4204,6 @@ nuovaVersione.addEventListener(
 if(
 nuovaVersione.state === "installed"
 &&
-navigator.serviceWorker.controller
-&&
 localStorage.getItem("aggiornamentoVisto") !== "true"
 ){
 
