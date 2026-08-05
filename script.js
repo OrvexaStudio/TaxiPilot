@@ -4204,6 +4204,8 @@ nuovaVersione.addEventListener(
 if(
 nuovaVersione.state === "installed"
 &&
+navigator.serviceWorker.controller
+&&
 localStorage.getItem("aggiornamentoVisto") !== "true"
 ){
 
@@ -4245,6 +4247,38 @@ document.addEventListener(
         });
 
     }
+
+});
+
+window.addEventListener(
+"load",
+()=>{
+
+setTimeout(
+()=>{
+
+if(
+navigator.serviceWorker
+){
+
+navigator.serviceWorker
+.getRegistration()
+.then(
+registration=>{
+
+if(registration){
+
+registration.update();
+
+}
+
+});
+
+}
+
+},
+2000
+);
 
 });
 
