@@ -5034,7 +5034,7 @@ box.innerHTML =
 
 <div class="suggestion-box">
 
-<b>💡 Suggerimento tariffa</b>
+<b>Suggerimento tariffa</b>
 
 <br>
 
