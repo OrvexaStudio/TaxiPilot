@@ -4643,7 +4643,7 @@ let numero = corsa.telefono
 
 
 numero = "39" + numero;
-
+console.log("Numero WhatsApp:", numero);
 
     window.open(
         "https://wa.me/" + numero + "?text=" + testo,
