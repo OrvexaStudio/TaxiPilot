@@ -1589,7 +1589,21 @@ font-size:14px;
 
     flex-direction: column;
 
-    gap: 8px;
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 10px;
+
+}
+
+
+
+.next-actions button {
+
+    width: 100%;
+
+    max-width: 120px;
 
 }
 
