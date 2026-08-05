@@ -4225,6 +4225,29 @@ window.location.href =
 });
 
 }
+document.addEventListener(
+"visibilitychange",
+()=>{
+
+    if(
+        document.visibilityState === "visible" &&
+        navigator.serviceWorker.controller
+    ){
+
+        navigator.serviceWorker.getRegistration()
+        .then(registration=>{
+
+            if(registration){
+
+                registration.update();
+
+            }
+
+        });
+
+    }
+
+});
 
 function iniziaTaxiPilot(){
 
