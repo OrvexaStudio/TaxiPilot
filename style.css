@@ -1617,3 +1617,47 @@ font-size:14px;
     flex: 1;
 
 }
+
+.small-call,
+.small-whatsapp {
+
+    border: none;
+
+    border-radius: 12px;
+
+    padding: 8px 12px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    color: white;
+
+    cursor: pointer;
+
+}
+
+
+
+.small-call {
+
+    background: #e87517;
+
+}
+
+
+
+.small-whatsapp {
+
+    background: #25D366;
+
+}
+
+
+
+.small-call:hover,
+.small-whatsapp:hover {
+
+    opacity: 0.85;
+
+}
