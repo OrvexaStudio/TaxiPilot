@@ -1692,3 +1692,12 @@ font-size:14px;
     color: #000;
 
 }
+
+.feature-box,
+.feature-box h3,
+.feature-box p,
+.feature-box li {
+
+    color: #000 !important;
+
+}
