@@ -1,4 +1,4 @@
-const cacheName = "taxipilot-v15";
+const cacheName = "taxipilot-v16";
 
 
 const files = [
@@ -23,7 +23,8 @@ self.addEventListener(
 "install",
 event=>{
 
-
+self.skipWaiting();
+  
 event.waitUntil(
 
 caches.open(cacheName)
