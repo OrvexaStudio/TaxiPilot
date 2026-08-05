@@ -4597,7 +4597,8 @@ link.click();
 }
 
 function whatsappCliente(id){
-
+console.log("ID:", id);
+console.log("CORSE:", corse);
     let corsa = corse.find(
         c => c.id === id
     );
