@@ -4201,11 +4201,12 @@ nuovaVersione.addEventListener(
 "statechange",
 ()=>{
 
-
 if(
 nuovaVersione.state === "installed"
 &&
 navigator.serviceWorker.controller
+&&
+localStorage.getItem("aggiornamentoVisto") !== "true"
 ){
 
 
