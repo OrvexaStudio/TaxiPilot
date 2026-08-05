@@ -1685,3 +1685,10 @@ font-size:14px;
     opacity: 0.85;
 
 }
+
+.feature-box h3,
+.feature-box p {
+
+    color: #000;
+
+}
