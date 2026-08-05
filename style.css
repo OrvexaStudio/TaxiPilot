@@ -1623,19 +1623,27 @@ font-size:14px;
 
     border: none;
 
-    border-radius: 12px;
+    border-radius: 14px;
 
-    padding: 12px 14px;
+    height: 45px;
 
-    font-size: 13px;
+    padding: 0 14px;
 
-    font-weight: 600;
+    font-size: 14px;
+
+    font-weight: 700;
 
     color: white;
 
     cursor: pointer;
 
     width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
 
 }
 
