@@ -4250,6 +4250,25 @@ document.addEventListener(
 
 });
 
+window.addEventListener(
+"load",
+()=>{
+
+    navigator.serviceWorker
+    .getRegistration()
+    .then(
+    registration=>{
+
+        if(registration){
+
+            registration.update();
+
+        }
+
+    });
+
+});
+
 function iniziaTaxiPilot(){
 
 
