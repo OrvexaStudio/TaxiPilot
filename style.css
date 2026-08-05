@@ -1701,3 +1701,22 @@ font-size:14px;
     color: #000 !important;
 
 }
+
+.suggestion-box{
+
+background:#f5f5f5;
+border-radius:15px;
+padding:15px;
+margin-top:15px;
+text-align:center;
+font-size:15px;
+
+}
+
+
+.suggestion-box strong{
+
+font-size:20px;
+color:#e87517;
+
+}
