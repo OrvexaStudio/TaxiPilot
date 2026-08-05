@@ -4637,14 +4637,11 @@ Cooperativa Taxi Lecce`;
 
 let numero = corsa.telefono
 .replace(/\s/g,"")
+.replace("+39","")
 .replace("+","");
 
 
-if(!numero.startsWith("39")){
-
-    numero = "39" + numero;
-
-}
+numero = "39" + numero;
 
 
     window.open(
