@@ -4597,8 +4597,8 @@ link.click();
 }
 
 function whatsappCliente(id){
-console.log("ID:", id);
-console.log("CORSE:", corse);
+
+
     let corsa = corse.find(
         c => c.id === id
     );
@@ -4643,7 +4643,7 @@ let numero = corsa.telefono
 
 
 numero = "39" + numero;
-console.log("Numero WhatsApp:", numero);
+
 
     window.open(
         "https://wa.me/" + numero + "?text=" + testo,
