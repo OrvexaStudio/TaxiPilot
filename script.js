@@ -4823,3 +4823,29 @@ let data = prompt(
 
 
 }
+
+window.addEventListener(
+"load",
+()=>{
+
+    setTimeout(
+    ()=>{
+
+        navigator.serviceWorker
+        .getRegistration()
+        .then(
+        registration=>{
+
+            if(registration){
+
+                registration.update();
+
+            }
+
+        });
+
+    },
+    3000
+    );
+
+});
