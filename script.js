@@ -4849,3 +4849,250 @@ window.addEventListener(
     );
 
 });
+
+
+// ===============================
+// SUGGERIMENTO TARIFFA AUTOMATICO
+// ===============================
+
+
+async function geocodeTaxi(indirizzo){
+
+let risposta = await fetch(
+
+"https://nominatim.openstreetmap.org/search?format=json&q="
++
+encodeURIComponent(indirizzo)
+
+);
+
+
+let dati = await risposta.json();
+
+
+if(dati.length===0){
+
+throw "Indirizzo non trovato";
+
+}
+
+
+return {
+
+lat:dati[0].lat,
+
+lon:dati[0].lon
+
+};
+
+}
+
+
+
+
+async function calcolaSuggerimento(){
+
+
+let partenza =
+document.getElementById(
+"partenza"
+).value;
+
+
+let destinazione =
+document.getElementById(
+"destinazione"
+).value;
+
+
+let orario =
+document.getElementById(
+"orario"
+).value;
+
+
+
+if(!partenza || !destinazione){
+
+alert(
+"Inserisci partenza e destinazione"
+);
+
+return;
+
+}
+
+
+
+let box =
+document.getElementById(
+"suggerimentoPrezzo"
+);
+
+
+box.innerHTML =
+"Calcolo tariffa...";
+
+
+
+try{
+
+
+let p =
+await geocodeTaxi(partenza);
+
+
+let d =
+await geocodeTaxi(destinazione);
+
+
+
+let url =
+
+"https://router.project-osrm.org/route/v1/driving/"
++
+p.lon+","+p.lat+
+";"+
+d.lon+","+d.lat+
+"?overview=false";
+
+
+
+let risposta =
+await fetch(url);
+
+
+
+let percorso =
+await risposta.json();
+
+
+
+let km =
+percorso.routes[0].distance / 1000;
+
+
+
+let prezzo =
+5 + (km * 1.65);
+
+
+
+let dettagli = [];
+
+
+
+if(orario){
+
+
+let ora =
+Number(
+orario.split(":")[0]
+);
+
+
+
+if(ora>=21 && ora<24){
+
+prezzo += 3;
+
+dettagli.push(
+"Notturno 21-00: +3€"
+);
+
+}
+
+
+
+if(ora>=0 && ora<6){
+
+prezzo += 5;
+
+dettagli.push(
+"Notturno 00-06: +5€"
+);
+
+}
+
+
+}
+
+
+
+if(prezzo < 15){
+
+prezzo = 15;
+
+}
+
+
+
+
+box.innerHTML =
+
+`
+
+<div class="suggestion-box">
+
+<b>💡 Suggerimento tariffa</b>
+
+<br>
+
+Distanza:
+${km.toFixed(1)} km
+
+<br><br>
+
+Prezzo consigliato:
+
+<strong>
+${prezzo.toFixed(2)} €
+</strong>
+
+
+<br><br>
+
+
+<button
+class="main-button"
+onclick="usaSuggerimento(${prezzo.toFixed(2)})"
+>
+
+Usa suggerimento
+
+</button>
+
+
+</div>
+
+`;
+
+
+
+}
+
+catch(e){
+
+box.innerHTML =
+"Errore nel calcolo distanza";
+
+}
+
+
+
+}
+
+
+
+
+
+function usaSuggerimento(prezzo){
+
+
+document.getElementById(
+"importo"
+).value =
+prezzo;
+
+
+}
