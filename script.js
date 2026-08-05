@@ -2252,7 +2252,7 @@ function mostraProssimaCorsa(){
     let corsa =
 
     disponibili[0];
-
+    console.log("Corsa home:", corsa);
 
 
 
