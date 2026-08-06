@@ -4132,6 +4132,7 @@ document.body.classList.add(
 
 
     mostraTurno();
+    aggiornaAssistenteTaxiPilot();
 
     caricaUltimiKm();
 
@@ -5093,6 +5094,193 @@ document.getElementById(
 "importo"
 ).value =
 prezzo;
+
+
+}
+
+function aggiornaAssistenteTaxiPilot(){
+
+
+let box =
+document.getElementById(
+"assistenteTurno"
+);
+
+
+if(!box){
+    return;
+}
+
+
+
+let nome =
+profiloTaxi?.nome || "Autista";
+
+
+
+let oggi =
+new Date()
+.toISOString()
+.split("T")[0];
+
+
+
+let corseOggi =
+corse.filter(
+corsa =>
+corsa.data === oggi
+);
+
+
+
+let prossima =
+corse
+.filter(
+corsa =>
+new Date(
+corsa.data +
+"T" +
+corsa.orario
+)
+> new Date()
+)
+.sort(
+(a,b)=>
+a.orario.localeCompare(b.orario)
+)[0];
+
+
+
+let turno =
+JSON.parse(
+localStorage.getItem(
+"taxipilot_turno_attivo"
+)
+);
+
+
+
+let testo =
+
+"Buongiorno " 
++
+nome
++
+", oggi hai "
++
+corseOggi.length
++
+" corse programmate.";
+
+
+
+if(prossima){
+
+
+let minuti =
+
+Math.floor(
+
+(
+new Date(
+prossima.data+
+"T"+
+prossima.orario
+)
+-
+new Date()
+
+)
+/60000
+
+);
+
+
+
+testo +=
+
+
+"<br><br>Prossima corsa tra "
++
+minuti
++
+" minuti:"
++
+"<br>"
++
+prossima.partenza
++
+" verso "
++
+prossima.destinazione;
+
+
+
+}
+
+
+
+if(turno){
+
+
+let minutiTurno =
+
+Math.floor(
+
+(
+Date.now()
+-
+turno.inizio
+)
+/60000
+
+);
+
+
+
+let ore =
+
+Math.floor(
+minutiTurno / 60
+);
+
+
+
+let minuti =
+
+minutiTurno % 60;
+
+
+
+testo +=
+
+
+"<br><br>Turno attivo da: "
++
+ore
++
+" ore e "
++
+minuti
++
+" minuti";
+
+
+}
+else{
+
+
+testo +=
+
+"<br><br>Nessun turno attivo.";
+
+}
+
+
+
+
+box.innerHTML =
+testo;
 
 
 }
