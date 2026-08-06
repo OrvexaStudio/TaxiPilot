@@ -5858,3 +5858,267 @@ function monitoraVolo(numeroVolo){
     );
 
 }
+
+// =====================================
+// INSERIMENTO VOCALE TAXIPILOT
+// =====================================
+
+function avviaInserimentoVocale(){
+
+
+if(!("webkitSpeechRecognition" in window)){
+
+
+alert(
+"Il riconoscimento vocale non è disponibile su questo dispositivo"
+);
+
+return;
+
+}
+
+
+
+let recognition =
+new webkitSpeechRecognition();
+
+
+
+recognition.lang =
+"it-IT";
+
+
+recognition.continuous =
+false;
+
+
+recognition.interimResults =
+false;
+
+
+
+let box =
+document.getElementById(
+"risultatoVoce"
+);
+
+
+
+box.innerHTML =
+"Sto ascoltando...";
+
+
+
+recognition.start();
+
+
+
+
+recognition.onresult =
+function(event){
+
+
+let testo =
+event.results[0][0].transcript;
+
+
+
+box.innerHTML =
+
+"Testo ricevuto:<br><b>"
++
+testo
++
+"</b>";
+
+
+
+analizzaVoceCorsa(testo);
+
+
+
+};
+
+
+
+recognition.onerror =
+function(){
+
+box.innerHTML =
+"Errore nel riconoscimento vocale";
+
+};
+
+
+}
+
+
+
+
+function analizzaVoceCorsa(testo){
+
+
+let frase =
+testo.toLowerCase();
+
+
+
+
+// TELEFONO
+
+let telefono =
+frase.match(
+/\d{9,10}/
+);
+
+
+
+if(telefono){
+
+
+document.getElementById(
+"telefono"
+).value =
+telefono[0];
+
+
+}
+
+
+
+
+
+// IMPORTO
+
+let prezzo =
+frase.match(
+/(\d+)\s*(euro|€)/
+);
+
+
+
+if(prezzo){
+
+
+document.getElementById(
+"importo"
+).value =
+prezzo[1];
+
+
+}
+
+
+
+
+
+// ORARIO
+
+let ora =
+frase.match(
+/alle\s+(\d{1,2})/
+);
+
+
+
+if(ora){
+
+
+document.getElementById(
+"orario"
+).value =
+
+ora[1].padStart(2,"0")
++
+":00";
+
+
+}
+
+
+
+
+
+// AEROPORTO
+
+if(
+frase.includes("aeroporto")
+){
+
+
+let blocco =
+document.getElementById(
+"bloccoVolo"
+);
+
+
+
+if(blocco){
+
+blocco.style.display =
+"block";
+
+}
+
+
+}
+
+
+
+
+// PARTENZA
+
+if(
+frase.includes("da ")
+){
+
+
+let parte =
+frase.split("da ")[1];
+
+
+let arrivo =
+parte.split(" a ")[0];
+
+
+
+document.getElementById(
+"partenza"
+).value =
+arrivo;
+
+
+}
+
+
+
+
+
+// DESTINAZIONE
+
+if(
+frase.includes(" a ")
+){
+
+
+let destinazione =
+frase.split(" a ")[1];
+
+
+
+document.getElementById(
+"destinazione"
+).value =
+destinazione;
+
+
+}
+
+
+
+alert(
+"Campi compilati. Controlla prima di salvare."
+);
+
+
+}
