@@ -2271,9 +2271,6 @@ function mostraProssimaCorsa(){
 let adesso = new Date();
 
 
-let adesso = new Date();
-
-
 let disponibili = corse.filter(corsa=>{
 
 
