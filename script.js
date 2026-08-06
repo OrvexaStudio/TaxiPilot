@@ -5790,3 +5790,23 @@ document.getElementById("numeroVolo").value="";
 
 
 }
+
+function monitoraVolo(numeroVolo){
+
+    if(!numeroVolo){
+        return;
+    }
+
+
+    let url =
+    "https://www.flightradar24.com/data/flights/"
+    +
+    numeroVolo.toLowerCase();
+
+
+    window.open(
+        url,
+        "_blank"
+    );
+
+}
