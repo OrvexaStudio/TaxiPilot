@@ -5199,7 +5199,6 @@ new Date()
 
 testo +=
 
-
 "<br><br>Prossima corsa tra "
 +
 minuti
@@ -5207,6 +5206,8 @@ minuti
 " minuti:"
 +
 "<br>"
++
+"Da "
 +
 prossima.partenza
 +
