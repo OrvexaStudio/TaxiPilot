@@ -1734,3 +1734,8 @@ color:white;
     color:#e87517;
     font-weight:600;
 }
+
+.avviso-operativo{
+    color: red;
+    font-weight: 700;
+}
