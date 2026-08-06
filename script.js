@@ -5728,3 +5728,37 @@ document.addEventListener(
 }
 
 );
+
+function controllaAeroporto(){
+
+let partenza =
+document.getElementById("partenza")?.value.toLowerCase();
+
+
+let blocco =
+document.getElementById("bloccoVolo");
+
+
+if(!blocco){
+    return;
+}
+
+
+if(
+partenza.includes("aeroporto")
+){
+
+blocco.style.display="block";
+
+}
+
+else{
+
+blocco.style.display="none";
+
+document.getElementById("numeroVolo").value="";
+
+}
+
+
+}
