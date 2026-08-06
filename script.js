@@ -5160,9 +5160,38 @@ localStorage.getItem(
 
 
 
+let oraAttuale =
+new Date().getHours();
+
+
+let saluto;
+
+
+if(oraAttuale >= 5 && oraAttuale < 12){
+
+saluto = "Buongiorno";
+
+}
+
+else if(oraAttuale >= 12 && oraAttuale < 18){
+
+saluto = "Buon pomeriggio";
+
+}
+
+else{
+
+saluto = "Buonasera";
+
+}
+
+
+
 let testo =
 
-"Buongiorno " 
+saluto
++
+" "
 +
 nome
 +
@@ -5195,6 +5224,17 @@ new Date()
 
 );
 
+if(minuti <= 20){
+
+testo +=
+
+"<br><br><strong>"
++
+"È consigliabile avviarsi verso il punto di prelievo."
++
+"</strong>";
+
+}
 
 
 testo +=
