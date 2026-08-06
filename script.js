@@ -1277,6 +1277,11 @@ return;
         "destinazione"
     ).value;
 
+    let numeroVolo =
+document.getElementById(
+"numeroVolo"
+)?.value || "";
+
 let dataCorsa =
 document.getElementById(
 "dataCorsa"
@@ -1342,6 +1347,9 @@ document.getElementById(
 
         destinazione:
         destinazione,
+
+        numeroVolo:
+        numeroVolo,
         
         data:
         dataCorsa,
@@ -1774,6 +1782,26 @@ onclick="modificaCorsa(${corsa.id})"
 Modifica corsa
 
 </button>
+
+${
+corsa.numeroVolo
+?
+
+`
+<button
+class="main-button"
+onclick="monitoraVolo('${corsa.numeroVolo}')">
+
+Monitora volo
+
+</button>
+`
+
+:
+
+""
+
+}
 
 
 <div class="action-buttons">
