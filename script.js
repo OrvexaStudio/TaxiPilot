@@ -5862,6 +5862,7 @@ function monitoraVolo(numeroVolo){
 // =====================================
 // INSERIMENTO VOCALE TAXIPILOT
 // =====================================
+let riconoscimentoVocale = null;
 
 function avviaInserimentoVocale(){
 
@@ -5879,8 +5880,12 @@ return;
 
 
 
-let recognition =
+riconoscimentoVocale =
 new webkitSpeechRecognition();
+
+
+let recognition =
+riconoscimentoVocale;
 
 
 
@@ -5906,7 +5911,9 @@ document.getElementById(
 
 box.innerHTML =
 "Sto ascoltando...";
-
+document.getElementById(
+"annullaVoce"
+).style.display = "block";
 
 
 recognition.start();
@@ -6119,6 +6126,49 @@ destinazione;
 alert(
 "Campi compilati. Controlla prima di salvare."
 );
+
+
+}
+
+function annullaInserimentoVocale(){
+
+
+if(riconoscimentoVocale){
+
+riconoscimentoVocale.stop();
+
+}
+
+
+let box =
+document.getElementById(
+"risultatoVoce"
+);
+
+
+if(box){
+
+box.innerHTML =
+"";
+
+}
+
+
+
+let pulsante =
+document.getElementById(
+"annullaVoce"
+);
+
+
+
+if(pulsante){
+
+pulsante.style.display =
+"none";
+
+}
+
 
 
 }
