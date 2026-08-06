@@ -2271,6 +2271,9 @@ function mostraProssimaCorsa(){
 let adesso = new Date();
 
 
+let adesso = new Date();
+
+
 let disponibili = corse.filter(corsa=>{
 
 
@@ -5204,7 +5207,6 @@ let oggi =
 new Date()
 .toISOString()
 .split("T")[0];
-
 
 let adesso = new Date();
 
