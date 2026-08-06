@@ -1,4 +1,4 @@
-const cacheName = "taxipilot-v59";
+const cacheName = "taxipilot-v60";
 
 
 const files = [
