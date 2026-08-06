@@ -5333,3 +5333,355 @@ testo;
 
 
 }
+
+// ======================================================
+// TAXIPILOT - BLACKLIST CLIENTI
+// ======================================================
+
+
+let clientiBlacklist = JSON.parse(
+    localStorage.getItem("taxipilot_blacklist")
+) || [];
+
+
+
+
+// MOSTRA FORM BLACKLIST
+
+function mostraFormBlacklist(){
+
+    let form =
+    document.getElementById(
+        "formBlacklist"
+    );
+
+
+    if(form){
+
+        form.style.display = "block";
+
+    }
+
+}
+
+
+
+
+// SALVA CLIENTE BLACKLIST
+
+function salvaBlacklist(){
+
+
+    let nome =
+    document.getElementById(
+        "nomeBlacklist"
+    ).value;
+
+
+    let telefono =
+    document.getElementById(
+        "telefonoBlacklist"
+    ).value;
+
+
+    let tratta =
+    document.getElementById(
+        "trattaBlacklist"
+    ).value;
+
+
+    let motivo =
+    document.getElementById(
+        "motivoBlacklist"
+    ).value;
+
+
+
+    if(
+        !nome ||
+        !telefono
+    ){
+
+        alert(
+            "Inserisci almeno nome e telefono del cliente"
+        );
+
+        return;
+
+    }
+
+
+
+    let cliente = {
+
+
+        id:
+        Date.now(),
+
+
+        nome:
+        nome,
+
+
+        telefono:
+        telefono,
+
+
+        tratta:
+        tratta,
+
+
+        motivo:
+        motivo,
+
+
+        data:
+        new Date()
+        .toLocaleDateString(
+            "it-IT"
+        )
+
+
+    };
+
+
+
+    clientiBlacklist.push(
+        cliente
+    );
+
+
+
+    localStorage.setItem(
+
+        "taxipilot_blacklist",
+
+        JSON.stringify(
+            clientiBlacklist
+        )
+
+    );
+
+
+
+    alert(
+        "Cliente aggiunto alla blacklist"
+    );
+
+
+
+    document.getElementById(
+        "nomeBlacklist"
+    ).value="";
+
+
+    document.getElementById(
+        "telefonoBlacklist"
+    ).value="";
+
+
+    document.getElementById(
+        "trattaBlacklist"
+    ).value="";
+
+
+
+    mostraBlacklist();
+
+
+}
+
+
+
+
+
+
+
+// MOSTRA LISTA BLACKLIST
+
+
+function mostraBlacklist(){
+
+
+    let box =
+    document.getElementById(
+        "listaBlacklist"
+    );
+
+
+    if(!box){
+
+        return;
+
+    }
+
+
+
+    box.innerHTML="";
+
+
+
+    if(
+        clientiBlacklist.length===0
+    ){
+
+        box.innerHTML=
+
+        `
+        <p class="empty">
+        Nessun cliente bloccato
+        </p>
+        `;
+
+
+        return;
+
+    }
+
+
+
+
+
+
+    clientiBlacklist.forEach(
+
+    cliente=>{
+
+
+        box.innerHTML +=
+
+
+        `
+
+        <div class="trip-card">
+
+
+        <h3>
+        ${cliente.nome}
+        </h3>
+
+
+        <p>
+        Telefono:
+        ${cliente.telefono}
+        </p>
+
+
+        <p>
+        Tratta:
+        ${cliente.tratta || "Non indicata"}
+        </p>
+
+
+        <p>
+        Motivo:
+        ${cliente.motivo}
+        </p>
+
+
+        <p>
+        Inserito:
+        ${cliente.data}
+        </p>
+
+
+
+        <button
+
+        class="delete-btn"
+
+        onclick="eliminaBlacklist(${cliente.id})"
+
+        >
+
+        Elimina
+
+        </button>
+
+
+
+        </div>
+
+        `;
+
+
+    });
+
+
+}
+
+
+
+
+
+
+
+
+// ELIMINA CLIENTE
+
+
+function eliminaBlacklist(id){
+
+
+    if(
+        !confirm(
+        "Eliminare questo cliente dalla blacklist?"
+        )
+    ){
+
+        return;
+
+    }
+
+
+
+    clientiBlacklist =
+
+    clientiBlacklist.filter(
+
+    cliente =>
+
+    cliente.id !== id
+
+    );
+
+
+
+
+    localStorage.setItem(
+
+        "taxipilot_blacklist",
+
+        JSON.stringify(
+            clientiBlacklist
+        )
+
+    );
+
+
+
+    mostraBlacklist();
+
+
+}
+
+
+
+
+
+
+// AVVIO PAGINA BLACKLIST
+
+document.addEventListener(
+
+"DOMContentLoaded",
+
+()=>{
+
+
+    mostraBlacklist();
+
+
+}
+
+);
