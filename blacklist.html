@@ -1,1 +1,211 @@
+<!DOCTYPE html>
+<html lang="it">
 
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Blacklist - TaxiPilot</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="manifest" href="manifest.json">
+
+<meta name="theme-color" content="#e87517">
+
+</head>
+
+
+<body>
+
+
+<header class="topbar">
+
+<div>
+
+<h1>
+Clienti bloccati
+</h1>
+
+<p>
+Gestione blacklist
+</p>
+
+</div>
+
+</header>
+
+
+
+<main class="container">
+
+
+
+<section class="dashboard-card">
+
+
+<h2>
+Clienti non accettati
+</h2>
+
+
+<p>
+Inserisci clienti con cui evitare nuovi servizi.
+</p>
+
+
+<button 
+class="main-button"
+onclick="mostraFormBlacklist()">
+
+Aggiungi cliente
+
+</button>
+
+
+</section>
+
+
+
+
+<section 
+id="formBlacklist"
+class="dashboard-card"
+style="display:none;">
+
+
+<h2>
+Nuovo cliente bloccato
+</h2>
+
+
+<input
+id="nomeBlacklist"
+placeholder="Nome cliente">
+
+
+<input
+id="telefonoBlacklist"
+placeholder="Telefono"
+type="tel">
+
+
+<input
+id="trattaBlacklist"
+placeholder="Tratta effettuata">
+
+
+<select id="motivoBlacklist">
+
+
+<option>
+Cliente non pagante
+</option>
+
+
+<option>
+Cliente non presentato
+</option>
+
+
+<option>
+Comportamento scorretto
+</option>
+
+
+<option>
+Prenotazione falsa
+</option>
+
+
+<option>
+Richieste non conformi
+</option>
+
+
+<option>
+Altro
+</option>
+
+
+</select>
+
+
+
+<button
+class="main-button"
+onclick="salvaBlacklist()">
+
+Salva cliente
+
+</button>
+
+
+</section>
+
+
+
+
+<section class="dashboard-card">
+
+
+<h2>
+Lista clienti bloccati
+</h2>
+
+
+<div id="listaBlacklist">
+
+<p class="empty">
+Nessun cliente bloccato
+</p>
+
+</div>
+
+
+</section>
+
+
+
+</main>
+
+
+
+<nav class="bottom-nav">
+
+<a href="index.html">
+Home
+</a>
+
+
+<a href="corse.html">
+Corse
+</a>
+
+
+<a href="turno.html">
+Turno
+</a>
+
+
+<a href="sos.html">
+SOS
+</a>
+
+
+<a class="active" href="profilo.html">
+Profilo
+</a>
+
+</nav>
+
+
+
+<script src="script.js"></script>
+
+
+</body>
+
+</html>
