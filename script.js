@@ -5228,7 +5228,7 @@ if(minuti <= 20){
 
 testo +=
 
-"<br><br><strong>"
+"<br><br><strong class='avviso-operativo'>"
 +
 "È consigliabile avviarsi verso il punto di prelievo."
 +
