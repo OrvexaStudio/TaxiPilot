@@ -1219,7 +1219,50 @@ function salvaCorsa(){
     document.getElementById(
         "telefono"
     ).value;
+// CONTROLLO BLACKLIST CLIENTE
 
+let clienteBloccato =
+clientiBlacklist.find(
+
+cliente =>
+
+cliente.telefono.replace(/\s/g,"")
+===
+telefono.replace(/\s/g,"")
+
+);
+
+
+
+if(clienteBloccato){
+
+
+let conferma =
+
+confirm(
+
+"ATTENZIONE: questo cliente è presente nella blacklist.\n\n" +
+
+"Cliente: " +
+clienteBloccato.nome +
+
+"\nMotivo: " +
+clienteBloccato.motivo +
+
+"\n\nVuoi comunque salvare la corsa?"
+
+);
+
+
+
+if(!conferma){
+
+return;
+
+}
+
+
+}
 
 
     let partenza =
