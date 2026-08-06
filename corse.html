@@ -73,8 +73,20 @@ type="tel">
 
 <input 
 id="partenza"
-placeholder="Indirizzo partenza">
+placeholder="Indirizzo partenza"
+oninput="controllaAeroporto()">
 
+  <div id="bloccoVolo" style="display:none;">
+
+<label>
+Numero volo (facoltativo)
+</label>
+
+<input
+id="numeroVolo"
+placeholder="Es. FR1234">
+
+</div>
 
 
 <input 
