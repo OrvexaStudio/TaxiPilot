@@ -2268,16 +2268,27 @@ function mostraProssimaCorsa(){
 
 
 
+let adesso = new Date();
 
-    let disponibili =
 
-    corse.filter(
+let disponibili = corse.filter(corsa=>{
 
-    c =>
 
-    c.stato !== "Completata"
-
+    let dataOra = new Date(
+        corsa.data +
+        "T" +
+        corsa.orario
     );
+
+
+    return (
+        corsa.stato !== "Completata"
+        &&
+        dataOra >= adesso
+    );
+
+
+});
 
 
 
@@ -5195,11 +5206,28 @@ new Date()
 .split("T")[0];
 
 
+let adesso = new Date();
+
 
 let corseOggi =
 corse.filter(
-corsa =>
+corsa => {
+
+let dataOra =
+new Date(
+corsa.data +
+"T" +
+corsa.orario
+);
+
+
+return (
 corsa.data === oggi
+&&
+dataOra >= adesso
+);
+
+}
 );
 
 
@@ -5207,17 +5235,38 @@ corsa.data === oggi
 let prossima =
 corse
 .filter(
-corsa =>
+corsa => {
+
+let dataOra =
 new Date(
 corsa.data +
 "T" +
 corsa.orario
-)
-> new Date()
+);
+
+
+return (
+dataOra > new Date()
+&&
+corsa.stato !== "Completata"
+);
+
+}
+
 )
 .sort(
 (a,b)=>
-a.orario.localeCompare(b.orario)
+
+new Date(
+a.data+"T"+a.orario
+)
+
+-
+
+new Date(
+b.data+"T"+b.orario
+)
+
 )[0];
 
 
