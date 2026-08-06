@@ -5209,11 +5209,19 @@ minuti
 +
 "Da "
 +
+"<span class='indirizzo-assistente'>"
++
 prossima.partenza
++
+"</span>"
 +
 " verso "
 +
-prossima.destinazione;
+"<span class='indirizzo-assistente'>"
++
+prossima.destinazione
++
+"</span>";
 
 
 
