@@ -5964,38 +5964,57 @@ box.innerHTML =
 
 function analizzaVoceCorsa(testo){
 
-
-let frase =
-testo.toLowerCase();
+let frase = testo.toLowerCase().trim();
 
 
+// =======================
+// CLIENTE
+// =======================
+
+let cliente = frase
+.replace(/inserisci corsa/,"")
+.replace(/cliente/,"")
+.split(" telefono")[0]
+.split(" da ")[0]
+.trim();
 
 
-// TELEFONO
+if(cliente){
 
-let telefono =
-frase.match(
-/\d{9,10}/
-);
-
-
-
-if(telefono){
-
-
-document.getElementById(
-"telefono"
-).value =
-telefono[0];
-
+document.getElementById("nomeCliente").value =
+cliente
+.split(" ")
+.map(
+p=>p.charAt(0).toUpperCase()+p.slice(1)
+)
+.join(" ");
 
 }
 
 
 
 
+// =======================
+// TELEFONO
+// =======================
 
+let telefono =
+frase.match(/\d{9,10}/);
+
+
+if(telefono){
+
+document.getElementById("telefono").value =
+telefono[0];
+
+}
+
+
+
+
+// =======================
 // IMPORTO
+// =======================
 
 let prezzo =
 frase.match(
@@ -6003,14 +6022,46 @@ frase.match(
 );
 
 
-
 if(prezzo){
 
-
-document.getElementById(
-"importo"
-).value =
+document.getElementById("importo").value =
 prezzo[1];
+
+}
+
+
+
+
+// =======================
+// ORARIO
+// =======================
+
+let orario = "";
+
+
+let oraNumero =
+frase.match(
+/alle\s+(\d{1,2})(?:\s*e\s*(30|trenta))?/
+);
+
+
+if(oraNumero){
+
+
+orario =
+oraNumero[1].padStart(2,"0")
++
+(
+oraNumero[2]
+?
+":30"
+:
+":00"
+);
+
+
+document.getElementById("orario").value =
+orario;
 
 
 }
@@ -6019,25 +6070,62 @@ prezzo[1];
 
 
 
-// ORARIO
+// =======================
+// RIMOZIONE ORARIO DALLA FRASE
+// =======================
 
-let ora =
-frase.match(
-/alle\s+(\d{1,2})/
+let frasePulita =
+frase.replace(
+/alle\s+\d{1,2}(\s*e\s*(30|trenta))?/,
+""
 );
 
 
 
-if(ora){
 
 
-document.getElementById(
-"orario"
-).value =
+// =======================
+// PARTENZA E DESTINAZIONE
+// =======================
 
-ora[1].padStart(2,"0")
-+
-":00";
+if(
+frasePulita.includes(" da ")
+&&
+frasePulita.includes(" a ")
+){
+
+
+let dati =
+frasePulita.split(" da ")[1];
+
+
+let parti =
+dati.split(" a ");
+
+
+
+let partenza =
+parti[0].trim();
+
+
+let destinazione =
+parti[1].trim();
+
+
+
+
+
+document.getElementById("partenza").value =
+partenza;
+
+
+
+document.getElementById("destinazione").value =
+destinazione;
+
+
+
+controllaAeroporto();
 
 
 }
@@ -6046,7 +6134,10 @@ ora[1].padStart(2,"0")
 
 
 
+// =======================
 // AEROPORTO
+// =======================
+
 
 if(
 frase.includes("aeroporto")
@@ -6059,11 +6150,9 @@ document.getElementById(
 );
 
 
-
 if(blocco){
 
-blocco.style.display =
-"block";
+blocco.style.display="block";
 
 }
 
@@ -6071,61 +6160,19 @@ blocco.style.display =
 }
 
 
-
-
-// PARTENZA
-
-if(
-frase.includes("da ")
-){
-
-
-let parte =
-frase.split("da ")[1];
-
-
-let arrivo =
-parte.split(" a ")[0];
 
 
 
 document.getElementById(
-"partenza"
-).value =
-arrivo;
+"risultatoVoce"
+).innerHTML =
 
+"✅ Dati inseriti:<br><b>"
++
+testo
++
+"</b>";
 
-}
-
-
-
-
-
-// DESTINAZIONE
-
-if(
-frase.includes(" a ")
-){
-
-
-let destinazione =
-frase.split(" a ")[1];
-
-
-
-document.getElementById(
-"destinazione"
-).value =
-destinazione;
-
-
-}
-
-
-
-alert(
-"Campi compilati. Controlla prima di salvare."
-);
 
 
 }
