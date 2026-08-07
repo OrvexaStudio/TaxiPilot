@@ -6627,3 +6627,117 @@ chiudiTaxiPilotAssistant();
 
 
 });
+
+// =====================================
+// TAXIPILOT HOTWORD
+// =====================================
+
+let ascoltoTaxiPilot = null;
+let assistenteAttivo = false;
+
+
+function avviaAscoltoTaxiPilot(){
+
+
+if(!("webkitSpeechRecognition" in window)){
+
+console.log(
+"Microfono non supportato"
+);
+
+return;
+
+}
+
+
+ascoltoTaxiPilot =
+new webkitSpeechRecognition();
+
+
+ascoltoTaxiPilot.lang =
+"it-IT";
+
+
+ascoltoTaxiPilot.continuous =
+true;
+
+
+ascoltoTaxiPilot.interimResults =
+false;
+
+
+
+ascoltoTaxiPilot.onresult =
+function(event){
+
+
+let frase =
+event.results[event.results.length - 1][0].transcript.toLowerCase();
+
+
+
+console.log(frase);
+
+
+
+if(
+frase.includes("ehi taxipilot") ||
+frase.includes("ei taxipilot") ||
+frase.includes("hey taxipilot")
+){
+
+
+apriTaxiPilotAssistant();
+
+
+}
+
+
+};
+
+
+
+ascoltoTaxiPilot.onerror =
+function(){
+
+console.log(
+"Errore microfono, riavvio..."
+);
+
+
+setTimeout(
+avviaAscoltoTaxiPilot,
+1000
+);
+
+};
+
+
+
+ascoltoTaxiPilot.onend =
+function(){
+
+// mantiene sempre attivo
+
+setTimeout(
+avviaAscoltoTaxiPilot,
+500
+);
+
+
+};
+
+
+
+ascoltoTaxiPilot.start();
+
+
+}
+
+window.addEventListener(
+"load",
+function(){
+
+avviaAscoltoTaxiPilot();
+
+});
