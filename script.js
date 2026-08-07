@@ -6018,7 +6018,58 @@ function analizzaVoceCorsa(testo){
 
 let frase = testo.toLowerCase();
 
+// ===============================
+// IMPORTAZIONE MODULO WHATSAPP
+// ===============================
 
+
+let righe = testo.split("\n");
+
+
+righe.forEach((riga, indice)=>{
+
+
+let r = riga.trim().toLowerCase();
+
+
+
+if(r.startsWith("partenza:")){
+
+document.getElementById("partenza").value =
+righe[indice + 1].trim();
+
+}
+
+
+
+if(r.startsWith("arrivo:")){
+
+document.getElementById("destinazione").value =
+righe[indice + 1].trim();
+
+}
+
+
+
+if(r.startsWith("data:")){
+
+document.getElementById("dataCorsa").value =
+righe[indice + 1].trim();
+
+}
+
+
+
+if(r.startsWith("orario:")){
+
+document.getElementById("orario").value =
+righe[indice + 1].trim();
+
+}
+
+
+});
+    
 // ===============================
 // NOME CLIENTE
 // ===============================
