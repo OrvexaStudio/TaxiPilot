@@ -166,7 +166,9 @@ Inserisci con la voce
 
 <div id="risultatoVoce"></div>
 
-<div id="confermaVoce" class="dashboard-card" style="display:none;">
+<div id="confermaVoce" class="voce-overlay" style="display:none;">
+
+<div class="voce-popup">
 
 <h2>
 Conferma nuova corsa
@@ -174,23 +176,35 @@ Conferma nuova corsa
 
 <div id="datiVoce"></div>
 
+
+<div class="voce-buttons">
+
+
 <button
 class="main-button"
 onclick="confermaCorsaVocale()">
 Aggiungi corsa
 </button>
 
+
 <button
-class="secondary-button"
+class="modifica-btn"
 onclick="modificaCorsaVocale()">
 Modifica dati
 </button>
+
 
 <button
 class="delete-btn"
 onclick="annullaCorsaVocale()">
 Annulla
 </button>
+
+
+</div>
+
+
+</div>
 
 </div>
   
