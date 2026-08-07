@@ -1324,7 +1324,7 @@ document.getElementById(
 
 let corseSalvate =
 JSON.parse(
-localStorage.getItem("corse")
+localStorage.getItem("taxipilot_corse")
 ) || [];
 
 
@@ -1333,7 +1333,7 @@ corseSalvate.find(
 
 corsa =>
 
-corsa.dataCorsa === dataCorsa &&
+corsa.data === dataCorsa &&
 corsa.orario === orario
 
 );
@@ -1357,7 +1357,7 @@ let confermaDoppia = confirm(
 (corsaEsistente.destinazione || "") +
 
 "\nOrario: " +
-orario +
+corsaEsistente.orario +
 
 "\n\nVuoi comunque salvare la nuova corsa?"
 
