@@ -1801,6 +1801,9 @@ corsa.numeroCorsa
         `
 
         <div class="trip-card">
+        <div class="id-corsa">
+#${corsa.numeroCorsa}
+</div>
 
 
 <p>
