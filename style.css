@@ -1872,3 +1872,29 @@ background:#1ebe5d;
 
 }
 
+.corsa-card{
+position:relative;
+}
+
+
+.corsa-id{
+
+position:absolute;
+
+top:15px;
+
+right:15px;
+
+font-size:13px;
+
+font-weight:bold;
+
+color:#e87517;
+
+background:#fff3e8;
+
+padding:5px 10px;
+
+border-radius:10px;
+
+}
