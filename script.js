@@ -6213,11 +6213,24 @@ giorno
 );
 
 
+let giornoFormato =
+String(data.getDate()).padStart(2,"0");
+
+let meseFormato =
+String(data.getMonth()+1).padStart(2,"0");
+
+let annoFormato =
+data.getFullYear();
+
+
 document.getElementById(
 "dataCorsa"
 ).value =
-data.toISOString()
-.split("T")[0];
+annoFormato +
+"-" +
+meseFormato +
+"-" +
+giornoFormato;
 
 }
 
