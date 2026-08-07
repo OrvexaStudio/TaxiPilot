@@ -1320,7 +1320,59 @@ document.getElementById(
 
 }
 
+// CONTROLLO DOPPIA PRENOTAZIONE
 
+let corseSalvate =
+JSON.parse(
+localStorage.getItem("corse")
+) || [];
+
+
+let corsaEsistente =
+corseSalvate.find(
+
+corsa =>
+
+corsa.dataCorsa === dataCorsa &&
+corsa.orario === orario
+
+);
+
+
+
+if(corsaEsistente){
+
+
+let confermaDoppia = confirm(
+
+"ATTENZIONE: hai già una corsa programmata in questo orario.\n\n" +
+
+"Cliente: " +
+(corsaEsistente.cliente || "Non rilevato") +
+
+"\nPartenza: " +
+(corsaEsistente.partenza || "") +
+
+"\nDestinazione: " +
+(corsaEsistente.destinazione || "") +
+
+"\nOrario: " +
+orario +
+
+"\n\nVuoi comunque salvare la nuova corsa?"
+
+);
+
+
+
+if(!confermaDoppia){
+
+return;
+
+}
+
+
+}
 
 
 
