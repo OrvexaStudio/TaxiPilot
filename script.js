@@ -5863,6 +5863,7 @@ function monitoraVolo(numeroVolo){
 // INSERIMENTO VOCALE TAXIPILOT
 // =====================================
 let riconoscimentoVocale = null;
+let corsaVocaleTemporanea = null;
 
 function avviaInserimentoVocale(){
 
@@ -6042,9 +6043,70 @@ document.getElementById(
 ).value =
 tratta[2].trim();
 
+mostraConfermaVoce();
+}
+function mostraConfermaVoce(){
 
+let box =
+document.getElementById(
+"confermaVoce"
+);
+
+
+let dati =
+document.getElementById(
+"datiVoce"
+);
+
+
+if(!box || !dati){
+    return;
 }
 
+
+dati.innerHTML =
+
+`
+<p>
+<strong>Cliente:</strong><br>
+${document.getElementById("nomeCliente").value || "Non rilevato"}
+</p>
+
+<p>
+<strong>Telefono:</strong><br>
+${document.getElementById("telefono").value || "Non rilevato"}
+</p>
+
+<p>
+<strong>Partenza:</strong><br>
+${document.getElementById("partenza").value || "Non rilevata"}
+</p>
+
+<p>
+<strong>Destinazione:</strong><br>
+${document.getElementById("destinazione").value || "Non rilevata"}
+</p>
+
+<p>
+<strong>Data:</strong><br>
+${document.getElementById("dataCorsa").value || "Non rilevata"}
+</p>
+
+<p>
+<strong>Orario:</strong><br>
+${document.getElementById("orario").value || "Non rilevato"}
+</p>
+
+<p>
+<strong>Importo:</strong><br>
+${document.getElementById("importo").value || "Non inserito"}
+</p>
+
+`;
+
+box.style.display = "block";
+
+}
 
 
 // ===============================
@@ -6244,5 +6306,35 @@ pulsante.style.display =
 }
 
 
+
+}
+
+function confermaCorsaVocale(){
+
+salvaCorsa();
+
+document.getElementById(
+"confermaVoce"
+).style.display = "none";
+
+}
+
+
+
+function modificaCorsaVocale(){
+
+document.getElementById(
+"confermaVoce"
+).style.display = "none";
+
+}
+
+
+
+function annullaCorsaVocale(){
+
+document.getElementById(
+"confermaVoce"
+).style.display = "none";
 
 }
