@@ -766,6 +766,9 @@ function mostraListaSOS(){
         `
 
         <div class="trip-card">
+        <div class="id-corsa">
+#${corsa.numeroCorsa}
+</div>
 
 
         <h3>
@@ -1755,6 +1758,11 @@ corsa.cliente
 
 corsa.destinazione
 .toLowerCase()
+.includes(ricerca)
+
+||
+
+corsa.numeroCorsa
 .includes(ricerca)
 
 
