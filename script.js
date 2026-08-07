@@ -6024,7 +6024,7 @@ telefono[0]
 
 let tratta =
 frase.match(
-/da (.+?) a (.+?)(?=\s+(?:oggi|domani|dopodomani|alle|alle ore|$))/i
+/da (.+?) a (.+?)(?=\s+(?:oggi|domani|dopodomani|il \d+|il giorno|\d{1,2} agosto|\d{1,2} settembre|\d{1,2} ottobre|\d{1,2} novembre|\d{1,2} dicembre|alle|alle ore|$))/i
 );
 
 
@@ -6168,7 +6168,58 @@ new Date()
 
 
 }
+// DATA COMPLETA (es. 15 agosto)
 
+let mesi = {
+gennaio:0,
+febbraio:1,
+marzo:2,
+aprile:3,
+maggio:4,
+giugno:5,
+luglio:6,
+agosto:7,
+settembre:8,
+ottobre:9,
+novembre:10,
+dicembre:11
+};
+
+
+let dataCompleta =
+frase.match(
+/(\d{1,2})\s+(gennaio|febbraio|marzo|aprile|maggio|giugno|luglio|agosto|settembre|ottobre|novembre|dicembre)/i
+);
+
+
+if(dataCompleta){
+
+let giorno =
+Number(dataCompleta[1]);
+
+let mese =
+mesi[dataCompleta[2].toLowerCase()];
+
+
+let anno =
+new Date().getFullYear();
+
+
+let data =
+new Date(
+anno,
+mese,
+giorno
+);
+
+
+document.getElementById(
+"dataCorsa"
+).value =
+data.toISOString()
+.split("T")[0];
+
+}
 
 
 // ===============================
