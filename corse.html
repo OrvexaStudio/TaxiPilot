@@ -49,14 +49,61 @@ Gestione clienti e trasferimenti
 
 
 
-<section class="dashboard-card">
+<section class="dashboard-card nuova-corsa-card">
 
+
+<div class="titolo-corsa">
+
+<div class="titolo-corsa">
 
 <h2>
 Nuova corsa
 </h2>
 
 
+<button
+class="whatsapp-button"
+onclick="apriImportaWhatsApp()"
+>
+Importa WhatsApp
+</button>
+
+
+</div>
+
+
+<button
+class="whatsapp-button"
+onclick="apriImportaWhatsApp()"
+>
+Importa WhatsApp
+</button>
+
+
+</div>
+
+<div id="importaWhatsApp" style="display:none;">
+
+<h3>
+Importa corsa da WhatsApp
+</h3>
+
+
+<textarea
+id="testoWhatsApp"
+placeholder="Incolla il messaggio ricevuto..."
+></textarea>
+
+
+<button
+class="main-button"
+onclick="analizzaWhatsApp()"
+>
+Analizza corsa
+</button>
+
+
+</div>
 
 <input 
 id="nomeCliente"
