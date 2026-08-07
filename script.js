@@ -6148,22 +6148,27 @@ minuti.padStart(2,"0");
 
 }
 
-
-
 // IMPORTO
 
-let prezzo =
+let prezzo = null;
+
+
+// cerca solo numeri seguiti da euro o €
+
+let risultatoPrezzo =
 frase.match(
-/(\d+(?:[.,]\d+)?)\s*(euro|€)/
+/(?:di |importo |prezzo |costo )?(\d+(?:[.,]\d+)?)\s*(euro|€)/
 );
 
 
-if(prezzo){
+if(risultatoPrezzo){
+
+prezzo = risultatoPrezzo[1];
 
 document.getElementById(
 "importo"
 ).value =
-prezzo[1].replace(",", ".");
+prezzo.replace(",", ".");
 
 }
 
