@@ -6555,3 +6555,75 @@ mostraConfermaVoce();
 
 
 }
+
+// =====================================
+// TAXIPILOT ASSISTANT
+// =====================================
+
+
+function apriTaxiPilotAssistant(){
+
+
+let assistente =
+document.getElementById(
+"taxipilotAssistant"
+);
+
+
+if(assistente){
+
+assistente.style.display =
+"flex";
+
+}
+
+
+}
+
+
+
+function chiudiTaxiPilotAssistant(){
+
+
+let assistente =
+document.getElementById(
+"taxipilotAssistant"
+);
+
+
+if(assistente){
+
+assistente.style.display =
+"none";
+
+}
+
+
+}
+
+
+
+// chiusura toccando lo schermo
+
+document.addEventListener(
+"click",
+function(e){
+
+
+let assistente =
+document.getElementById(
+"taxipilotAssistant"
+);
+
+
+if(
+assistente &&
+e.target === assistente
+){
+
+chiudiTaxiPilotAssistant();
+
+}
+
+
+});
