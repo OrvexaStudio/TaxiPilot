@@ -1375,14 +1375,35 @@ return;
 }
 
 
+let ultimoNumeroCorsa =
+Number(
+localStorage.getItem("ultimoNumeroCorsa")
+) || 0;
 
+
+ultimoNumeroCorsa++;
+
+
+localStorage.setItem(
+"ultimoNumeroCorsa",
+ultimoNumeroCorsa
+);
+
+
+let idCorsa =
+String(ultimoNumeroCorsa)
+.padStart(4,"0");
 
 
     let corsa = {
 
 
-        id:
-        Date.now(),
+id:
+Date.now(),
+
+
+numeroCorsa:
+idCorsa,
 
 
         cliente:
