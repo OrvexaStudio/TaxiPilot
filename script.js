@@ -5973,7 +5973,7 @@ let frase = testo.toLowerCase();
 let nome = "";
 
 let parteNome = frase.match(
-/(?:per|cliente|signor|signora)\s+(.+?)(?=\s+(?:telefono|numero|da|partenza))/i
+/(?:per|cliente|signor|signora)?\s*([a-zàèéìòù\s]+?)(?=\s+\d|\s+telefono|\s+numero|\s+da|$)/i
 );
 
 
@@ -5982,11 +5982,7 @@ if(parteNome){
 nome =
 parteNome[1]
 .trim()
-.replace(
-/numero di|telefono/gi,
-""
-)
-.trim();
+.replace(/\s+/g," ");
 
 
 document.getElementById(
@@ -6120,7 +6116,7 @@ new Date()
 
 let orario =
 frase.match(
-/alle\s+(\d{1,2})(?:\s+e\s+(\d{1,2}))?/i
+/alle\s+(\d{1,2})(?:\s*(?:e|:)\s*(\d{1,2}))?/i
 );
 
 
@@ -6131,9 +6127,12 @@ if(orario){
 let ore =
 orario[1];
 
-
 let minuti =
 orario[2] || "00";
+
+if(minuti.length === 1){
+    minuti = minuti + "0";
+}
 
 
 document.getElementById(
