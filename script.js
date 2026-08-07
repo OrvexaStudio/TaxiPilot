@@ -1743,31 +1743,36 @@ if(
 ricerca !== ""
 ){
 
-
 lista =
 lista.filter(
 
 corsa =>
 
-
+(
+corsa.cliente &&
 corsa.cliente
 .toLowerCase()
 .includes(ricerca)
+)
 
 ||
 
+(
+corsa.destinazione &&
 corsa.destinazione
 .toLowerCase()
 .includes(ricerca)
+)
 
 ||
 
+(
+corsa.numeroCorsa &&
 corsa.numeroCorsa
 .includes(ricerca)
-
+)
 
 );
-
 
 }
 
