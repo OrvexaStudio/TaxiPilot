@@ -6560,7 +6560,6 @@ mostraConfermaVoce();
 // TAXIPILOT ASSISTANT
 // =====================================
 
-
 function apriTaxiPilotAssistant(){
 
 
@@ -6576,6 +6575,11 @@ assistente.style.display =
 "flex";
 
 }
+
+
+// avvia il microfono dell'assistente
+
+ascoltaDomandaTaxiPilot();
 
 
 }
@@ -6741,3 +6745,541 @@ function(){
 avviaAscoltoTaxiPilot();
 
 });
+
+function gestisciComandoTaxiPilot(domanda){
+
+
+let testo = domanda.toLowerCase();
+
+let risposta = 
+"Non ho capito. Prova a riformulare la richiesta.";
+
+
+
+let corse =
+JSON.parse(
+localStorage.getItem("taxipilot_corse")
+) || [];
+
+
+
+
+// ===============================
+// PROSSIMA CORSA
+// ===============================
+
+if(
+testo.includes("prossima corsa") ||
+testo.includes("corsa dopo") ||
+testo.includes("che corsa ho")
+){
+
+let oggi =
+new Date()
+.toISOString()
+.split("T")[0];
+
+
+let prossima =
+corse
+.filter(c=>c.data >= oggi)
+.sort(
+(a,b)=>
+(a.data+a.orario)
+.localeCompare(
+b.data+b.orario
+)
+)[0];
+
+
+if(prossima){
+
+risposta =
+"La prossima corsa è alle " +
+prossima.orario +
+". Cliente " +
+prossima.cliente +
+". Partenza da " +
+prossima.partenza +
+" verso " +
+prossima.destinazione;
+
+}
+
+else{
+
+risposta =
+"Non hai corse programmate.";
+
+}
+
+}
+
+
+
+// ===============================
+// CORSE OGGI
+// ===============================
+
+
+else if(
+testo.includes("quante corse") ||
+testo.includes("corse oggi")
+){
+
+
+let oggi =
+new Date()
+.toISOString()
+.split("T")[0];
+
+
+let numero =
+corse.filter(
+c=>c.data===oggi
+).length;
+
+
+risposta =
+"Oggi hai " +
+numero +
+" corse programmate.";
+
+}
+
+
+
+// ===============================
+// INCASSO OGGI
+// ===============================
+
+
+else if(
+testo.includes("incasso") ||
+testo.includes("guadagnato")
+){
+
+
+let oggi =
+new Date()
+.toISOString()
+.split("T")[0];
+
+
+let totale = 0;
+
+
+corse.forEach(c=>{
+
+if(c.data===oggi){
+
+totale +=
+Number(c.importo)||0;
+
+}
+
+});
+
+
+risposta =
+"Oggi hai incassato " +
+totale +
+" euro.";
+
+}
+
+
+
+// ===============================
+// CLIENTE PROSSIMA CORSA
+// ===============================
+
+
+else if(
+testo.includes("chi è il cliente") ||
+testo.includes("cliente prossimo")
+){
+
+
+let prossima =
+corse[0];
+
+
+if(prossima){
+
+risposta =
+"Il cliente è " +
+prossima.cliente;
+
+}
+
+}
+
+
+
+// ===============================
+// NUMERO CLIENTE
+// ===============================
+
+
+else if(
+testo.includes("numero") &&
+testo.includes("cliente")
+){
+
+
+let prossima =
+corse[0];
+
+
+if(prossima){
+
+risposta =
+"Il numero del cliente è " +
+prossima.telefono;
+
+}
+
+}
+
+
+
+// ===============================
+// TEMPO ALLA PROSSIMA CORSA
+// ===============================
+
+
+else if(
+testo.includes("quanto manca") ||
+testo.includes("manca alla corsa")
+){
+
+
+risposta =
+"Sto calcolando il tempo alla prossima corsa.";
+
+}
+
+
+
+// ===============================
+// TURNI
+// ===============================
+
+
+else if(
+testo.includes("inizia turno")
+){
+
+risposta =
+"Turno iniziato correttamente.";
+
+}
+
+
+
+else if(
+testo.includes("termina turno")
+){
+
+risposta =
+"Turno terminato.";
+
+}
+
+
+
+else if(
+testo.includes("turno attivo") ||
+testo.includes("ho il turno")
+){
+
+risposta =
+"Controllo lo stato del turno.";
+
+}
+
+
+
+// ===============================
+// PAGINE APP
+// ===============================
+
+
+else if(
+testo.includes("apri corse")
+){
+
+window.location.href="corse.html";
+
+return;
+
+}
+
+
+
+else if(
+testo.includes("apri profilo")
+){
+
+window.location.href="profilo.html";
+
+return;
+
+}
+
+
+
+else if(
+testo.includes("apri turno")
+){
+
+window.location.href="turno.html";
+
+return;
+
+}
+
+
+
+// ===============================
+// BLACKLIST
+// ===============================
+
+
+else if(
+testo.includes("blacklist") ||
+testo.includes("cliente bloccato")
+){
+
+risposta =
+"Controllo i clienti bloccati.";
+
+}
+
+
+
+// ===============================
+// DATA E ORA
+// ===============================
+
+
+else if(
+testo.includes("che ore sono")
+){
+
+risposta =
+"Adesso sono le " +
+new Date()
+.toLocaleTimeString("it-IT");
+
+}
+
+
+
+else if(
+testo.includes("che giorno è")
+){
+
+risposta =
+"Oggi è " +
+new Date()
+.toLocaleDateString("it-IT");
+
+}
+
+
+
+// ===============================
+// CHIUSURA
+// ===============================
+
+
+else if(
+testo.includes("chiudi assistente") ||
+testo.includes("chiudi")
+){
+
+chiudiTaxiPilotAssistant();
+
+return;
+
+}
+
+
+
+mostraRispostaTaxiPilot(
+domanda,
+risposta
+);
+
+
+}
+
+// =====================================
+// ASCOLTO DOMANDE ASSISTENTE
+// =====================================
+
+
+let ascoltoDomanda = null;
+
+
+function ascoltaDomandaTaxiPilot(){
+
+
+if(!("webkitSpeechRecognition" in window)){
+
+alert(
+"Microfono non supportato"
+);
+
+return;
+
+}
+
+
+
+ascoltoDomanda =
+new webkitSpeechRecognition();
+
+
+ascoltoDomanda.lang =
+"it-IT";
+
+
+ascoltoDomanda.continuous =
+false;
+
+
+ascoltoDomanda.interimResults =
+false;
+
+
+
+let stato =
+document.querySelector(
+".assistant-status"
+);
+
+
+
+if(stato){
+
+stato.innerHTML =
+"In ascolto...";
+
+}
+
+
+
+ascoltoDomanda.start();
+
+
+
+ascoltoDomanda.onresult =
+function(event){
+
+
+let domanda =
+event.results[0][0].transcript;
+
+
+
+mostraRispostaTaxiPilot(
+domanda,
+""
+);
+
+
+
+gestisciComandoTaxiPilot(
+domanda
+);
+
+
+
+};
+
+
+
+ascoltoDomanda.onerror =
+function(){
+
+if(stato){
+
+stato.innerHTML =
+"Non ho sentito, riprova.";
+
+}
+
+};
+
+
+
+}
+
+function parlaTaxiPilot(testo){
+
+
+let voce =
+new SpeechSynthesisUtterance(
+testo
+);
+
+
+voce.lang =
+"it-IT";
+
+
+voce.rate =
+1;
+
+
+speechSynthesis.speak(
+voce
+);
+
+
+}
+
+function mostraRispostaTaxiPilot(domanda, risposta){
+
+
+let chat =
+document.getElementById(
+"assistantChat"
+);
+
+
+
+if(!chat){
+
+return;
+
+}
+
+
+
+chat.innerHTML +=
+
+`
+<p class="assistant-user">
+Tu: ${domanda}
+</p>
+
+
+<p class="assistant-bot">
+TaxiPilot: ${risposta}
+</p>
+`;
+
+
+
+if(risposta){
+
+parlaTaxiPilot(risposta);
+
+}
+
+
+}
