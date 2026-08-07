@@ -6473,3 +6473,34 @@ box.style.display =
 
 
 }
+
+// =====================================
+// IMPORTAZIONE CORSA DA WHATSAPP
+// =====================================
+
+function analizzaWhatsApp(){
+
+let testo =
+document.getElementById("testoWhatsApp").value;
+
+
+if(!testo){
+
+alert("Incolla prima un messaggio WhatsApp");
+
+return;
+
+}
+
+
+// usa lo stesso sistema della voce
+
+analizzaVoceCorsa(testo);
+
+
+// apre il banner di conferma
+
+mostraConfermaVoce();
+
+
+}
