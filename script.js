@@ -6043,7 +6043,7 @@ document.getElementById(
 ).value =
 tratta[2].trim();
 
-mostraConfermaVoce();
+
 }
 function mostraConfermaVoce(){
 
@@ -6262,7 +6262,7 @@ document.getElementById(
 ).innerHTML =
 
 "Campi compilati. Controlla prima di salvare.";
-
+mostraConfermaVoce();
 
 }
 
