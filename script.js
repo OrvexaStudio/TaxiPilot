@@ -6579,7 +6579,7 @@ assistente.style.display =
 
 // avvia il microfono dell'assistente
 
-ascoltaDomandaTaxiPilot();
+
 
 
 }
