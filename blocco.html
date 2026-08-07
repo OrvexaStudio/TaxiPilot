@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TaxiPilot - Accesso</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<main class="welcome-container">
+
+
+<section class="welcome-card">
+
+
+<img src="logo.png" class="welcome-logo">
+
+
+<h1>
+Accesso TaxiPilot
+</h1>
+
+
+<p>
+Inserisci il PIN per continuare
+</p>
+
+
+<input 
+id="pin"
+type="password"
+maxlength="4"
+placeholder="PIN"
+>
+
+
+<button
+class="main-button"
+onclick="controllaPin()">
+
+Accedi
+
+</button>
+
+
+<p id="errorePin"></p>
+
+
+</section>
+
+
+</main>
+
+
+
+<script>
+
+
+function controllaPin(){
+
+
+let inserito =
+document.getElementById("pin").value;
+
+
+let pinSalvato =
+localStorage.getItem("taxipilot_pin");
+
+
+
+if(inserito === pinSalvato){
+
+
+localStorage.setItem(
+"taxipilot_accesso",
+"true"
+);
+
+
+window.location.href =
+"index.html";
+
+
+}
+
+else{
+
+
+document.getElementById(
+"errorePin"
+).innerHTML =
+"PIN non corretto";
+
+
+}
+
+
+}
+
+
+
+</script>
+
+
+</body>
+
+</html>
