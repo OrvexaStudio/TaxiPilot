@@ -6150,25 +6150,17 @@ minuti.padStart(2,"0");
 
 // IMPORTO
 
-let prezzo = null;
-
-
-// cerca solo numeri seguiti da euro o €
-
-let risultatoPrezzo =
-frase.match(
-/(?:di |importo |prezzo |costo )?(\d+(?:[.,]\d+)?)\s*(euro|€)/
+let prezzo = frase.match(
+/(\d+(?:[.,]\d+)?)\s*(?:euro|€)/
 );
 
 
-if(risultatoPrezzo){
-
-prezzo = risultatoPrezzo[1];
+if(prezzo){
 
 document.getElementById(
 "importo"
 ).value =
-prezzo.replace(",", ".");
+prezzo[1].replace(",", ".");
 
 }
 
