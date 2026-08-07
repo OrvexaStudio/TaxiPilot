@@ -5961,188 +5961,227 @@ box.innerHTML =
 
 
 
-
 function analizzaVoceCorsa(testo){
 
-let frase = testo.toLowerCase().trim();
+let frase = testo.toLowerCase();
 
 
-// =======================
-// CLIENTE
-// =======================
+// ===============================
+// NOME CLIENTE
+// ===============================
 
-let cliente = frase
-.replace(/inserisci corsa/,"")
-.replace(/cliente/,"")
-.split(" telefono")[0]
-.split(" da ")[0]
+let nome = "";
+
+let parteNome = frase.match(
+/(?:per|cliente|signor|signora)\s+(.+?)(?=\s+(?:telefono|numero|da|partenza))/i
+);
+
+
+if(parteNome){
+
+nome =
+parteNome[1]
+.trim()
+.replace(
+/numero di|telefono/gi,
+""
+)
 .trim();
 
 
-if(cliente){
-
-document.getElementById("nomeCliente").value =
-cliente
-.split(" ")
-.map(
-p=>p.charAt(0).toUpperCase()+p.slice(1)
-)
-.join(" ");
+document.getElementById(
+"nomeCliente"
+).value =
+nome;
 
 }
 
 
-
-
-// =======================
+// ===============================
 // TELEFONO
-// =======================
+// ===============================
+
 
 let telefono =
-frase.match(/\d{9,10}/);
+frase.match(
+/(?:\d[\s]*){9,11}/
+);
 
 
 if(telefono){
 
-document.getElementById("telefono").value =
-telefono[0];
+document.getElementById(
+"telefono"
+).value =
+telefono[0]
+.replace(/\s/g,"");
 
 }
 
 
 
-
-// =======================
-// IMPORTO
-// =======================
-
-let prezzo =
-frase.match(
-/(\d+)\s*(euro|€)/
-);
-
-
-if(prezzo){
-
-document.getElementById("importo").value =
-prezzo[1];
-
-}
-
-
-
-
-// =======================
-// ORARIO
-// =======================
-
-let orario = "";
-
-
-let oraNumero =
-frase.match(
-/alle\s+(\d{1,2})(?:\s*e\s*(30|trenta))?/
-);
-
-
-if(oraNumero){
-
-
-orario =
-oraNumero[1].padStart(2,"0")
-+
-(
-oraNumero[2]
-?
-":30"
-:
-":00"
-);
-
-
-document.getElementById("orario").value =
-orario;
-
-
-}
-
-
-
-
-
-// =======================
-// RIMOZIONE ORARIO DALLA FRASE
-// =======================
-
-let frasePulita =
-frase.replace(
-/alle\s+\d{1,2}(\s*e\s*(30|trenta))?/,
-""
-);
-
-
-
-
-
-// =======================
+// ===============================
 // PARTENZA E DESTINAZIONE
-// =======================
+// ===============================
+
+
+let tratta =
+frase.match(
+/da (.+?) a (.+?)(?=\s+(?:oggi|domani|dopodomani|alle|alle ore|$))/i
+);
+
+
+if(tratta){
+
+
+document.getElementById(
+"partenza"
+).value =
+tratta[1].trim();
+
+
+
+document.getElementById(
+"destinazione"
+).value =
+tratta[2].trim();
+
+
+}
+
+
+
+// ===============================
+// DATA
+// ===============================
+
+
+let oggi = new Date();
+
 
 if(
-frasePulita.includes(" da ")
-&&
-frasePulita.includes(" a ")
+frase.includes("domani")
+){
+
+oggi.setDate(
+oggi.getDate()+1
+);
+
+
+document.getElementById(
+"dataCorsa"
+).value =
+oggi.toISOString()
+.split("T")[0];
+
+
+}
+
+
+else if(
+frase.includes("dopodomani")
+){
+
+oggi.setDate(
+oggi.getDate()+2
+);
+
+
+document.getElementById(
+"dataCorsa"
+).value =
+oggi.toISOString()
+.split("T")[0];
+
+}
+
+
+else if(
+frase.includes("oggi")
 ){
 
 
-let dati =
-frasePulita.split(" da ")[1];
-
-
-let parti =
-dati.split(" a ");
-
-
-
-let partenza =
-parti[0].trim();
-
-
-let destinazione =
-parti[1].trim();
-
-
-
-
-
-document.getElementById("partenza").value =
-partenza;
-
-
-
-document.getElementById("destinazione").value =
-destinazione;
-
-
-
-controllaAeroporto();
+document.getElementById(
+"dataCorsa"
+).value =
+new Date()
+.toISOString()
+.split("T")[0];
 
 
 }
 
 
 
+// ===============================
+// ORARIO
+// ===============================
 
 
-// =======================
+let orario =
+frase.match(
+/alle\s+(\d{1,2})(?:\s+e\s+(\d{1,2}))?/i
+);
+
+
+
+if(orario){
+
+
+let ore =
+orario[1];
+
+
+let minuti =
+orario[2] || "00";
+
+
+document.getElementById(
+"orario"
+).value =
+
+ore.padStart(2,"0")
++
+":"
++
+minuti.padStart(2,"0");
+
+
+}
+
+
+
+// ===============================
+// IMPORTO
+// ===============================
+
+
+let importo =
+frase.match(
+/(\d+)\s*(?:euro|€)/i
+);
+
+
+
+if(importo){
+
+document.getElementById(
+"importo"
+).value =
+importo[1];
+
+}
+
+
+
+// ===============================
 // AEROPORTO
-// =======================
+// ===============================
 
 
 if(
 frase.includes("aeroporto")
 ){
-
 
 let blocco =
 document.getElementById(
@@ -6156,10 +6195,7 @@ blocco.style.display="block";
 
 }
 
-
 }
-
-
 
 
 
@@ -6167,12 +6203,7 @@ document.getElementById(
 "risultatoVoce"
 ).innerHTML =
 
-"✅ Dati inseriti:<br><b>"
-+
-testo
-+
-"</b>";
-
+"Campi compilati. Controlla prima di salvare.";
 
 
 }
