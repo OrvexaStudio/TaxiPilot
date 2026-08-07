@@ -6454,3 +6454,22 @@ document.getElementById(
 ).style.display = "none";
 
 }
+
+function apriImportaWhatsApp(){
+
+
+let box =
+document.getElementById(
+"importaWhatsApp"
+);
+
+
+if(box){
+
+box.style.display =
+"block";
+
+}
+
+
+}
