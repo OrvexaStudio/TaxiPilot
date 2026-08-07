@@ -6151,16 +6151,20 @@ minuti.padStart(2,"0");
 // IMPORTO
 
 let prezzo = frase.match(
-/(\d+(?:[.,]\d+)?)\s*(?:euro|€)/
+/(?:euro|€)\s*(\d+(?:[.,]\d+)?)|(\d+(?:[.,]\d+)?)\s*(?:euro|€)/
 );
 
 
 if(prezzo){
 
+let valorePrezzo =
+prezzo[1] || prezzo[2];
+
+
 document.getElementById(
 "importo"
 ).value =
-prezzo[1].replace(",", ".");
+valorePrezzo.replace(",", ".");
 
 }
 
