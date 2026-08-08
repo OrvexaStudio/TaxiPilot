@@ -1,3 +1,4 @@
+localStorage.removeItem("taxipilot_benvenuto");
 // ======================================================
 // TaxiPilot
 // SCRIPT DEFINITIVO
