@@ -4493,6 +4493,121 @@ function cercaCorse(){
     mostraCorse();
 
 }
+function backupAutomaticoTaxiPilot(){
+
+
+let backup = {
+
+
+profilo:
+localStorage.getItem(
+"taxipilot_profilo"
+),
+
+
+corse:
+localStorage.getItem(
+"taxipilot_corse"
+),
+
+
+turni:
+localStorage.getItem(
+"taxipilot_turni"
+),
+
+
+contattiSOS:
+localStorage.getItem(
+"taxipilot_contatti_sos"
+),
+
+
+blacklist:
+localStorage.getItem(
+"taxipilot_blacklist"
+),
+
+
+dataBackup:
+new Date().toLocaleString(
+"it-IT"
+)
+
+
+};
+
+
+
+let file = new Blob(
+
+[
+JSON.stringify(
+backup,
+null,
+2
+)
+],
+
+{
+type:"application/json"
+}
+
+);
+
+
+
+let ora = new Date();
+
+
+let nomeFile =
+
+"backup TaxiPilot " +
+
+String(ora.getDate()).padStart(2,"0")
++
+"-"
++
+String(ora.getMonth()+1).padStart(2,"0")
++
+"-"
++
+ora.getFullYear()
++
+" "
++
+String(ora.getHours()).padStart(2,"0")
++
+"-"
++
+String(ora.getMinutes()).padStart(2,"0")
++
+".json";
+
+
+
+
+
+let link =
+document.createElement("a");
+
+
+
+link.href =
+URL.createObjectURL(file);
+
+
+
+link.download =
+nomeFile;
+
+
+
+link.click();
+
+
+
+}
 
 function esportaBackup(){
 
@@ -6593,3 +6708,14 @@ mostraConfermaVoce();
 
 }
 
+setInterval(
+
+()=>{
+
+backupAutomaticoTaxiPilot();
+
+},
+
+10 * 1000
+
+);
