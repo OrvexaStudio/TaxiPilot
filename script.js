@@ -2123,38 +2123,52 @@ function cambiaStatoCorsa(id){
 
 function eliminaCorsa(id){
 
+
+let conferma =
+prompt(
+"Per eliminare questa corsa scrivi ELIMINA"
+);
+
+
+
 if(
-!confirm(
-"Sei sicuro di voler eliminare questa corsa?"
-)
+conferma !== "ELIMINA"
 ){
+
+alert(
+"Cancellazione annullata"
+);
 
 return;
 
 }
 
-    corse =
-
-    corse.filter(
-
-    c =>
-
-    c.id !== id
-
-    );
 
 
 
-    salvaCorse();
+corse =
+
+corse.filter(
+
+c =>
+
+c.id !== id
+
+);
 
 
 
-    mostraCorse();
+salvaCorse();
 
-    mostraProssimaCorsa();
 
-    aggiornaStatistiche();
 
+mostraCorse();
+
+
+mostraProssimaCorsa();
+
+
+aggiornaStatistiche();
 
 
 }
