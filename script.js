@@ -2132,8 +2132,16 @@ prompt(
 
 
 if(
-conferma !== "ELIMINA"
+conferma.trim().toLowerCase() !== "elimina"
 ){
+
+alert(
+"Cancellazione annullata"
+);
+
+return;
+
+}
 
 alert(
 "Cancellazione annullata"
