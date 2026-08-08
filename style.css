@@ -2135,3 +2135,182 @@ border-radius:10px;
     transform:scale(0.97);
 
 }
+
+/* ======================================================
+   TAXIPILOT PRESENTAZIONE APP
+====================================================== */
+
+
+.welcome-container{
+
+    min-height:100vh;
+
+    padding:40px 20px;
+
+    display:flex;
+
+    justify-content:center;
+
+    background:
+    linear-gradient(
+    160deg,
+    #080808,
+    #171717
+    );
+
+    color:white;
+
+}
+
+
+
+.welcome-container > h1{
+
+    position:absolute;
+
+    top:40px;
+
+    font-size:42px;
+
+    font-weight:900;
+
+    letter-spacing:2px;
+
+    background:
+    linear-gradient(
+    90deg,
+    #ff9800,
+    #ffc266
+    );
+
+    -webkit-background-clip:text;
+
+    color:transparent;
+
+}
+
+
+
+.welcome-container > h2{
+
+    position:absolute;
+
+    top:105px;
+
+    text-align:center;
+
+    color:#aaa;
+
+    font-size:17px;
+
+    font-weight:400;
+
+}
+
+
+
+.welcome-box{
+
+    margin-top:160px;
+
+    width:100%;
+
+    max-width:700px;
+
+    padding:35px;
+
+    border-radius:30px;
+
+
+    background:
+
+    linear-gradient(
+    145deg,
+    rgba(255,255,255,0.12),
+    rgba(255,255,255,0.04)
+    );
+
+
+    border:
+
+    1px solid rgba(255,255,255,0.12);
+
+
+    box-shadow:
+
+    0 25px 60px rgba(0,0,0,0.6);
+
+
+    backdrop-filter:blur(20px);
+
+}
+
+
+
+.welcome-box h3{
+
+    color:#ff9800;
+
+    font-size:22px;
+
+    margin-top:30px;
+
+    margin-bottom:12px;
+
+}
+
+
+
+.welcome-box p{
+
+    color:#ddd;
+
+    line-height:1.7;
+
+    font-size:15px;
+
+}
+
+
+
+.welcome-box ul{
+
+    margin-top:15px;
+
+    padding-left:20px;
+
+}
+
+
+
+.welcome-box li{
+
+    color:#ddd;
+
+    margin-bottom:10px;
+
+    line-height:1.5;
+
+}
+
+
+
+.welcome-box li::marker{
+
+    color:#ff9800;
+
+}
+
+
+
+.welcome-box .main-button{
+
+    margin-top:35px;
+
+    height:55px;
+
+    font-size:17px;
+
+    border-radius:18px;
+
+}
