@@ -2314,3 +2314,573 @@ border-radius:10px;
     border-radius:18px;
 
 }
+
+/* ======================================================
+   TAXIPILOT PRESENTAZIONE PREMIUM
+====================================================== */
+
+
+.presentation-page{
+
+    min-height:100vh;
+
+    padding:40px 20px 80px;
+
+    background:
+
+    radial-gradient(
+    circle at top,
+    rgba(232,117,23,0.18),
+    transparent 35%
+    ),
+
+    linear-gradient(
+    160deg,
+    #050505,
+    #151515
+    );
+
+
+    color:white;
+
+}
+
+
+
+
+/* HERO */
+
+.hero-presentation{
+
+    max-width:800px;
+
+    margin:auto;
+
+    text-align:center;
+
+    padding:40px 20px 30px;
+
+    animation:
+    presentationFade 1s ease;
+
+}
+
+
+
+.presentation-logo{
+
+    width:150px;
+
+    height:150px;
+
+    object-fit:contain;
+
+    margin-bottom:25px;
+
+
+    filter:
+
+    drop-shadow(
+    0 0 25px
+    rgba(232,117,23,0.6)
+    );
+
+
+    animation:
+
+    logoPulse 3s infinite;
+
+}
+
+
+
+.hero-presentation h1{
+
+
+    font-size:55px;
+
+    font-weight:900;
+
+    letter-spacing:3px;
+
+
+    background:
+
+    linear-gradient(
+    90deg,
+    #ff9800,
+    #ffc266
+    );
+
+
+    -webkit-background-clip:text;
+
+    color:transparent;
+
+
+}
+
+
+
+.hero-presentation h2{
+
+
+    margin-top:15px;
+
+    color:#ddd;
+
+    font-size:21px;
+
+    font-weight:500;
+
+
+}
+
+
+
+.status-ready{
+
+
+    display:inline-block;
+
+    margin:30px auto;
+
+    padding:12px 25px;
+
+    border-radius:30px;
+
+
+    background:
+
+    rgba(232,117,23,0.15);
+
+
+    border:
+
+    1px solid
+    rgba(232,117,23,0.6);
+
+
+    color:#ff9800;
+
+
+    font-weight:700;
+
+
+}
+
+
+
+.hero-presentation p{
+
+
+    color:#bbb;
+
+    line-height:1.8;
+
+    font-size:16px;
+
+    max-width:700px;
+
+    margin:15px auto;
+
+
+}
+
+
+
+
+
+
+/* CARD PRINCIPALI */
+
+
+.info-card{
+
+
+    max-width:850px;
+
+    margin:25px auto;
+
+
+    padding:30px;
+
+
+    border-radius:28px;
+
+
+    background:
+
+
+    linear-gradient(
+
+    145deg,
+
+    rgba(255,255,255,0.12),
+
+    rgba(255,255,255,0.04)
+
+    );
+
+
+    border:
+
+    1px solid
+
+    rgba(255,255,255,0.1);
+
+
+
+    backdrop-filter:
+
+    blur(20px);
+
+
+
+    box-shadow:
+
+    0 20px 50px
+
+    rgba(0,0,0,0.45);
+
+
+
+    animation:
+
+    cardAppear .7s ease;
+
+
+}
+
+
+
+.info-card:hover{
+
+
+    transform:translateY(-3px);
+
+
+    border-color:
+
+    rgba(232,117,23,0.5);
+
+
+    transition:.3s;
+
+
+}
+
+
+
+
+
+.info-card h3{
+
+
+    color:#ff9800;
+
+
+    font-size:24px;
+
+
+    margin-bottom:20px;
+
+
+}
+
+
+
+.info-card p{
+
+
+    color:#ddd;
+
+
+    line-height:1.7;
+
+
+}
+
+
+
+.info-card ul{
+
+
+    margin-top:15px;
+
+    padding-left:25px;
+
+
+}
+
+
+
+.info-card li{
+
+
+    margin-bottom:12px;
+
+
+    color:#ddd;
+
+
+}
+
+
+
+.info-card li::marker{
+
+
+    color:#ff9800;
+
+
+}
+
+
+
+
+
+/* VERSIONE FINALE */
+
+
+.version-card{
+
+
+    max-width:850px;
+
+
+    margin:40px auto;
+
+
+    padding:40px;
+
+
+    text-align:center;
+
+
+    border-radius:30px;
+
+
+
+    background:
+
+
+    linear-gradient(
+
+    135deg,
+
+    #ff9800,
+
+    #e87517
+
+    );
+
+
+
+    color:white;
+
+
+
+    box-shadow:
+
+    0 20px 50px
+
+    rgba(232,117,23,0.35);
+
+
+}
+
+
+
+.version-card h3{
+
+
+    font-size:32px;
+
+
+    margin-bottom:10px;
+
+
+}
+
+
+
+.version-card p{
+
+
+    font-size:17px;
+
+    margin-bottom:25px;
+
+
+}
+
+
+
+.version-card .main-button{
+
+
+    background:white;
+
+
+    color:#e87517;
+
+
+    width:80%;
+
+
+    max-width:350px;
+
+
+}
+
+
+
+.version-card .main-button:hover{
+
+
+    transform:scale(1.03);
+
+
+}
+
+
+
+
+
+
+
+/* ANIMAZIONI */
+
+
+@keyframes presentationFade{
+
+
+from{
+
+opacity:0;
+
+transform:translateY(30px);
+
+}
+
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+
+}
+
+
+
+
+@keyframes cardAppear{
+
+
+from{
+
+opacity:0;
+
+transform:translateY(20px);
+
+}
+
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+
+}
+
+
+
+
+@keyframes logoPulse{
+
+
+0%{
+
+transform:scale(1);
+
+}
+
+
+50%{
+
+transform:scale(1.05);
+
+}
+
+
+100%{
+
+transform:scale(1);
+
+
+}
+
+}
+
+
+
+
+
+
+/* MOBILE */
+
+
+@media(max-width:600px){
+
+
+.hero-presentation h1{
+
+font-size:42px;
+
+}
+
+
+.hero-presentation h2{
+
+font-size:17px;
+
+}
+
+
+.info-card{
+
+
+padding:22px;
+
+
+}
+
+
+
+.info-card h3{
+
+font-size:21px;
+
+}
+
+
+
+.version-card{
+
+
+padding:30px 20px;
+
+
+}
+
+
+}
