@@ -59,10 +59,7 @@ function controlloAccesso(){
     pagina.includes(
         "login.html"
     );
-let eBenvenuto =
-pagina.includes(
-"benvenuto.html"
-);
+
 
 
     if(
@@ -110,35 +107,7 @@ return;
 
 
 
-    if(
-configurato &&
-eLogin
-){
 
-let visto =
-localStorage.getItem(
-"taxipilot_benvenuto"
-);
-
-
-if(!visto){
-
-window.location.href =
-"benvenuto.html";
-
-}
-
-else{
-
-window.location.href =
-"index.html";
-
-}
-
-
-return;
-
-}
 
 
 }
