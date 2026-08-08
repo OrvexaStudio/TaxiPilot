@@ -766,7 +766,7 @@ function mostraListaSOS(){
         `
 
         <div class="trip-card">
-        <div class="id-corsa">
+        
 #${corsa.numeroCorsa}
 </div>
 
@@ -2132,8 +2132,13 @@ prompt(
 
 
 if(
-conferma !== "ELIMINA"
+conferma !== null &&
+conferma.toLowerCase() !== "elimina"
 ){
+
+return;
+
+}
 
 
 
@@ -6304,7 +6309,7 @@ document.getElementById(
 ).value =
 tratta[2].trim();
 
-
+}
 }
 function mostraConfermaVoce(){
 
@@ -6725,4 +6730,4 @@ backupAutomaticoTaxiPilot();
 24 * 60 * 60 * 1000
 
 );
-}
+
