@@ -6310,7 +6310,7 @@ document.getElementById(
 tratta[2].trim();
 
 }
-}
+
 function mostraConfermaVoce(){
 
 let box =
