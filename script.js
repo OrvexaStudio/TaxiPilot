@@ -65,16 +65,46 @@ pagina.includes(
 
 
     if(
-        !configurato &&
-        !eLogin
-    ){
+!configurato &&
+!eLogin
+){
 
-        window.location.href =
-        "login.html";
+window.location.href =
+"login.html";
 
-        return;
+return;
 
-    }
+}
+
+
+
+// CONTROLLO PRESENTAZIONE PRIMO AVVIO
+
+let presentazione =
+localStorage.getItem(
+"taxipilot_presentazione_completata"
+);
+
+
+let ePresentazione =
+pagina.includes(
+"presentazione.html"
+);
+
+
+
+if(
+configurato &&
+!presentazione &&
+!ePresentazione
+){
+
+window.location.href =
+"presentazione.html";
+
+return;
+
+}
 
 
 
@@ -4487,14 +4517,21 @@ window.addEventListener(
 function iniziaTaxiPilot(){
 
 
-    localStorage.setItem(
-        "taxipilot_benvenuto",
-        "true"
-    );
+localStorage.setItem(
+"taxipilot_presentazione_completata",
+"true"
+);
 
 
-    window.location.href =
-    "index.html";
+localStorage.setItem(
+"taxipilot_benvenuto",
+"true"
+);
+
+
+
+window.location.href =
+"index.html";
 
 
 }
